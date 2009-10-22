@@ -1,64 +1,74 @@
 package dal;
 
-public class Customer {
-
-	protected int CustomerID;                     
+public class User {
+	
+	protected int UserID;                     
 	protected String Name;                
-	protected String Birth;                 
+	protected String CPR;                 
 	protected String Gender;                 
 	protected int Phone;
 	protected String Adresse;	
 	
 	
-	public Customer (int CustomerID, String Name, String Birth, String Gender,int Phone, String Adresse)
-	{
-		this.CustomerID = CustomerID;
+	public User(int UserID, String Name, String CPR, String Gender, int Phone, String Address){
+		this.UserID = UserID;
 		this.Name = Name;
-		this.Birth = Birth;
+		this.CPR = CPR;
 		this.Gender = Gender;
 		this.Phone = Phone;
-		this.Adresse = Adresse;
+		this.Adresse = Address;
 	}
-	public Customer(){
 	
+	public User(){
+		
 	}
-	public int getCustomerID() {
-		return CustomerID;
+
+	public int getUserID() {
+		return UserID;
 	}
-	public void setCustomerID(int customerID) {
-		CustomerID = customerID;
+
+	public void setUserID(int userID) {
+		UserID = userID;
 	}
+
 	public String getName() {
 		return Name;
 	}
+
 	public void setName(String name) {
 		Name = name;
 	}
-	public String getBirth() {
-		return Birth;
+
+	public String getCPR() {
+		return CPR;
 	}
-	public void setBirth(String birth) {
-		Birth = birth;
+
+	public void setCPR(String cpr) {
+		CPR = cpr;
 	}
+
 	public String getGender() {
 		return Gender;
 	}
+
 	public void setGender(String gender) {
 		Gender = gender;
 	}
+
 	public int getPhone() {
 		return Phone;
 	}
+
 	public void setPhone(int phone) {
 		Phone = phone;
 	}
+
 	public String getAdresse() {
 		return Adresse;
 	}
+
 	public void setAdresse(String adresse) {
 		Adresse = adresse;
 	}
-	
-	
-	
+
 }

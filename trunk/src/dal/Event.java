@@ -12,12 +12,11 @@ public class Event  {
 	protected String Titel;
 	protected double Price;		
 	protected int Visitors;
-	protected double DiscountSHOW;
-	protected double DiscoutNORM;
+
 	
 
-	public Event(int EventID, String Concerttype, String Stage, String Artist, String DateStart, String DateFinish, String Titel, double Price, int Visitors
-			,double DiscountSHOW, double DiscountNORM)
+	public Event(int EventID, String Concerttype, String Stage, String Artist, String DateStart, String DateFinish, String Titel, 
+			double Price, int Visitors)
 	{
 		this.EventID = EventID;
 		this.Concerttype = Concerttype;
@@ -28,8 +27,7 @@ public class Event  {
 		this.Titel = Titel;
 		this.Price = Price;
 		this.Visitors = Visitors;
-		this.DiscountSHOW = DiscountSHOW;
-		this.DiscoutNORM = DiscountNORM;
+
 	}
 	
 	public Event(){
@@ -104,21 +102,6 @@ public class Event  {
 		Visitors = visitors;
 	}
 
-	public double getDiscountSHOW() {
-		return DiscountSHOW;
-	}
-
-	public void setDiscountSHOW(double discountSHOW) {
-		DiscountSHOW = discountSHOW;
-	}
-
-	public double getDiscoutNORM() {
-		return DiscoutNORM;
-	}
-
-	public void setDiscoutNORM(double discoutNORM) {
-		DiscoutNORM = discoutNORM;
-	}
 
 	public void setEventID(int eventID) {
 		EventID = eventID;
