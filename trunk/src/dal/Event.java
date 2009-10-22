@@ -1,24 +1,29 @@
 package dal;
 
-public class Event {
+public class Event  {
 
-	int EventID;                     
+
+	protected int EventID;                     
 	protected String Concerttype;                
-	protected String Stage;                 
+	protected String Stage;  
+	protected String DateStart;
+	protected String DateFinish;
 	protected String Artist;                 
 	protected String Titel;
-	protected String Price;		
-	protected String Visitors;
-	protected String DiscountSHOW;
-	protected String DiscoutNORM;
+	protected double Price;		
+	protected int Visitors;
+	protected double DiscountSHOW;
+	protected double DiscoutNORM;
 	
 
-	public Event(int EventID, String Concerttype, String Stage, String Artist, String Titel, String Price, String Visitors
-			,String DiscountSHOW, String DiscountNORM)
+	public Event(int EventID, String Concerttype, String Stage, String Artist, String DateStart, String DateFinish, String Titel, double Price, int Visitors
+			,double DiscountSHOW, double DiscountNORM)
 	{
 		this.EventID = EventID;
 		this.Concerttype = Concerttype;
 		this.Stage = Stage;
+		this.DateStart = DateStart;
+		this.DateFinish = DateFinish;
 		this.Artist = Artist;
 		this.Titel = Titel;
 		this.Price = Price;
@@ -34,57 +39,89 @@ public class Event {
 	public int getEventID() {
 		return EventID;
 	}
-	public void setEventID(int eventID) {
-		EventID = eventID;
-	}
+	
 	public String getConcerttype() {
 		return Concerttype;
 	}
+
 	public void setConcerttype(String concerttype) {
 		Concerttype = concerttype;
 	}
+
 	public String getStage() {
 		return Stage;
 	}
+
 	public void setStage(String stage) {
 		Stage = stage;
 	}
+
+	public String getDateStart() {
+		return DateStart;
+	}
+
+	public void setDateStart(String dateStart) {
+		DateStart = dateStart;
+	}
+
+	public String getDateFinish() {
+		return DateFinish;
+	}
+
+	public void setDateFinish(String dateFinish) {
+		DateFinish = dateFinish;
+	}
+
 	public String getArtist() {
 		return Artist;
 	}
+
 	public void setArtist(String artist) {
 		Artist = artist;
 	}
+
 	public String getTitel() {
 		return Titel;
 	}
+
 	public void setTitel(String titel) {
 		Titel = titel;
 	}
-	public String getPrice() {
+
+	public double getPrice() {
 		return Price;
 	}
-	public void setPrice(String price) {
+
+	public void setPrice(double price) {
 		Price = price;
 	}
-	public String getVisitors() {
+
+	public int getVisitors() {
 		return Visitors;
 	}
-	public void setVisitors(String visitors) {
+
+	public void setVisitors(int visitors) {
 		Visitors = visitors;
 	}
-	public String getDiscountSHOW() {
+
+	public double getDiscountSHOW() {
 		return DiscountSHOW;
 	}
-	public void setDiscountSHOW(String discountSHOW) {
+
+	public void setDiscountSHOW(double discountSHOW) {
 		DiscountSHOW = discountSHOW;
 	}
-	public String getDiscoutNORM() {
+
+	public double getDiscoutNORM() {
 		return DiscoutNORM;
 	}
-	public void setDiscoutNORM(String discoutNORM) {
+
+	public void setDiscoutNORM(double discoutNORM) {
 		DiscoutNORM = discoutNORM;
 	}
 
-	
+	public void setEventID(int eventID) {
+		EventID = eventID;
+	}
+
 }
