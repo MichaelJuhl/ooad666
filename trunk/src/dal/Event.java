@@ -1,28 +1,32 @@
 package dal;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+
 public class Event  {
 
 
 	protected int EventID;                     
 	protected String Concerttype;                
 	protected String Stage;  
-	protected String DateStart;
-	protected String DateFinish;
+	protected Date DateStart;
+	protected Date DateFinish;
 	protected String Artist;                 
 	protected String Titel;
 	protected double Price;		
 	protected int Visitors;
-
-	
+	protected DateFormat dateFormat;	
 
 	public Event(int EventID, String Concerttype, String Stage, String Artist, String DateStart, String DateFinish, String Titel, 
-			double Price, int Visitors)
+			double Price, int Visitors) throws ParseException
 	{
+		dateFormat = DateFormat.getDateInstance();
 		this.EventID = EventID;
 		this.Concerttype = Concerttype;
 		this.Stage = Stage;
-		this.DateStart = DateStart;
-		this.DateFinish = DateFinish;
+		this.DateStart = dateFormat.parse(DateStart);
+		this.DateFinish = dateFormat.parse(DateFinish);
 		this.Artist = Artist;
 		this.Titel = Titel;
 		this.Price = Price;
@@ -55,19 +59,19 @@ public class Event  {
 	}
 
 	public String getDateStart() {
-		return DateStart;
+		return dateFormat.format(DateStart);
 	}
 
-	public void setDateStart(String dateStart) {
-		DateStart = dateStart;
+	public void setDateStart(String dateStart) throws ParseException {
+		DateStart = dateFormat.parse(dateStart);
 	}
 
 	public String getDateFinish() {
-		return DateFinish;
+		return dateFormat.format(DateFinish);
 	}
 
-	public void setDateFinish(String dateFinish) {
-		DateFinish = dateFinish;
+	public void setDateFinish(String dateFinish) throws ParseException {
+		DateFinish = dateFormat.parse(dateFinish);
 	}
 
 	public String getArtist() {

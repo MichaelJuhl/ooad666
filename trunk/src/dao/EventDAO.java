@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import dbConnect.Connector;
 
 public class EventDAO implements IEvent {
 
-	public Event getEvent(int EventID) throws DALException {
+	public Event getEvent(int EventID) throws DALException, ParseException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM OOADEvent WHERE EventID = " + EventID);
 	    try {
 	    	if (!rs.first()) throw new DALException("Event'et " + EventID + " findes ikke"); 
@@ -41,7 +42,7 @@ public class EventDAO implements IEvent {
 
 	@Override
 	public List<Event> getEventList() throws DALException, InstantiationException, IllegalAccessException, 
-	ClassNotFoundException, SQLException {
+	ClassNotFoundException, SQLException, ParseException {
 		
 		List<Event> list = new ArrayList<Event>();
 		ResultSet rs = Connector.getConnector().doQuery("SELECT * FROM OOADEvent");
