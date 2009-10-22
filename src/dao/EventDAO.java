@@ -14,11 +14,11 @@ import dbConnect.Connector;
 public class EventDAO implements IEvent {
 
 	public Event getEvent(int EventID) throws DALException, ParseException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM OOADEvent WHERE EventID = " + EventID);
+		ResultSet rs = Connector.doQuery("SELECT DISTINCT * from OOADEvent NATURAL left JOIN OOADTicket natural left join OOADDiscount WHERE EventID = " + EventID);
 	    try {
 	    	if (!rs.first()) throw new DALException("Event'et " + EventID + " findes ikke"); 
 	    	return new Event (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)
-	    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9));
+	    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9), rs.getString(10), rs.getDouble(11), rs.getDouble(12) );
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
 		
@@ -26,18 +26,28 @@ public class EventDAO implements IEvent {
 
 	@Override
 	public void createEvent(Event EventID, Event Event) throws DALException {
-		String sql=" INSERT INTO OOADEvent (Concerttype, Stage, DateSTART, DateFINISH, Artist, Titel, Price, Visitors) VALUES("
-			+ EventID
-			+ ", " + Event.getConcerttype()
-			+ ", " + Event.getStage()
-			+ ", " + Event.getDateStart()
-			+ ", " + Event.getDateFinish()
-			+ ", " + Event.getArtist()
-			+ ", " + Event.getTitel()
+		String event=" INSERT INTO OOADEvent (Concerttype, Stage, DateSTART, DateFINISH, Artist, Titel, Price, Visitors) VALUES("
+			+ "', '" + Event.getConcerttype()
+			+ "', '" + Event.getStage()
+			+ "', '" + Event.getDateStart()
+			+ "', '" + Event.getDateFinish()
+			+ "', '" + Event.getArtist()
+			+ "', '" + Event.getTitel()
 			+ ", " + Event.getPrice()
 			+ ", " + Event.getVisitors() + ")";
 		
-		Connector.doUpdate(sql);
+		String ticket=" INSERT INTO OOADTicket (EventID,TicketID) VALUES("
+			+ EventID
+			+ ", " + Event.getTicketID()+ ")";
+		
+		String discount=" INSERT INTO OOADDiscount (EventID, SHOW, NORMAL) VALUES("
+			+ EventID
+			+ ", " + Event.getSHOW()
+			+ ", " + Event.getNORMAL()+ ")";
+		
+		Connector.doUpdate(event);
+		Connector.doUpdate(ticket);
+		Connector.doUpdate(discount);
 	}
 
 	@Override
@@ -45,11 +55,11 @@ public class EventDAO implements IEvent {
 	ClassNotFoundException, SQLException, ParseException {
 		
 		List<Event> list = new ArrayList<Event>();
-		ResultSet rs = Connector.getConnector().doQuery("SELECT * FROM OOADEvent");
+		ResultSet rs = Connector.getConnector().doQuery("SELECT DISTINCT * from OOADEvent NATURAL left JOIN OOADTicket natural left join OOADDiscount");
 		try {
 			while (rs.next()) {
 				list.add(new Event(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)
-		    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9)));
+		    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9), rs.getString(10), rs.getDouble(11), rs.getDouble(12) ));
 			}
 		} catch (SQLException e) {
 			throw new DALException(e);
@@ -67,12 +77,21 @@ public class EventDAO implements IEvent {
 
 	@Override
 	public void updateEvent(int EventID, Event Event) throws DALException {
-		Connector.doUpdate(
-				"UPDATE OOADEvent SET Concerttype = '" + Event.getConcerttype() + "', Stage =  '" + Event.getStage() + 
+		String event ="UPDATE OOADEvent SET Concerttype = '" + Event.getConcerttype() + "', Stage =  '" + Event.getStage() + 
 				"', TimeSTART = '" + Event.getDateStart() + "', TimeFINISH = '" + Event.getDateFinish() + "', Artist =  '" + Event.getArtist() + 
-				"', Titel = '" + Event.getTitel() + "', Price = '" + Event.getPrice()+ "',Visitors = '" + Event.getVisitors()+
-				"' WHERE EventID = " + EventID
-				);
+				"', Titel = '" + Event.getTitel() + "', Price = " + Event.getPrice()+ ",Visitors = " + Event.getVisitors()+
+				" WHERE EventID = " + EventID;
+		
+		String ticket=" Update OOADTicket SET TicketID = '"+Event.getTicketID()+"' WHERE EventID = "
+			+ EventID;
+		
+		String discount=" Update OOADDiscount SET SHOW = "+Event.getSHOW()+ ", NORMAL = " + Event.getNORMAL()+" WHERE EventID = "
+		+ EventID;;
+		
+		Connector.doUpdate(event);
+		Connector.doUpdate(ticket);
+		Connector.doUpdate(discount);
+			
 	}
 
 	public boolean checkEvent(Event Event) throws DALException {
