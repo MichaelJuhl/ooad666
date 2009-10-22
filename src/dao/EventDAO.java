@@ -18,7 +18,7 @@ public class EventDAO implements IEvent {
 	    try {
 	    	if (!rs.first()) throw new DALException("Event'et " + EventID + " findes ikke"); 
 	    	return new Event (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)
-	    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9), rs.getString(10), rs.getDouble(11), rs.getDouble(12) );
+	    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9), rs.getInt(10), rs.getDouble(11), rs.getDouble(12) );
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
 		
@@ -36,9 +36,6 @@ public class EventDAO implements IEvent {
 			+ ", " + Event.getPrice()
 			+ ", " + Event.getVisitors() + ")";
 		
-		String ticket=" INSERT INTO OOADTicket (EventID,TicketID) VALUES("
-			+ EventID
-			+ ", " + Event.getTicketID()+ ")";
 		
 		String discount=" INSERT INTO OOADDiscount (EventID, SHOW, NORMAL) VALUES("
 			+ EventID
@@ -46,7 +43,6 @@ public class EventDAO implements IEvent {
 			+ ", " + Event.getNORMAL()+ ")";
 		
 		Connector.doUpdate(event);
-		Connector.doUpdate(ticket);
 		Connector.doUpdate(discount);
 	}
 
@@ -59,7 +55,7 @@ public class EventDAO implements IEvent {
 		try {
 			while (rs.next()) {
 				list.add(new Event(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)
-		    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9), rs.getString(10), rs.getDouble(11), rs.getDouble(12) ));
+		    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9), rs.getInt(10), rs.getDouble(11), rs.getDouble(12) ));
 			}
 		} catch (SQLException e) {
 			throw new DALException(e);
@@ -82,14 +78,11 @@ public class EventDAO implements IEvent {
 				"', Titel = '" + Event.getTitel() + "', Price = " + Event.getPrice()+ ",Visitors = " + Event.getVisitors()+
 				" WHERE EventID = " + EventID;
 		
-		String ticket=" Update OOADTicket SET TicketID = '"+Event.getTicketID()+"' WHERE EventID = "
-			+ EventID;
 		
 		String discount=" Update OOADDiscount SET SHOW = "+Event.getSHOW()+ ", NORMAL = " + Event.getNORMAL()+" WHERE EventID = "
 		+ EventID;;
 		
 		Connector.doUpdate(event);
-		Connector.doUpdate(ticket);
 		Connector.doUpdate(discount);
 			
 	}
