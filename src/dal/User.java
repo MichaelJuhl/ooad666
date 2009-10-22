@@ -4,19 +4,23 @@ public class User {
 	
 	protected int UserID;                     
 	protected String Name;                
-	protected String CPR;                 
+	protected double CPR;                 
 	protected String Gender;                 
 	protected int Phone;
-	protected String Adresse;	
+	protected String Adresse;
+	protected String Password;
+	protected String Rank;
 	
 	
-	public User(int UserID, String Name, String CPR, String Gender, int Phone, String Address){
+	public User(int UserID, String Name, double CPR, String Gender, int Phone, String Address, String Password, String Rank){
 		this.UserID = UserID;
 		this.Name = Name;
 		this.CPR = CPR;
 		this.Gender = Gender;
 		this.Phone = Phone;
 		this.Adresse = Address;
+		this.Password = Password;
+		this.Rank	= Rank;
 	}
 	
 	public User(){
@@ -39,11 +43,11 @@ public class User {
 		Name = name;
 	}
 
-	public String getCPR() {
+	public double getCPR() {
 		return CPR;
 	}
 
-	public void setCPR(String cpr) {
+	public void setCPR(double cpr) {
 		CPR = cpr;
 	}
 
@@ -69,6 +73,22 @@ public class User {
 
 	public void setAdresse(String adresse) {
 		Adresse = adresse;
+	}
+
+	public String getPassword() {
+		return Password;
+	}
+
+	public void setPassword(String password) {
+		Password = password;
+	}
+
+	public String getRank() {
+		return Rank;
+	}
+
+	public void setRank(String rank) {
+		Rank = rank;
 	}
 
 }
