@@ -22,7 +22,7 @@ public class Event  {
 	protected double NORMAL;
 	protected DateFormat dateFormat;	
 
-	public Event(int EventID, String Concerttype, String Stage, String Artist, String DateStart, String DateFinish, String Titel, 
+	public Event(int EventID, String Concerttype, String Stage, String DateStart, String DateFinish, String Artist, String Titel, 
 			double Price, int Visitors, int TicketsSold, double SHOW, double NORMAL) throws ParseException
 	{
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
