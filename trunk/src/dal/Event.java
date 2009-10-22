@@ -17,13 +17,13 @@ public class Event  {
 	protected String Titel;
 	protected double Price;		
 	protected int Visitors;
-	protected String TicketID;
+	protected int TicketsSold;
 	protected double SHOW;
 	protected double NORMAL;
 	protected DateFormat dateFormat;	
 
 	public Event(int EventID, String Concerttype, String Stage, String Artist, String DateStart, String DateFinish, String Titel, 
-			double Price, int Visitors, String TicketID, double SHOW, double NORMAL) throws ParseException
+			double Price, int Visitors, int TicketsSold, double SHOW, double NORMAL) throws ParseException
 	{
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		this.EventID = EventID;
@@ -35,7 +35,7 @@ public class Event  {
 		this.Titel = Titel;
 		this.Price = Price;
 		this.Visitors = Visitors;
-		this.TicketID = TicketID;
+		this.TicketsSold = TicketsSold;
 		this.SHOW = SHOW;
 		this.NORMAL = NORMAL;
 
@@ -118,12 +118,12 @@ public class Event  {
 		EventID = eventID;
 	}
 
-	public String getTicketID() {
-		return TicketID;
+	public int getTicketsSold() {
+		return TicketsSold;
 	}
 
-	public void setTicketID(String ticketID) {
-		TicketID = ticketID;
+	public void setTicketsSold(int ticketsSold) {
+		TicketsSold = ticketsSold;
 	}
 
 	public double getSHOW() {
