@@ -9,22 +9,34 @@ package GUI;
  *
  * @author User
  */
+import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
+import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
 import dal.Event;
+import dalinterface.DALException;
+import dao.EventDAO;
 
 public class EventDataModel extends AbstractTableModel {
 
-    protected ArrayList<Event> eventList;
+    protected List<Event> eventList;
     
-    EventDataModel() throws ParseException {
-        eventList = new ArrayList<Event>();
+    EventDataModel() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+        
+    	eventList = new EventDAO().getEventList();
+    	
+    	//Test
+    	//eventList = new ArrayList<Event>();
         //test
-        eventList.add(new Event(1,"Rock","Gul","Bamse","2010-09-22 12:00:00","2010-09-22 13:30:00","Bamse spiller",154,200));
-        eventList.add(new Event(2,"Dance","Orange","TECHNO-Tiz","2010-09-25 18:20:04","2010-09-29 13:30:59","Techno Forever",154,1500));
-        eventList.add(new Event(3,"Leg","Gul","Michael","2010-01-05 12:00:00","2010-01-05 13:30:00","Michael Leger",154,200));
+        //eventList.add(new Event(1,"Rock","Gul","Bamse","2010-09-22 12:00:00","2010-09-22 13:30:00","Bamse spiller",154,200,0,10,25));
+        //eventList.add(new Event(2,"Dance","Orange","TECHNO-Tiz","2010-09-25 18:20:04","2010-09-29 13:30:59","Techno Forever",154,1500,0,7,21));
+        //eventList.add(new Event(3,"Leg","Gul","Michael","2010-01-05 12:00:00","2010-01-05 13:30:00","Michael Leger",154,200,0,18,4));
+    }
+    
+    public TableModel getTableModel() {
+    	return (TableModel)this;
     }
 
     public int getRowCount() {
@@ -33,6 +45,13 @@ public class EventDataModel extends AbstractTableModel {
 
     public int getColumnCount() {
         return 10;
+    }
+    
+    public String getColumnName(int columnIndex) {
+    	String[] columnNames = new String [] {
+                "Titel", "Kunstner", "Scene", "Koncerttype", "Start", "Slut", "Billetter", "Pris", "Showportalis Tilbud", "Portalis Tilbud"
+        };
+    	return columnNames[columnIndex];
     }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -49,25 +68,25 @@ public class EventDataModel extends AbstractTableModel {
 
         switch(columnIndex) {
             case TITEL:
-                return eventList.get(columnIndex);
+                return eventList.get(rowIndex).getTitel();
             case ARTIST:
-                return eventList.get(columnIndex);
+                return eventList.get(rowIndex).getArtist();
             case STAGE:
-                return eventList.get(columnIndex);
+                return eventList.get(rowIndex).getStage();
             case CONCERTTYPE:
-                return eventList.get(columnIndex);
+                return eventList.get(rowIndex).getConcerttype();
             case DATESTART:
-                return eventList.get(columnIndex);
+                return eventList.get(rowIndex).getDateStart();
             case DATEFINISH:
-                return eventList.get(columnIndex);
+                return eventList.get(rowIndex).getDateFinish();
             case TICKETS:
-                return eventList.get(columnIndex);
+                return eventList.get(rowIndex).getTicketsSold();
             case PRICE:
-                return eventList.get(columnIndex);
+                return eventList.get(rowIndex).getPrice();
             case SHOW:
-                return eventList.get(columnIndex);
+                return eventList.get(rowIndex).getSHOW();
             case NORMAL:
-                return eventList.get(columnIndex);
+                return eventList.get(rowIndex).getNORMAL();
             default:
                 return "";
         }
