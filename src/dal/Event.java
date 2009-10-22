@@ -2,6 +2,7 @@ package dal;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Event  {
@@ -21,7 +22,7 @@ public class Event  {
 	public Event(int EventID, String Concerttype, String Stage, String Artist, String DateStart, String DateFinish, String Titel, 
 			double Price, int Visitors) throws ParseException
 	{
-		dateFormat = DateFormat.getDateInstance();
+		dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		this.EventID = EventID;
 		this.Concerttype = Concerttype;
 		this.Stage = Stage;
