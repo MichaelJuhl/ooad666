@@ -1,14 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package GUI;
 
-/**
- *
- * @author User
- */
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
