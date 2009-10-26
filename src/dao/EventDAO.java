@@ -24,6 +24,16 @@ public class EventDAO implements IEvent {
 		
 	}
 
+	public int getTicketSold(int EventID) throws DALException, ParseException {
+		ResultSet rs = Connector.doQuery("SELECT COUNT(TicketID) from OOADTicket WHERE EventID = " + EventID);
+	    try {
+	    	if (!rs.first()) throw new DALException("Event'et " + EventID + " findes ikke"); 
+	    	return rs.getInt(1);
+	    }
+	    catch (SQLException e) {throw new DALException(e); }
+		
+	}
+
 	@Override
 	public void createEvent(Event EventID, Event Event) throws DALException {
 		String event=" INSERT INTO OOADEvent (Concerttype, Stage, DateSTART, DateFINISH, Artist, Titel, Price, Visitors) VALUES("
