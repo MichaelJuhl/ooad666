@@ -14,7 +14,7 @@ import dbConnect.Connector;
 public class EventDAO implements IEvent {
 
 	public Event getEvent(int EventID) throws DALException, ParseException {
-		ResultSet rs = Connector.doQuery("SELECT DISTINCT * from OOADEvent NATURAL left JOIN OOADTicket natural left join OOADDiscount WHERE EventID = " + EventID);
+		ResultSet rs = Connector.doQuery("SELECT DISTINCT * from OOADEvent natural left join OOADDiscount WHERE EventID = " + EventID);
 	    try {
 	    	if (!rs.first()) throw new DALException("Event'et " + EventID + " findes ikke"); 
 	    	return new Event (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)
