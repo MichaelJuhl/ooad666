@@ -41,9 +41,9 @@ public class UserDAO implements IUser{
 	}
 
 	@Override
-	public List<User> getUserList() throws DALException, InstantiationException, IllegalAccessException,
+	public ArrayList<User> getUserList() throws DALException, InstantiationException, IllegalAccessException,
 			ClassNotFoundException, SQLException {
-		List<User> list = new ArrayList<User>();
+		ArrayList<User> list = new ArrayList<User>();
 		ResultSet rs = Connector.getConnector().doQuery("SELECT * FROM OOADUser NATURAL JOIN OOADRank");
 		try
 		{

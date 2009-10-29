@@ -44,10 +44,10 @@ public class CustomerDAO implements ICustomer {
 	
 
 	@Override
-	public List<Customer> getCustomerList() throws DALException, InstantiationException, IllegalAccessException,
+	public ArrayList<Customer> getCustomerList() throws DALException, InstantiationException, IllegalAccessException,
 			ClassNotFoundException, SQLException {
 		
-		List<Customer> list = new ArrayList<Customer>();
+		ArrayList<Customer> list = new ArrayList<Customer>();
 		ResultSet rs = Connector.getConnector().doQuery("SELECT * FROM OOADCustomer");
 		try {
 			while (rs.next()) {

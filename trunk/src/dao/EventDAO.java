@@ -57,10 +57,10 @@ public class EventDAO implements IEvent {
 	}
 
 	@Override
-	public List<Event> getEventList() throws DALException, InstantiationException, IllegalAccessException, 
+	public ArrayList<Event> getEventList() throws DALException, InstantiationException, IllegalAccessException, 
 	ClassNotFoundException, SQLException, ParseException {
 		
-		List<Event> list = new ArrayList<Event>();
+		ArrayList<Event> list = new ArrayList<Event>();
 		ResultSet rs = Connector.getConnector().doQuery("SELECT DISTINCT * from OOADEvent NATURAL LEFT JOIN OOADDiscount");
 		try {
 			while (rs.next()) {
