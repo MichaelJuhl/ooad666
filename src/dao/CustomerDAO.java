@@ -23,17 +23,20 @@ public class CustomerDAO implements ICustomer {
 	+ ", " + Customer.getGender()
 	+ ", " + Customer.getPhone()
 	+ ", " + Customer.getAdresse() + ")";
+		String sql2 = "INSERT INTO OOADDiscount (CustomerID, Discount) VALUES((SELECT MAX(CustomerID) FROM OOADCustomer), '"+Customer.getDiscount() + "')";
 
-Connector.doUpdate(sql);
+		Connector.doUpdate(sql);
+		Connector.doUpdate(sql2);
+		
 		
 	}
 
 	@Override
 	public Customer getCustomer(int CustomerID) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM OOADCustomer WHERE CustomerID = " + CustomerID);
+		ResultSet rs = Connector.doQuery("SELECT * FROM OOADCustomer NATURAL JOIN OOADDiscount WHERE CustomerID = " + CustomerID);
 	    try {
 	    	if (!rs.first()) throw new DALException("Kunden " + CustomerID + " findes ikke"); 
-	    	return new Customer (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6));
+	    	return new Customer (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
 		
@@ -49,7 +52,7 @@ Connector.doUpdate(sql);
 		try {
 			while (rs.next()) {
 				list.add(new Customer(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5)
-		    			,rs.getString(6)));
+		    			,rs.getString(6), rs.getString(7)));
 			}
 		} catch (SQLException e) {
 			throw new DALException(e);
