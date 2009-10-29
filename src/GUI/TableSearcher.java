@@ -19,6 +19,10 @@ public abstract class TableSearcher implements TableModel{
 			rowToModelIndex.add(new Integer(t));
 		}
 	}
+	
+	private int getModelRow(int row){
+		return ((Integer) rowToModelIndex.get(row)).intValue();
+    }
 
 	@Override
 	public void addTableModelListener(TableModelListener arg0) {
@@ -27,7 +31,7 @@ public abstract class TableSearcher implements TableModel{
 	}
 
 	@Override
-	public Class<?> getColumnClass(int column) {
+	public Class getColumnClass(int column) {
 		
 		return userDataModel.getColumnClass(column);
 	}
