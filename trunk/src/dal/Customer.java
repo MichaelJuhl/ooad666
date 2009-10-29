@@ -7,10 +7,11 @@ public class Customer {
 	protected String Birth;                 
 	protected String Gender;                 
 	protected int Phone;
-	protected String Adresse;	
+	protected String Adresse;
+	protected String Discount;
 	
 	
-	public Customer (int CustomerID, String Name, String Birth, String Gender,int Phone, String Adresse)
+	public Customer (int CustomerID, String Name, String Birth, String Gender,int Phone, String Adresse, String Discount)
 	{
 		this.CustomerID = CustomerID;
 		this.Name = Name;
@@ -18,6 +19,7 @@ public class Customer {
 		this.Gender = Gender;
 		this.Phone = Phone;
 		this.Adresse = Adresse;
+		this.Discount = Discount;
 	}
 	public Customer(){
 	
@@ -57,6 +59,12 @@ public class Customer {
 	}
 	public void setAdresse(String adresse) {
 		Adresse = adresse;
+	}
+	public String getDiscount() {
+		return Discount;
+	}
+	public void setDiscount(String discount) {
+		Discount = discount;
 	}
 	
 	
