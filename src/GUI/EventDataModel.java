@@ -69,9 +69,9 @@ public class EventDataModel extends AbstractTableModel {
             case CONCERTTYPE:
                 return eventList.get(rowIndex).getConcerttype();
             case DATESTART:
-                return eventList.get(rowIndex).getDateStart();
+                return eventList.get(rowIndex).getDateStartString();
             case DATEFINISH:
-                return eventList.get(rowIndex).getDateFinish();
+                return eventList.get(rowIndex).getDateFinishString();
             case TICKETS:
 			try {
 				return eventList.get(rowIndex).getVisitors() - new EventDAO().getTicketSold(eventList.get(rowIndex).getEventID())+"/"
@@ -87,9 +87,9 @@ public class EventDataModel extends AbstractTableModel {
             case PRICE:
                 return eventList.get(rowIndex).getPrice();
             case SHOW:
-                return eventList.get(rowIndex).getSHOW();
+                return eventList.get(rowIndex).getShowDiscount();
             case NORMAL:
-                return eventList.get(rowIndex).getNORMAL();
+                return eventList.get(rowIndex).getPortalisDiscount();
             default:
                 return "";
         }

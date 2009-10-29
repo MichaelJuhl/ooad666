@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 
 import dal.Event;
 import dalinterface.DALException;
@@ -35,22 +34,21 @@ public class EventDAO implements IEvent {
 	}
 
 	@Override
-	public void createEvent(Event EventID, Event Event) throws DALException {
+	public void createEvent(Event Event) throws DALException {
 		String event=" INSERT INTO OOADEvent (Concerttype, Stage, DateSTART, DateFINISH, Artist, Titel, Price, Visitors) VALUES("
-			+ "', '" + Event.getConcerttype()
+			+ "'" + Event.getConcerttype()
 			+ "', '" + Event.getStage()
-			+ "', '" + Event.getDateStart()
-			+ "', '" + Event.getDateFinish()
+			+ "', '" + Event.getDateStartString()
+			+ "', '" + Event.getDateFinishString()
 			+ "', '" + Event.getArtist()
 			+ "', '" + Event.getTitel()
-			+ ", " + Event.getPrice()
+			+ "', " + Event.getPrice()
 			+ ", " + Event.getVisitors() + ")";
 		
 		
-		String discount=" INSERT INTO OOADDiscount (EventID, SHOW, NORMAL) VALUES("
-			+ EventID
-			+ ", " + Event.getSHOW()
-			+ ", " + Event.getNORMAL()+ ")";
+		String discount=" INSERT INTO OOADDiscount (EventID, SHOWDiscount, NORMAL) VALUES((SELECT MAX(EventID) FROM OOADEvent)"
+			+ ", " + Event.getShowDiscount()
+			+ ", " + Event.getPortalisDiscount()+ ")";
 		
 		Connector.doUpdate(event);
 		Connector.doUpdate(discount);
@@ -89,7 +87,7 @@ public class EventDAO implements IEvent {
 				" WHERE EventID = " + EventID;
 		
 		
-		String discount=" Update OOADDiscount SET SHOW = "+Event.getSHOW()+ ", NORMAL = " + Event.getNORMAL()+" WHERE EventID = "
+		String discount=" Update OOADDiscount SET SHOW = "+Event.getShowDiscount()+ ", NORMAL = " + Event.getPortalisDiscount()+" WHERE EventID = "
 		+ EventID;;
 		
 		Connector.doUpdate(event);

@@ -1,15 +1,20 @@
 package GUI;
 
+import java.util.Calendar;
+
 import dal.Event;
 /**
  *
  * @author User
  */
 public class editEventDialog extends javax.swing.JDialog {
-
+	
+	Event event;
+	
     /** Creates new form editEventDialog */
     public editEventDialog(java.awt.Frame parent, boolean modal, Event event) {
         super(parent, modal);
+        this.event = event;
         initComponents();
 
         //set up input fields for edit
@@ -17,9 +22,9 @@ public class editEventDialog extends javax.swing.JDialog {
         eventArtistInputField.setText(event.getArtist());
         eventConcerttypeInputField.setText(event.getConcerttype());
         eventPriceInputField.setText(new Double(event.getPrice()).toString());
-        eventPortalisDiscountField.setText(new Double(event.getNORMAL()).toString());
-        eventShowDiscountField.setText(new Double(event.getSHOW()).toString());
-
+        eventPortalisDiscountField.setText(new Double(event.getPortalisDiscount()).toString());
+        eventShowDiscountField.setText(new Double(event.getShowDiscount()).toString());
+        //
     }
 
     /** This method is called from within the constructor to
@@ -65,17 +70,11 @@ public class editEventDialog extends javax.swing.JDialog {
 
         eventTitelLabel.setText("Titel");
 
-        eventTitelInputField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eventTitelInputFieldActionPerformed(evt);
-            }
-        });
-
         eventArtistLabel.setText("Kunstner");
 
         eventSceneLabel.setText("Scene");
 
-        eventSceneInputComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eventSceneInputComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Koncertsal", "Foyerscene", "Store scene", "Lille scene" , "Galleriscenen" , "Galleri 1", "Galleri 2", "Galleri 3" }));
 
         eventConcerttypeLabel.setText("Koncerttype");
 
@@ -89,21 +88,28 @@ public class editEventDialog extends javax.swing.JDialog {
 
         eventPortalisDiscountLabel.setText("Portalis tilbud");
 
-        eventStartYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eventStartYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeYearArray()));
+        //eventStartYearComboBox.setSelectedItem(String.valueOf(event.getDateStart().getYear()));
 
-        eventStartMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eventStartMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeMonthArray()));
+        //eventStartMonthComboBox.setSelectedItem(String.valueOf(event.getDateStart().getMonth()));
 
-        eventStartDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eventStartDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
+        System.out.println(event.getDateStart().get(Calendar.DAY_OF_MONTH) + "");
+        //eventStartDateComboBox.setSelectedIndex(event.getDateStart().get(Calendar.DAY_OF_MONTH));
+        
+        //eventStartTimeField.setText(event.getDateStart().getHours() + ":" + event.getDateStart().getMinutes());
+        
+        eventEndYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeYearArray()));
+        //eventEndYearComboBox.setSelectedItem(String.valueOf(event.getDateFinish().getMonth()));
+        
+        eventEndMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeMonthArray()));
+        //eventEndMonthComboBox.setSelectedItem(String.valueOf(event.getDateFinish().getYear()));
+        
+        eventEndDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
+        //eventEndDateComboBox.setSelectedItem(String.valueOf(event.getDateFinish().getDay()));
 
-        eventStartTimeField.setText("HH:MM");
-
-        eventEndMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        eventEndYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        eventEndDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        eventEndTimeField.setText("HH:MM");
+        //eventEndTimeField.setText(event.getDateFinish().getHours() + ":" + event.getDateFinish().getMinutes());
 
         eventKrLabel.setText("Kr");
 
@@ -111,7 +117,7 @@ public class editEventDialog extends javax.swing.JDialog {
 
         eventProcentLabel2.setText("%");
 
-        eventErrorLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        eventErrorLabel.setFont(new java.awt.Font("Tahoma", 1, 11));
         eventErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
         eventErrorLabel.setText(" ");
 
@@ -263,10 +269,34 @@ public class editEventDialog extends javax.swing.JDialog {
         pack();
     }                    
 
-    private void eventTitelInputFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                     
-        // TODO add your handling code here:
-    }                                                    
-
+    private String[] makeYearArray() {
+    	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+    	
+    	String[] years = new String[51];
+    	int y = 0;
+    	for(int i=currentYear; i<=currentYear+50; i++) {
+    		years[y] = String.valueOf(i);
+    		y++;
+    	}
+		return years;
+	}
+    
+    private String[] makeMonthArray() {
+    	String[] months = new String[12];
+    	for(int i=1; i<=12; i++) {
+    		months[i-1]=String.valueOf(i);
+    	}
+    	return months;
+    }
+    
+    private String[] makeDayArray() {
+    	String[] days = new String[31];
+    	for(int i=1; i<=31; i++) {
+    		days[i-1]=String.valueOf(i);
+    	}
+    	return days;
+    }
+    
     private void eventDiscardButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                   
         this.setVisible(false);
     }                                                  

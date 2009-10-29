@@ -48,13 +48,13 @@ public class ticketEventDialog extends javax.swing.JDialog {
 			e.printStackTrace();
 		}
         if (customer.getDiscount().equalsIgnoreCase("SHOW") ) {
-            RabatInputJLabel.setText(event.getSHOW()+"%");
-            double pris = event.getPrice()-((event.getPrice()/100)*event.getSHOW());
+            RabatInputJLabel.setText(event.getShowDiscount()+"%");
+            double pris = event.getPrice()-((event.getPrice()/100)*event.getShowDiscount());
             PrisInputJLabel.setText(pris+"kr");
         }else{
             if (customer.getDiscount().equalsIgnoreCase("NORMAL") ) {
-                RabatInputJLabel.setText(+event.getNORMAL()+"%");
-                double pris = event.getPrice()-((event.getPrice()/100)*event.getNORMAL());
+                RabatInputJLabel.setText(+event.getPortalisDiscount()+"%");
+                double pris = event.getPrice()-((event.getPrice()/100)*event.getPortalisDiscount());
                 PrisInputJLabel.setText(pris+"kr");
             }else{
                 RabatInputJLabel.setText(0+"%");

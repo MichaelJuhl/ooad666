@@ -2,8 +2,15 @@ package GUI;
 
 import javax.swing.JTable;
 import dal.Event;
+import dalinterface.DALException;
+import dao.EventDAO;
+
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.lang.NumberFormatException;
 
 /**
@@ -35,6 +42,8 @@ public class newEventDialog extends javax.swing.JDialog {
         eventArtistInputField = new javax.swing.JTextField();
         eventSceneLabel = new javax.swing.JLabel();
         eventSceneInputComboBox = new javax.swing.JComboBox();
+        eventMaxVisitorsLabel = new javax.swing.JLabel();
+        eventMaxVisitorsField = new javax.swing.JTextField();
         eventConcerttypeLabel = new javax.swing.JLabel();
         eventConcerttypeInputField = new javax.swing.JTextField();
         eventStartLabel = new javax.swing.JLabel();
@@ -74,7 +83,9 @@ public class newEventDialog extends javax.swing.JDialog {
 
         eventSceneLabel.setText("Scene");
 
-        eventSceneInputComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Koncertsal", "Foyerscene", "Store scene", " Lille scene " , "Galleriscenen" , "Gal-leri 1", "Galleri 2", " Galleri 3" }));
+        eventSceneInputComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Koncertsal", "Foyerscene", "Store scene", "Lille scene" , "Galleriscenen" , "Galleri 1", "Galleri 2", "Galleri 3" }));
+        
+        eventMaxVisitorsLabel.setText("Antal Billetter");
 
         eventConcerttypeLabel.setText("Koncerttype");
 
@@ -91,16 +102,20 @@ public class newEventDialog extends javax.swing.JDialog {
         eventStartYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeYearArray()));
 
         eventStartMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeMonthArray()));
+        eventStartMonthComboBox.setSelectedItem(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1));
 
         eventStartDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
-
+        eventStartDateComboBox.setSelectedItem(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
+        
         eventStartTimeField.setText(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE));
-
+        
         eventEndYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeYearArray()));
         
         eventEndMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeMonthArray()));
+        eventEndMonthComboBox.setSelectedItem(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1));
 
         eventEndDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
+        eventEndDateComboBox.setSelectedItem(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
 
         eventEndTimeField.setText(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE));
 
@@ -151,13 +166,17 @@ public class newEventDialog extends javax.swing.JDialog {
                                     .addGap(18, 18, 18)
                                     .addComponent(eventSceneInputComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(layout.createSequentialGroup()
+                                	.addComponent(eventMaxVisitorsLabel)
+                                	.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                	.addComponent(eventMaxVisitorsField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(eventConcerttypeLabel)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(eventConcerttypeInputField, javax.swing.GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(eventPriceLabel)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(eventPriceInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(eventPriceInputField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(eventKrLabel))
                                 .addGroup(layout.createSequentialGroup()
@@ -219,6 +238,10 @@ public class newEventDialog extends javax.swing.JDialog {
                     .addComponent(eventSceneInputComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                		.addComponent(eventMaxVisitorsLabel)
+                        .addComponent(eventMaxVisitorsField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(eventConcerttypeLabel)
                     .addComponent(eventConcerttypeInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -260,7 +283,7 @@ public class newEventDialog extends javax.swing.JDialog {
         );
 
         pack();
-    }// </editor-fold>                        
+    }
     
     private String[] makeYearArray() {
     	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
@@ -310,7 +333,7 @@ public class newEventDialog extends javax.swing.JDialog {
             eventErrorLabel.setText("Fejl: Kunstner kan ikke vaere tom");
             return;
         }
-            //check concerttype
+        	//check concerttype
         if (eventConcerttypeInputField.getText().equals("")) {
             eventErrorLabel.setText("Fejl: Koncerttype kan ikke vaere tom");
             return;
@@ -319,11 +342,16 @@ public class newEventDialog extends javax.swing.JDialog {
         if (!timeValidate(eventStartTimeField.getText())) {
             eventErrorLabel.setText("Fejl: Ugyldigt starttidspunkt");
             return;
+        } else if(eventStartTimeField.getText().length()==4) {
+        	eventStartTimeField.setText("0" + eventStartTimeField.getText());
         }
+        	
             //check endtime
         if (!timeValidate(eventEndTimeField.getText())) {
             eventErrorLabel.setText("Fejl: Ugyldigt sluttidspunkt");
             return;
+        } else if(eventEndTimeField.getText().length()==4) {
+        	eventEndTimeField.setText("0" + eventEndTimeField.getText());
         }
             //check that endtime is after starttime
         if (!endTimeAfterStartTime()) {
@@ -331,7 +359,7 @@ public class newEventDialog extends javax.swing.JDialog {
             return;
         }
             //check pris
-        if (!isNumber(eventPriceInputField.getText())) {
+        if (!isDouble(eventPriceInputField.getText())) {
             eventErrorLabel.setText("Fejl: Ugyldig pris");
             return;
         }
@@ -347,41 +375,119 @@ public class newEventDialog extends javax.swing.JDialog {
         }
 
         //Validation passed, make new event
+        EventDAO eventDAO = new EventDAO();
         try {
-            new Event(1234, eventConcerttypeInputField.getText(), "test", "2009-10-25 12:21", "2009-10-26 08:30", eventArtistInputField.getText(), eventTitelInputField.getText(), new Double(eventPriceInputField.getText()), 234, 0, new Double(eventShowDiscountField.getText()), new Double(eventPortalisDiscountField.getText()));
+            eventDAO.createEvent(new Event(eventConcerttypeInputField.getText(), (String)eventSceneInputComboBox.getSelectedItem(), getStartTime(), getEndTime(), eventArtistInputField.getText(), eventTitelInputField.getText(), Double.valueOf(eventPriceInputField.getText()), Integer.valueOf(eventMaxVisitorsField.getText()), Double.valueOf(eventShowDiscountField.getText()), Double.valueOf(eventPortalisDiscountField.getText())));
         } catch(NumberFormatException e) {
-
-        } catch (ParseException f) {
-
-        }
-        //mainFrame.UpdateEventTable();
+        	e.printStackTrace();
+        } catch (ParseException e) {
+			e.printStackTrace();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        try {
+			mainFrame.newEvent();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         this.dispose();
     }                                               
 
     private boolean timeValidate(String text) {
-        return true;
+    	try{
+    		Pattern timePattern = Pattern.compile("^(20|21|22|23|[01]\\d|\\d)(([:][0-5]\\d){1,2})$");
+    		Matcher timeMatcher = timePattern.matcher(text);
+    		if (timeMatcher.matches()) {
+    			if (text.length()==4)
+    				text = "0"+text;
+    			return true;
+    		}
+    		else
+    			return false;
+    		
+    	} catch(java.util.regex.PatternSyntaxException e){
+    		System.out.println("Invalid regex pattern when matching time");
+    		e.printStackTrace();
+    		return false;
+    	}
+    }
+    
+    private Calendar getStartTime() {
+    	int startTimeYear = Integer.valueOf((String)eventStartYearComboBox.getSelectedItem());
+    	int startTimeMonth = Integer.valueOf((String)eventStartMonthComboBox.getSelectedItem());
+    	int startTimeDate = Integer.valueOf((String)eventStartDateComboBox.getSelectedItem());
+    	int startTimeHour = Integer.valueOf(eventStartTimeField.getText().substring(0, 2));
+    	int startTimeMinute = Integer.valueOf(eventStartTimeField.getText().substring(3, 5));
+    	
+    	Calendar startTime = GregorianCalendar.getInstance();
+    	startTime.clear();
+    	startTime.set(startTimeYear, startTimeMonth, startTimeDate, startTimeHour, startTimeMinute, 0);
+    	
+    	return startTime;
+    }
+    
+    private Calendar getEndTime() {
+    	int endTimeYear = Integer.valueOf((String)eventEndYearComboBox.getSelectedItem());
+    	int endTimeMonth = Integer.valueOf((String)eventEndMonthComboBox.getSelectedItem());
+    	int endTimeDate = Integer.valueOf((String)eventEndDateComboBox.getSelectedItem());
+    	int endTimeHour = Integer.valueOf(eventEndTimeField.getText().substring(0, 2));
+    	int endTimeMinute = Integer.valueOf(eventEndTimeField.getText().substring(3, 5));
+    	
+    	Calendar endTime = GregorianCalendar.getInstance();
+    	endTime.clear();
+    	endTime.set(endTimeYear, endTimeMonth, endTimeDate, endTimeHour, endTimeMinute, 0);
+    	
+    	return endTime;
     }
 
     private boolean endTimeAfterStartTime() {
-        return true;
+    	return getStartTime().compareTo(getEndTime()) < 0;
     }
 
-    private boolean isNumber(String text) {
-        return true;
+    private boolean isDouble(String text) {
+        try {
+        	Double.valueOf(text);
+        } catch (NumberFormatException e) {
+        	return false;
+        }
+    	return true;
     }
 
     private boolean isProcent(String text) {
-        return true;
+        try {
+        	Double d = Double.valueOf(text);
+        	if (d<0 || d>100)
+        		return false;
+        } catch (NumberFormatException e) {
+        	return false;
+        }
+    	return true;
     }
-    /**
-    * @param args the command line arguments
-    */
 
     // Variables declaration - do not modify                     
     private javax.swing.JTextField eventArtistInputField;
     private javax.swing.JLabel eventArtistLabel;
     private javax.swing.JTextField eventConcerttypeInputField;
     private javax.swing.JLabel eventConcerttypeLabel;
+    private javax.swing.JLabel eventMaxVisitorsLabel;
+    private javax.swing.JTextField eventMaxVisitorsField;
     private javax.swing.JButton eventDiscardButton;
     private javax.swing.JComboBox eventEndDateComboBox;
     private javax.swing.JLabel eventEndLabel;

@@ -3,41 +3,63 @@ package dal;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
 
 public class Event  {
 
 
-	protected int EventID;                     
-	protected String Concerttype;                
+	protected int eventID;                     
+	protected String concertType;                
 	protected String Stage;  
-	protected Date DateStart;
-	protected Date DateFinish;
-	protected String Artist;                 
-	protected String Titel;
-	protected double Price;		
-	protected int Visitors;
-	protected int TicketsSold;
-	protected double SHOW;
-	protected double NORMAL;
+	protected Calendar dateStart = new GregorianCalendar(new Locale("da","DK"));
+	protected Calendar dateFinish = new GregorianCalendar(new Locale("da","DK"));
+	protected String artist;                 
+	protected String titel;
+	protected double price;		
+	protected int maxVisitors;
+	protected int ticketsSold;
+	protected double showDiscount;
+	protected double portalisDiscount;
 	protected DateFormat dateFormat;	
 
-	public Event(int EventID, String Concerttype, String Stage, String DateStart, String DateFinish, String Artist, String Titel, 
-			double Price, int Visitors, int TicketsSold, double SHOW, double NORMAL) throws ParseException
+	//Constructor for building Event objects from information from the database
+	public Event(int eventID, String concertType, String Stage, String dateStart, String dateFinish, String artist, String titel, 
+			double price, int maxVisitors, int ticketsSold, double showDiscount, double portalisDiscount) throws ParseException
 	{
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		this.EventID = EventID;
-		this.Concerttype = Concerttype;
+		this.eventID = eventID;
+		this.concertType = concertType;
 		this.Stage = Stage;
-		this.DateStart = dateFormat.parse(DateStart);
-		this.DateFinish = dateFormat.parse(DateFinish);
-		this.Artist = Artist;
-		this.Titel = Titel;
-		this.Price = Price;
-		this.Visitors = Visitors;
-		this.TicketsSold = TicketsSold;
-		this.SHOW = SHOW;
-		this.NORMAL = NORMAL;
+		this.dateStart.setTime(dateFormat.parse(dateStart));
+		this.dateFinish.setTime(dateFormat.parse(dateFinish));
+		this.artist = artist;
+		this.titel = titel;
+		this.price = price;
+		this.maxVisitors = maxVisitors;
+		this.ticketsSold = ticketsSold;
+		this.showDiscount = showDiscount;
+		this.portalisDiscount = portalisDiscount;
+	}
+	
+	//Constructor for creating a new Event from the GUI to send to the database 
+	public Event(String concertType, String Stage, Calendar dateStart, Calendar dateFinish, String artist, String titel, 
+			double price, int maxVisitors, double showDiscount, double portalisDiscount) throws ParseException
+	{
+		dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		this.eventID = 12345;
+		this.concertType = concertType;
+		this.Stage = Stage;
+		this.dateStart = dateStart;
+		this.dateFinish = dateFinish;
+		this.artist = artist;
+		this.titel = titel;
+		this.price = price;
+		this.maxVisitors = maxVisitors;
+		this.ticketsSold = 0;
+		this.showDiscount = showDiscount;
+		this.portalisDiscount = portalisDiscount;
 
 	}
 	
@@ -46,15 +68,15 @@ public class Event  {
 	}
 	
 	public int getEventID() {
-		return EventID;
+		return eventID;
 	}
 	
 	public String getConcerttype() {
-		return Concerttype;
+		return concertType;
 	}
 
-	public void setConcerttype(String concerttype) {
-		Concerttype = concerttype;
+	public void setConcerttype(String concertType) {
+		this.concertType = concertType;
 	}
 
 	public String getStage() {
@@ -66,89 +88,87 @@ public class Event  {
 	}
 
 	public String getDateStartString() {
-		return dateFormat.format(DateStart);
+		return dateFormat.format(dateStart.getTime());
 	}
 
 	public void setDateStart(String dateStart) throws ParseException {
-		DateStart = dateFormat.parse(dateStart);
+		this.dateStart.setTime(dateFormat.parse(dateStart));
 	}
 
 	public String getDateFinishString() {
-		return dateFormat.format(DateFinish);
+		return dateFormat.format(dateFinish.getTime());
 	}
 
 	public void setDateFinish(String dateFinish) throws ParseException {
-		DateFinish = dateFormat.parse(dateFinish);
+		this.dateFinish.setTime(dateFormat.parse(dateFinish));
 	}
 
-	public Date getDateStart() {
-		return DateStart;
+	public Calendar getDateStart() {
+		return dateStart;
 	}
 
-	public Date getDateFinish() {
-		return DateFinish;
+	public Calendar getDateFinish() {
+		return dateFinish;
 	}
 
 	public String getArtist() {
-		return Artist;
+		return artist;
 	}
 
 	public void setArtist(String artist) {
-		Artist = artist;
+		this.artist = artist;
 	}
 
 	public String getTitel() {
-		return Titel;
+		return titel;
 	}
 
 	public void setTitel(String titel) {
-		Titel = titel;
+		this.titel = titel;
 	}
 
 	public double getPrice() {
-		return Price;
+		return price;
 	}
 
 	public void setPrice(double price) {
-		Price = price;
+		this.price = price;
 	}
 
 	public int getVisitors() {
-		return Visitors;
+		return maxVisitors;
 	}
 
 	public void setVisitors(int visitors) {
-		Visitors = visitors;
+		maxVisitors = visitors;
 	}
 
 
 	public void setEventID(int eventID) {
-		EventID = eventID;
+		this.eventID = eventID;
 	}
 
 	public int getTicketsSold() {
-		return TicketsSold;
+		return ticketsSold;
 	}
 
 	public void setTicketsSold(int ticketsSold) {
-		TicketsSold = ticketsSold;
+		this.ticketsSold = ticketsSold;
 	}
 
-	public double getSHOW() {
-		return SHOW;
+	public double getShowDiscount() {
+		return showDiscount;
 	}
 
-	public void setSHOW(double sHOW) {
-		SHOW = sHOW;
+	public void setShowDiscount(double showTilbud) {
+		this.showDiscount = showTilbud;
 	}
 
-	public double getNORMAL() {
-		return NORMAL;
+	public double getPortalisDiscount() {
+		return portalisDiscount;
 	}
 
-	public void setNORMAL(double nORMAL) {
-		NORMAL = nORMAL;
+	public void setPortalisDiscount(double portalisDiscount) {
+		this.portalisDiscount = portalisDiscount;
 	}
-
-	
 }
