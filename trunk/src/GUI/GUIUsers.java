@@ -243,7 +243,7 @@ public class GUIUsers extends javax.swing.JFrame {
     /**
     * @param args the command line arguments
     */
-    
+    /*
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -272,7 +272,7 @@ public class GUIUsers extends javax.swing.JFrame {
             }
         });
     }
-
+*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
