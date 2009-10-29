@@ -65,7 +65,7 @@ public class Event  {
 		Stage = stage;
 	}
 
-	public String getDateStart() {
+	public String getDateStartString() {
 		return dateFormat.format(DateStart);
 	}
 
@@ -73,12 +73,20 @@ public class Event  {
 		DateStart = dateFormat.parse(dateStart);
 	}
 
-	public String getDateFinish() {
+	public String getDateFinishString() {
 		return dateFormat.format(DateFinish);
 	}
 
 	public void setDateFinish(String dateFinish) throws ParseException {
 		DateFinish = dateFormat.parse(dateFinish);
+	}
+
+	public Date getDateStart() {
+		return DateStart;
+	}
+
+	public Date getDateFinish() {
+		return DateFinish;
 	}
 
 	public String getArtist() {

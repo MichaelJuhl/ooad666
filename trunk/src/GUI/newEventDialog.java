@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.JTable;
 import dal.Event;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.lang.NumberFormatException;
 
 /**
@@ -73,7 +74,7 @@ public class newEventDialog extends javax.swing.JDialog {
 
         eventSceneLabel.setText("Scene");
 
-        eventSceneInputComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eventSceneInputComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Koncertsal", "Foyerscene", "Store scene", " Lille scene " , "Galleriscenen" , "Gal-leri 1", "Galleri 2", " Galleri 3" }));
 
         eventConcerttypeLabel.setText("Koncerttype");
 
@@ -86,22 +87,22 @@ public class newEventDialog extends javax.swing.JDialog {
         eventShowDiscountLabel.setText("ShowPortalis tilbud");
 
         eventPortalisDiscountLabel.setText("Portalis tilbud");
+        
+        eventStartYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeYearArray()));
 
-        eventStartYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eventStartMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeMonthArray()));
 
-        eventStartMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eventStartDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
 
-        eventStartDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eventStartTimeField.setText(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE));
 
-        eventStartTimeField.setText("HH:MM");
+        eventEndYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeYearArray()));
+        
+        eventEndMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeMonthArray()));
 
-        eventEndMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        eventEndDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
 
-        eventEndYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        eventEndDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        eventEndTimeField.setText("HH:MM");
+        eventEndTimeField.setText(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE));
 
         eventKrLabel.setText("Kr");
 
@@ -260,7 +261,35 @@ public class newEventDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>                        
-
+    
+    private String[] makeYearArray() {
+    	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+    	
+    	String[] years = new String[51];
+    	int y = 0;
+    	for(int i=currentYear; i<=currentYear+50; i++) {
+    		years[y] = String.valueOf(i);
+    		y++;
+    	}
+		return years;
+	}
+    
+    private String[] makeMonthArray() {
+    	String[] months = new String[12];
+    	for(int i=1; i<=12; i++) {
+    		months[i-1]=String.valueOf(i);
+    	}
+    	return months;
+    }
+    
+    private String[] makeDayArray() {
+    	String[] days = new String[31];
+    	for(int i=1; i<=31; i++) {
+    		days[i-1]=String.valueOf(i);
+    	}
+    	return days;
+    }
+    
     private void eventTitelInputFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                     
         // TODO add your handling code here:
     }                                                    
