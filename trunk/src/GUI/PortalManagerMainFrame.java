@@ -16,10 +16,6 @@ import java.awt.Toolkit;
 import java.awt.Window;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JTable;
-import javax.swing.table.TableColumnModel;
 import javax.swing.event.*;
 import javax.swing.table.TableModel;
 import dal.Event;
@@ -236,8 +232,8 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
         // Do something with the data...
 
     }
-    public void newEvent(Event event) {
-        
+    public void newEvent() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    	eventDataModel = new EventDataModel();
         eventDataModel.fireTableDataChanged();
     }
 
