@@ -3,6 +3,7 @@ package GUI;
 
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
@@ -13,7 +14,7 @@ import dao.EventDAO;
 
 public class EventDataModel extends AbstractTableModel {
 
-    protected List<Event> eventList;
+    protected ArrayList<Event> eventList;
     
     EventDataModel() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
         
@@ -22,9 +23,9 @@ public class EventDataModel extends AbstractTableModel {
     	//Test
     	//eventList = new ArrayList<Event>();
         //test
-        //eventList.add(new Event(1,"Rock","Gul","Bamse","2010-09-22 12:00:00","2010-09-22 13:30:00","Bamse spiller",154,200,0,10,25));
-        //eventList.add(new Event(2,"Dance","Orange","TECHNO-Tiz","2010-09-25 18:20:04","2010-09-29 13:30:59","Techno Forever",154,1500,0,7,21));
-        //eventList.add(new Event(3,"Leg","Gul","Michael","2010-01-05 12:00:00","2010-01-05 13:30:00","Michael Leger",154,200,0,18,4));
+        //eventList.add(new Event(1, "Rock", "Gul", "2010-09-22 12:00:00", "2010-09-22 13:30:00", "Bamse", "Bamse spiller", 154, 200, 0, 10, 25));
+        //eventList.add(new Event(2,"Dance","Orange","2010-09-25 18:20:04","2010-09-29 13:30:59","TECHNO-Tiz","Techno Forever",154,1500,0,7,21));
+        //eventList.add(new Event(3,"Leg","Gul","2010-01-05 12:00:00","2010-01-05 13:30:00","Michael","Michael Leger",154,200,0,18,4));
     }
     
     public TableModel getTableModel() {
@@ -92,5 +93,9 @@ public class EventDataModel extends AbstractTableModel {
             default:
                 return "";
         }
-    }   
+    }
+    
+    public ArrayList<Event> getEventList() {
+        return (ArrayList<Event>)eventList;
+    }
 }
