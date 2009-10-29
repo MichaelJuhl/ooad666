@@ -77,6 +77,9 @@ public class CustomerDAO implements ICustomer {
 				"', Gender = '" + Customers.getGender() + "', Phone = '" + Customers.getPhone() + "', Address =  '"
 				+ Customers.getAdresse() + "' WHERE CustomerID = " + CustomerID
 				);
+		Connector.doUpdate(
+				"UPDATE OOADDiscount SET Discount =  '" + Customers.getDiscount() + "' WHERE CustomerID = " + CustomerID
+		);
 		
 	}
 
