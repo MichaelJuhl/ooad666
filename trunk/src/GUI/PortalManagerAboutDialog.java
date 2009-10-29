@@ -32,56 +32,56 @@ public class PortalManagerAboutDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        pictureLabel = new javax.swing.JLabel();
+        Heading = new javax.swing.JLabel();
+        textScrollPane = new javax.swing.JScrollPane();
+        textPane = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Om ");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("resources/mugShot.png"))); // NOI18N
+        pictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("resources/mugShot.png"))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
-        jLabel2.setText("Portal Manager");
+        Heading.setFont(new java.awt.Font("Verdana", 1, 18)); // NOI18N
+        Heading.setText("Portal Manager");
 
-        jTextPane1.setEditable(false);
-        jTextPane1.setText("Hej \ndu er\n\n\nsoooeooeoeoeooeoeoed");
-        jScrollPane1.setViewportView(jTextPane1);
+        textPane.setEditable(false);
+        textPane.setText("Vi har lavet dette program, forever!");
+        textScrollPane.setViewportView(textPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addComponent(pictureLabel)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                        .addComponent(textScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2)
+                        .addComponent(Heading)
                         .addGap(71, 71, 71))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1)
+            .addComponent(pictureLabel)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
+                .addComponent(Heading)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                .addComponent(textScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     /**
     * @param args the command line arguments
-    */
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -95,12 +95,13 @@ public class PortalManagerAboutDialog extends javax.swing.JDialog {
             }
         });
     }
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
-    // End of variables declaration//GEN-END:variables
+	*/
+    
+    // Variables declaration - do not modify
+    private javax.swing.JLabel Heading;
+    private javax.swing.JLabel pictureLabel;
+    private javax.swing.JTextPane textPane;
+    private javax.swing.JScrollPane textScrollPane;
+    // End of variables declaration
 
 }
