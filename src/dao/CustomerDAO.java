@@ -23,7 +23,7 @@ public class CustomerDAO implements ICustomer {
 	+ ", " + Customer.getGender()
 	+ ", " + Customer.getPhone()
 	+ ", " + Customer.getAdresse() + ")";
-		String sql2 = "INSERT INTO OOADDiscount (CustomerID, Discount) VALUES((SELECT MAX(CustomerID) FROM OOADCustomer), '"+Customer.getDiscount() + "')";
+		String sql2 = "INSERT INTO OOADMember (CustomerID, Discount) VALUES((SELECT MAX(CustomerID) FROM OOADCustomer), '"+Customer.getDiscount() + "')";
 
 		Connector.doUpdate(sql);
 		Connector.doUpdate(sql2);
@@ -33,7 +33,7 @@ public class CustomerDAO implements ICustomer {
 
 	@Override
 	public Customer getCustomer(int CustomerID) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM OOADCustomer NATURAL JOIN OOADDiscount WHERE CustomerID = " + CustomerID);
+		ResultSet rs = Connector.doQuery("SELECT * FROM OOADCustomer NATURAL JOIN OOADMember WHERE CustomerID = " + CustomerID);
 	    try {
 	    	if (!rs.first()) throw new DALException("Kunden " + CustomerID + " findes ikke"); 
 	    	return new Customer (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7));
@@ -78,7 +78,7 @@ public class CustomerDAO implements ICustomer {
 				+ Customers.getAdresse() + "' WHERE CustomerID = " + CustomerID
 				);
 		Connector.doUpdate(
-				"UPDATE OOADDiscount SET Discount =  '" + Customers.getDiscount() + "' WHERE CustomerID = " + CustomerID
+				"UPDATE OOADMember SET Discount =  '" + Customers.getDiscount() + "' WHERE CustomerID = " + CustomerID
 		);
 		
 	}
