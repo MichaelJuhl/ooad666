@@ -60,7 +60,7 @@ public class UserDAO implements IUser{
 	@Override
 	public void sletUser(int UserID) throws DALException {
 		Connector.doUpdate(
-				"UPDATE OOADRank SET Rank = 'deaktiv' WHERE opr_nr = " +UserID
+				"UPDATE OOADRank SET Rank = 'deaktiv' WHERE UserID = " +UserID
 			);
 		
 	}
@@ -74,7 +74,7 @@ public class UserDAO implements IUser{
 		);
 
 		Connector.doUpdate(
-				"UPDATE OOADRank SET Rank =  '" + Users.getRank()+ "' WHERE opr_nr = " + UserID
+				"UPDATE OOADRank SET Rank =  '" + Users.getRank()+ "' WHERE UserID = " + UserID
 		);
 		
 	}
