@@ -80,17 +80,23 @@ public class EventDAO implements IEvent {
 		
 
 	@Override
-	public void updateEvent(int EventID, Event Event) throws DALException {
-		String event ="UPDATE OOADEvent SET Concerttype = '" + Event.getConcerttype() + "', Stage =  '" + Event.getStage() + 
-				"', TimeSTART = '" + Event.getDateStart() + "', TimeFINISH = '" + Event.getDateFinish() + "', Artist =  '" + Event.getArtist() + 
-				"', Titel = '" + Event.getTitel() + "', Price = " + Event.getPrice()+ ",Visitors = " + Event.getVisitors()+
-				" WHERE EventID = " + EventID;
+	public void updateEvent(Event event) throws DALException {
+		String eventUpdate ="UPDATE OOADEvent SET Concerttype = " +
+				"'" + event.getConcerttype() + 
+				"', Stage =  '" + event.getStage() + 
+				"', TimeSTART = '" + event.getDateStart() + 
+				"', TimeFINISH = '" + event.getDateFinish() + 
+				"', Artist =  '" + event.getArtist() + 
+				"', Titel = '" + event.getTitel() + 
+				"', Price = " + event.getPrice()+ 
+				", Visitors = " + event.getVisitors()+
+				" WHERE EventID = " + event.getEventID();
 		
 		
-		String discount=" Update OOADDiscount SET SHOW = "+Event.getShowDiscount()+ ", NORMAL = " + Event.getPortalisDiscount()+" WHERE EventID = "
-		+ EventID;;
+		String discount=" Update OOADDiscount SET SHOW = "+event.getShowDiscount()+ ", NORMAL = " + event.getPortalisDiscount()+" WHERE EventID = "
+		+ event.getEventID();
 		
-		Connector.doUpdate(event);
+		Connector.doUpdate(eventUpdate);
 		Connector.doUpdate(discount);
 			
 	}
