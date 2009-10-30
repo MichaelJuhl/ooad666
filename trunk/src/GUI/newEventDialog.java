@@ -107,7 +107,7 @@ public class newEventDialog extends javax.swing.JDialog {
         eventStartDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
         eventStartDateComboBox.setSelectedItem(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
         
-        eventStartTimeField.setText(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE));
+        eventStartTimeField.setText(getCurrentTime());
         
         eventEndYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeYearArray()));
         
@@ -117,7 +117,7 @@ public class newEventDialog extends javax.swing.JDialog {
         eventEndDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
         eventEndDateComboBox.setSelectedItem(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
 
-        eventEndTimeField.setText(Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + ":" + Calendar.getInstance().get(Calendar.MINUTE));
+        eventEndTimeField.setText(getCurrentTime());
 
         eventKrLabel.setText("Kr");
 
@@ -387,7 +387,7 @@ public class newEventDialog extends javax.swing.JDialog {
 			e.printStackTrace();
 		}
         try {
-			mainFrame.newEvent();
+			mainFrame.updateTable();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -479,6 +479,21 @@ public class newEventDialog extends javax.swing.JDialog {
         	return false;
         }
     	return true;
+    }
+    
+    private String getCurrentTime() {
+    	// returns the current time in the format HH:mm - fx 13:25 or 02:07
+    	String currentHour;
+    	String currentMinute;
+    	
+    	currentHour = String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
+    	if (currentHour.length()<2)
+    		currentHour = "0" + currentHour;
+    	currentMinute = String.valueOf(Calendar.getInstance().get(Calendar.MINUTE));
+    	if (currentMinute.length()<2) 
+    		currentMinute = "0" + currentMinute;
+    	
+    	return currentHour + ":" + currentMinute;
     }
 
     // Variables declaration - do not modify                     
