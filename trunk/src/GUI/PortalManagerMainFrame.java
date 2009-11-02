@@ -193,7 +193,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 
 	private void buttonEditEventActionPerformed(java.awt.event.ActionEvent evt) {                                                
 		if (jTable1.getSelectedRow() != -1) {
-			editEventDialog dialog = new editEventDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(jTable1.getSelectedRow()));
+			editEventDialog dialog = new editEventDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(jTable1.getSelectedRow()), this);
 			dialog.setLocationRelativeTo(this);
 			dialog.setVisible(true);
 		}
