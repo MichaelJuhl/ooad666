@@ -131,8 +131,8 @@ public class EventDAO implements IEvent {
 	
 	public void createTicket(int EventID,String TicketID) throws DALException {
 		String sql=" INSERT INTO OOADTicket (EventID, TicketID) VALUES("
-			+ "'" + EventID
-			+ ", " + TicketID + ")";
+			+ EventID
+			+ ", '" + TicketID + "')";
 		
 		Connector.doUpdate(sql);
 	}
