@@ -73,17 +73,7 @@ public class EventDataModel extends AbstractTableModel {
             case DATEFINISH:
                 return eventList.get(rowIndex).getDateFinishString();
             case TICKETS:
-			try {
-				return eventList.get(rowIndex).getVisitors() - new EventDAO().getTicketSold(eventList.get(rowIndex).getEventID())+"/"
-				+eventList.get(rowIndex).getVisitors();
-						
-			} catch (DALException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}				//eventList.get(rowIndex).getTicketsSold();
+            	return eventList.get(rowIndex).getVisitors() - eventList.get(rowIndex).getTicketsSold() + "/" + eventList.get(rowIndex).getVisitors();
             case PRICE:
                 return eventList.get(rowIndex).getPrice();
             case SHOW:

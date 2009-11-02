@@ -99,7 +99,7 @@ public class editEventDialog extends javax.swing.JDialog {
 		eventStartMonthComboBox.setSelectedItem(String.valueOf(event.getStartMonth()));
 
 		eventStartDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
-		eventStartDateComboBox.setSelectedIndex(event.getStartDay());
+		eventStartDateComboBox.setSelectedItem(String.valueOf(event.getStartDay()));
 
 		eventStartTimeField.setText(event.getDateStart().get(Calendar.HOUR_OF_DAY) + ":" + event.getDateStart().get(Calendar.MINUTE));
 
@@ -329,13 +329,21 @@ public class editEventDialog extends javax.swing.JDialog {
 			return;
 		}
 
-		//Validation passed, make new event
+		//Validation passed, update event
+		event.setConcerttype(eventConcerttypeInputField.getText());
+		event.setStage((String)eventStageInputComboBox.getSelectedItem());
+		event.setDateStart(getStartTime());
+		event.setDateFinish(getEndTime());
+		event.setArtist(eventArtistInputField.getText());
+		event.setTitel(eventTitelInputField.getText());
+		event.setPrice(Double.valueOf(eventPriceInputField.getText()));
+		event.setShowDiscount(Double.valueOf(eventShowDiscountField.getText()));
+		event.setPortalisDiscount(Double.valueOf(eventPortalisDiscountField.getText()));
+		
 		EventDAO eventDAO = new EventDAO();
 		try {
-			eventDAO.updateEvent(new Event(eventConcerttypeInputField.getText(), (String)eventStageInputComboBox.getSelectedItem(), getStartTime(), getEndTime(), eventArtistInputField.getText(), eventTitelInputField.getText(), Double.valueOf(eventPriceInputField.getText()), Integer.valueOf(event.getVisitors()), Double.valueOf(eventShowDiscountField.getText()), Double.valueOf(eventPortalisDiscountField.getText())));
+			eventDAO.updateEvent(event);
 		} catch(NumberFormatException e) {
-			e.printStackTrace();
-		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
