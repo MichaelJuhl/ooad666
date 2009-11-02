@@ -14,7 +14,7 @@ public class Event  {
 	protected String concertType;                
 	protected String Stage;  
 	protected Calendar dateStart = new GregorianCalendar(new Locale("da","DK"));
-	protected Calendar dateFinish = new GregorianCalendar(new Locale("da","DK"));
+	protected Calendar dateEnd = new GregorianCalendar(new Locale("da","DK"));
 	protected String artist;                 
 	protected String titel;
 	protected double price;		
@@ -33,7 +33,7 @@ public class Event  {
 		this.concertType = concertType;
 		this.Stage = Stage;
 		this.dateStart.setTime(dateFormat.parse(dateStart));
-		this.dateFinish.setTime(dateFormat.parse(dateFinish));
+		this.dateEnd.setTime(dateFormat.parse(dateFinish));
 		this.artist = artist;
 		this.titel = titel;
 		this.price = price;
@@ -52,7 +52,7 @@ public class Event  {
 		this.concertType = concertType;
 		this.Stage = Stage;
 		this.dateStart = dateStart;
-		this.dateFinish = dateFinish;
+		this.dateEnd = dateFinish;
 		this.artist = artist;
 		this.titel = titel;
 		this.price = price;
@@ -96,11 +96,11 @@ public class Event  {
 	}
 
 	public String getDateFinishString() {
-		return dateFormat.format(dateFinish.getTime());
+		return dateFormat.format(dateEnd.getTime());
 	}
 
 	public void setDateFinish(String dateFinish) throws ParseException {
-		this.dateFinish.setTime(dateFormat.parse(dateFinish));
+		this.dateEnd.setTime(dateFormat.parse(dateFinish));
 	}
 
 	public Calendar getDateStart() {
@@ -108,7 +108,7 @@ public class Event  {
 	}
 
 	public Calendar getDateFinish() {
-		return dateFinish;
+		return dateEnd;
 	}
 
 	public String getArtist() {
@@ -171,4 +171,52 @@ public class Event  {
 	public void setPortalisDiscount(double portalisDiscount) {
 		this.portalisDiscount = portalisDiscount;
 	}
+	
+	public String[] getStartYearArray() {
+    	Calendar calendar = (Calendar) dateStart.clone();
+    	
+    	String[] years = new String[51];
+    	int y = 0;
+    	for(int i=calendar.get(Calendar.YEAR)-25; i<=calendar.get(Calendar.YEAR)+25; i++) {
+    		years[y] = String.valueOf(i);
+    		y++;
+    	}
+		return years;
+	}
+    
+    public String[] getEndYearArray() {
+    	Calendar calendar = (Calendar) dateEnd.clone();
+    	
+    	String[] years = new String[51];
+    	int y = 0;
+    	for(int i=calendar.get(Calendar.YEAR)-25; i<=calendar.get(Calendar.YEAR)+25; i++) {
+    		years[y] = String.valueOf(i);
+    		y++;
+    	}
+		return years;
+	}
+    
+    public int getStartYear() {
+    	return dateStart.get(Calendar.YEAR);
+    }
+    
+    public int getStartMonth() {
+    	return dateStart.get(Calendar.MONTH);
+    }
+    
+    public int getStartDay() {
+    	return dateStart.get(Calendar.DAY_OF_MONTH);
+    }
+    
+    public int getEndYear() {
+    	return dateEnd.get(Calendar.YEAR);
+    }
+    
+    public int getEndMonth() {
+    	return dateEnd.get(Calendar.MONTH);
+    }
+    
+    public int getEndDay() {
+    	return dateEnd.get(Calendar.DAY_OF_MONTH);
+    }
 }
