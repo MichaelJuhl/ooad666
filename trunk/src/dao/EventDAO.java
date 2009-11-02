@@ -84,8 +84,8 @@ public class EventDAO implements IEvent {
 		String eventUpdate ="UPDATE OOADEvent SET Concerttype = " +
 				"'" + event.getConcerttype() + 
 				"', Stage =  '" + event.getStage() + 
-				"', TimeSTART = '" + event.getDateStart() + 
-				"', TimeFINISH = '" + event.getDateFinish() + 
+				"', DateSTART = '" + event.getDateStartString() + 
+				"', DateFINISH = '" + event.getDateFinishString() + 
 				"', Artist =  '" + event.getArtist() + 
 				"', Titel = '" + event.getTitel() + 
 				"', Price = " + event.getPrice()+ 
@@ -93,7 +93,7 @@ public class EventDAO implements IEvent {
 				" WHERE EventID = " + event.getEventID();
 		
 		
-		String discount=" Update OOADDiscount SET SHOW = "+event.getShowDiscount()+ ", NORMAL = " + event.getPortalisDiscount()+" WHERE EventID = "
+		String discount=" Update OOADDiscount SET SHOWDiscount = "+event.getShowDiscount()+ ", NORMAL = " + event.getPortalisDiscount()+" WHERE EventID = "
 		+ event.getEventID();
 		
 		Connector.doUpdate(eventUpdate);
@@ -129,6 +129,6 @@ public class EventDAO implements IEvent {
 	    }catch (SQLException e) {throw new DALException(e); }
 	}
 	
-	
+
 
 }
