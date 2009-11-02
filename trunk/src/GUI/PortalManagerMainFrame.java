@@ -39,7 +39,6 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	public PortalManagerMainFrame() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		eventDataModel = new EventDataModel();
 		initComponents();
-		jTable1.getModel().addTableModelListener(jTable1);
 		centreWindow(this);
 	}
 	public static void centreWindow(Window frame) {
@@ -53,8 +52,8 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 
 		mainTabbedPane = new javax.swing.JTabbedPane();
 		EventsPanel = new javax.swing.JPanel();
-		jScrollPane1 = new javax.swing.JScrollPane();
-		jTable1 = new javax.swing.JTable();
+		eventScrollPane = new javax.swing.JScrollPane();
+		eventTable = new javax.swing.JTable();
 		buttonNewEvent = new javax.swing.JButton();
 		buttonEditEvent = new javax.swing.JButton();
 		buttonDeleteEvent = new javax.swing.JButton();
@@ -69,11 +68,14 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Portal Manager");
+		setSize(1280, 800);
 
-		jTable1.setModel(eventDataModel.getTableModel());
-		jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-		jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		jScrollPane1.setViewportView(jTable1);
+		eventTable.setModel(eventDataModel.getTableModel());
+		eventTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+		eventTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		eventTable.getModel().addTableModelListener(eventTable);
+		eventTable.setAutoCreateRowSorter(true);
+		eventScrollPane.setViewportView(eventTable);
 
 		buttonNewEvent.setText("Opret");
 		buttonNewEvent.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +97,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 		EventsPanel.setLayout(EventsPanelLayout);
 		EventsPanelLayout.setHorizontalGroup(
 				EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+				.addComponent(eventScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
 				.addGroup(EventsPanelLayout.createSequentialGroup()
 						.addComponent(buttonNewEvent)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -107,7 +109,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 		EventsPanelLayout.setVerticalGroup(
 				EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(EventsPanelLayout.createSequentialGroup()
-						.addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(eventScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addGroup(EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 								.addComponent(buttonNewEvent)
@@ -158,7 +160,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(
 				layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+				.addComponent(mainTabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
 				.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
 						.addContainerGap(455, Short.MAX_VALUE)
 						.addComponent(statusBar, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -192,8 +194,8 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	}                                              
 
 	private void buttonEditEventActionPerformed(java.awt.event.ActionEvent evt) {                                                
-		if (jTable1.getSelectedRow() != -1) {
-			editEventDialog dialog = new editEventDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(jTable1.getSelectedRow()), this);
+		if (eventTable.getSelectedRow() != -1) {
+			editEventDialog dialog = new editEventDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(eventTable.getSelectedRow()), this);
 			dialog.setLocationRelativeTo(this);
 			dialog.setVisible(true);
 		}
@@ -207,8 +209,8 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	private javax.swing.JButton buttonNewEvent;
 	private javax.swing.JMenuItem connectDBMenuItem;
 	private javax.swing.JMenuItem exitMenuItem;
-	private javax.swing.JScrollPane jScrollPane1;
-	private javax.swing.JTable jTable1;
+	private javax.swing.JScrollPane eventScrollPane;
+	private javax.swing.JTable eventTable;
 	private javax.swing.JMenuBar mainMenuBar;
 	private javax.swing.JTabbedPane mainTabbedPane;
 	private javax.swing.JMenu menuFiler;
