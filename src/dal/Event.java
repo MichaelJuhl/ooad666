@@ -24,7 +24,7 @@ public class Event  {
 	protected double portalisDiscount;
 	protected DateFormat dateFormat;	
 
-	//Constructor for building Event objects from information from the database
+	//Constructor for building Event objects from information from the database and editing 
 	public Event(int eventID, String concertType, String Stage, String dateStart, String dateFinish, String artist, String titel, 
 			double price, int maxVisitors, int ticketsSold, double showDiscount, double portalisDiscount) throws ParseException
 	{
@@ -94,6 +94,10 @@ public class Event  {
 	public void setDateStart(String dateStart) throws ParseException {
 		this.dateStart.setTime(dateFormat.parse(dateStart));
 	}
+	
+	public void setDateStart(Calendar dateStart) {
+		this.dateStart = dateStart;
+	}
 
 	public String getDateFinishString() {
 		return dateFormat.format(dateEnd.getTime());
@@ -101,6 +105,10 @@ public class Event  {
 
 	public void setDateFinish(String dateFinish) throws ParseException {
 		this.dateEnd.setTime(dateFormat.parse(dateFinish));
+	}
+	
+	public void setDateFinish(Calendar dateFinish) {
+		this.dateEnd = dateFinish;
 	}
 
 	public Calendar getDateStart() {

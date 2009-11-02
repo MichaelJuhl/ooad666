@@ -39,7 +39,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	public PortalManagerMainFrame() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		eventDataModel = new EventDataModel();
 		initComponents();
-		jTable1.getModel().addTableModelListener(this);
+		jTable1.getModel().addTableModelListener(jTable1);
 		centreWindow(this);
 	}
 	public static void centreWindow(Window frame) {
