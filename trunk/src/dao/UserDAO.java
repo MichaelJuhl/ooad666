@@ -31,7 +31,8 @@ public class UserDAO implements IUser{
 
 	@Override
 	public User getUser(int UserID) throws DALException {
-		ResultSet rs = Connector.doQuery("SELECT * FROM OOADUSer WHERE UserID = " + UserID);
+		System.out.println(UserID);
+		ResultSet rs = Connector.doQuery("SELECT * FROM OOADUser NATURAL JOIN OOADRank WHERE UserID = " + UserID );
 	    try {
 	    	if (!rs.first()) throw new DALException("Brugeren " + UserID + " findes ikke"); 
 	    	return new User (rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getInt(5), rs.getString(6),
@@ -39,7 +40,7 @@ public class UserDAO implements IUser{
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
 	}
-
+	
 	@Override
 	public ArrayList<User> getUserList() throws DALException, InstantiationException, IllegalAccessException,
 			ClassNotFoundException, SQLException {
@@ -54,6 +55,7 @@ public class UserDAO implements IUser{
 			}
 		}
 		catch (SQLException e) { throw new DALException(e); }
+		
 		return list;
 	}
 
