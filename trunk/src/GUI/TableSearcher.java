@@ -1,82 +1,91 @@
 package GUI;
-
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-
-import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-public abstract class TableSearcher implements TableModel{
-	UserDataModel userDataModel;
-	ArrayList rowToModelIndex;
 
+import dal.User;
+import dalinterface.DALException;
+
+import dao.UserDAO;;
+
+
+public class TableSearcher extends AbstractTableModel{
 	
-	private void clearSearchingState(){
-		String searchString = null;
-		rowToModelIndex.clear();
-		for (int t=0; t<userDataModel.getRowCount(); t++){
-			rowToModelIndex.add(new Integer(t));
-		}
+	protected User getUser;
+	int userID;
+    
+	TableSearcher() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	        
+	    	getUser = new UserDAO().getUser(Integer.parseInt(GUIUsers.jTextField1.getText()));
+	    	
+	    		 
 	}
 	
-	private int getModelRow(int row){
-		return ((Integer) rowToModelIndex.get(row)).intValue();
-    }
-
-	@Override
-	public void addTableModelListener(TableModelListener arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Class getColumnClass(int column) {
-		
-		return userDataModel.getColumnClass(column);
-	}
 	
-		
 	
-
-	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return (userDataModel.userList == null) ? 0 : userDataModel.getColumnCount(); 
-	}
-
-	@Override
-	public String getColumnName(int column) {
 		
-		// TODO Auto-generated method stub
-		return userDataModel.getColumnName(column);
+		return 8;
 	}
 
 	@Override
 	public int getRowCount() {
-		 return (userDataModel == null) ? 0 : rowToModelIndex.size();
-	}
-	public boolean isCellEditable(int row, int column) {
-
-		return userDataModel.isCellEditable(getModelRow(row), column);
-	}
-
-	public Object getValueAt(int row, int column) {
-		return userDataModel.getValueAt(getModelRow(row), column);
-	}
-
-	public void setValueAt(Object aValue, int row, int column) {
-		userDataModel.setValueAt(aValue, getModelRow(row), column);
+		
+		return 1;
 	}
 
 	@Override
-	public void removeTableModelListener(TableModelListener arg0) {
-		// TODO Auto-generated method stub
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		final int USERID = 0;
+        final int NAME = 1;
+        final int CPR = 2;
+        final int GENDER = 3;
+        final int PHONE = 4;
+        final int ADDRESS = 5;
+        final int PASSWORD = 6;
+        final int RANK = 7;
+       
+        switch(columnIndex) {
+            case USERID:
+                return getUser.getUserID();
+            case NAME:
+                return getUser.getName();
+            case CPR:
+                return getUser.getCPR();
+            case GENDER:
+                return getUser.getGender();
+            case PHONE:
+                return getUser.getPhone();
+            case ADDRESS:
+                return getUser.getAdresse();
+            case PASSWORD:
+                return getUser.getPassword();
+            case RANK:
+                return getUser.getRank();  
+            default:
+                return "";
+        }
+		
 		
 	}
-
+	
+	public String getColumnName(int columnIndex) {
+    	String[] columnNames = new String [] {
+                "ID", "Medlems navn", "CPR" ,"Tlf.", "Kon", "Adresse", "Password", "Rank"
+        };
+    	return columnNames[columnIndex];
+    }
+	
 	
 
+	public TableModel getTabelModel(){
+		
+		return (TableModel)this;
+	}
 	
 
 }

@@ -14,6 +14,8 @@ package GUI;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import javax.swing.JButton;
+
 import dal.User;
 import dalinterface.DALException;
 import dao.UserDAO;
@@ -53,6 +55,7 @@ public class GUIUsers extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -93,6 +96,33 @@ public class GUIUsers extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        
+        jButton5.setText("Hvis medlemmer.");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+					jButton5ActionPerformed(evt);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
 
         jLabel2.setText("Søg Medlem:");
 
@@ -118,8 +148,33 @@ public class GUIUsers extends javax.swing.JFrame {
         jTable1.setModel(new UserDataModel().getTabelModel());
         jScrollPane1.setViewportView(jTable1);
 
-        jButton4.setText("SÃ¸g");
-
+        jButton4.setText("Soeg");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+					jButton4ActionPerformed(evt);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (InstantiationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            }
+        });
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -138,7 +193,9 @@ public class GUIUsers extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3))
+                                .addComponent(jButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton5))
                             .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 237, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
@@ -164,7 +221,8 @@ public class GUIUsers extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -180,7 +238,7 @@ public class GUIUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseEntered
-      
+    	
     }//GEN-LAST:event_jTextField1MouseEntered
 
     private void jTextField1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseExited
@@ -188,20 +246,21 @@ public class GUIUsers extends javax.swing.JFrame {
         if(jTextField1.getText().length()==0){
 
             jTextField1.setText("Indtast Medlems ID");
+            
         }
 
         
          
         
         
-    }//GEN-LAST:event_jTextField1MouseExited
+    }
+    
+    
+    //GEN-LAST:event_jTextField1MouseExited
 
     private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
         jTextField1.setText(null);
-        /*if(jTextField1.getText().length()==0){
-
-            jTextField1.setText("Indtast Medlems ID");
-        }*/
+        
     }//GEN-LAST:event_jTextField1MouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -219,16 +278,17 @@ public class GUIUsers extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
     
-    int userID;
-	private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
-		
-		
-		
-		/*userID = Integer.parseInt(jTextField1.getText() );
-		jTable1.setModel(new UserDataModel().userList.);
-		*/
+   
+    
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    	
+		jTable1.setModel(new TableSearcher().getTabelModel());
+				
 	}
     
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    	jTable1.setModel(new UserDataModel().getTabelModel());
+    }
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
        
        // guiEditMember.setVisible(true);
@@ -243,7 +303,7 @@ public class GUIUsers extends javax.swing.JFrame {
     /**
     * @param args the command line arguments
     */
-    /*
+    
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -268,21 +328,22 @@ public class GUIUsers extends javax.swing.JFrame {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-                //new DialogEditMember().setVisible(true);
+                
             }
         });
     }
-*/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    static javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
 }
