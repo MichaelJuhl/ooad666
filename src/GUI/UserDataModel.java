@@ -35,7 +35,7 @@ public class UserDataModel extends AbstractTableModel{
 	
 	public int getColumnCount() {
 		
-		return 3;
+		return 8;
 	}
 
 	@Override
