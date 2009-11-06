@@ -12,9 +12,9 @@ public interface IEvent {
 	ArrayList<Event> getEventList() throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, ParseException;
 	void createEvent(Event Event) throws DALException;
 	void updateEvent(Event Event) throws DALException;
-	void sletEvent(int EventID) throws DALException;
+	void deleteEvent(int EventID) throws DALException;
 	public boolean checkEvent(Event Event) throws DALException;
-	public boolean CheckTickets(Event Event) throws DALException;
+	public boolean checkTickets(Event Event) throws DALException;
 }
 	
 

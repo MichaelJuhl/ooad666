@@ -1,7 +1,9 @@
 package GUI;
 
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
@@ -100,8 +102,9 @@ public class editEventDialog extends javax.swing.JDialog {
 
 		eventStartDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
 		eventStartDateComboBox.setSelectedItem(String.valueOf(event.getStartDay()));
-
-		eventStartTimeField.setText(event.getDateStart().get(Calendar.HOUR_OF_DAY) + ":" + event.getDateStart().get(Calendar.MINUTE));
+		
+		DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		eventStartTimeField.setText(dateFormat.format(event.getDateStart().getTime()));
 
 		eventEndYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(event.getStartYearArray()));
 		eventEndYearComboBox.setSelectedItem(String.valueOf(event.getDateFinish().get(Calendar.YEAR)));
@@ -111,8 +114,8 @@ public class editEventDialog extends javax.swing.JDialog {
 
 		eventEndDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
 		eventEndDateComboBox.setSelectedItem(String.valueOf(event.getDateFinish().get(Calendar.DAY_OF_MONTH)));
-
-		eventEndTimeField.setText(event.getDateFinish().get(Calendar.HOUR_OF_DAY) + ":" + event.getDateFinish().get(Calendar.MINUTE));
+		
+		eventEndTimeField.setText(dateFormat.format(event.getDateFinish().getTime()));
 
 		eventKrLabel.setText("Kr");
 
@@ -349,27 +352,7 @@ public class editEventDialog extends javax.swing.JDialog {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		try {
-			mainFrame.updateTable();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (DALException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		mainFrame.updateTable();
 		this.dispose();
 	}                                               
 

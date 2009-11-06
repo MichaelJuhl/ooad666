@@ -72,7 +72,7 @@ public class EventDAO implements IEvent {
 	}
 
 	@Override
-	public void sletEvent(int EventID) throws DALException {
+	public void deleteEvent(int EventID) throws DALException {
 		Connector.doUpdate(
 				"DELETE FROM OOADEvent WHERE EventID = "+ EventID
 			);
@@ -116,7 +116,7 @@ public class EventDAO implements IEvent {
 	}
 
 	@Override
-	public boolean CheckTickets(Event Event) throws DALException {
+	public boolean checkTickets(Event Event) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT COUNT(TicketID) from OOADTicket WHERE COUNT(TicketID) > "+Event.getVisitors()
 				);
 		
