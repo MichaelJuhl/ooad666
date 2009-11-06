@@ -14,11 +14,17 @@ package GUI;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import javax.swing.JOptionPane;
 import javax.swing.event.*;
+
+import dal.Event;
 import dalinterface.DALException;
+import dao.EventDAO;
 
 /**
  *
@@ -78,20 +84,25 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 		eventScrollPane.setViewportView(eventTable);
 
 		buttonNewEvent.setText("Opret");
-		buttonNewEvent.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		buttonNewEvent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				buttonNewEventActionPerformed(evt);
 			}
 		});
 
 		buttonEditEvent.setText("Rediger");
-		buttonEditEvent.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		buttonEditEvent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				buttonEditEventActionPerformed(evt);
 			}
 		});
 
 		buttonDeleteEvent.setText("Slet");
+		buttonDeleteEvent.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				buttonDeleteEventActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout EventsPanelLayout = new javax.swing.GroupLayout(EventsPanel);
 		EventsPanel.setLayout(EventsPanelLayout);
@@ -176,30 +187,44 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 		pack();
 	}
 
-	private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+	private void exitMenuItemActionPerformed(ActionEvent evt) {
 		setVisible(false);
 		System.exit(0);
-	}//GEN-LAST:event_exitMenuItemActionPerformed
+	}
 
-	private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {                                              
+	private void aboutMenuItemActionPerformed(ActionEvent evt) {                                              
 		PortalManagerAboutDialog dialog = new PortalManagerAboutDialog(this, rootPaneCheckingEnabled);
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
 	}                                             
 
-	private void buttonNewEventActionPerformed(java.awt.event.ActionEvent evt) {                                               
+	private void buttonNewEventActionPerformed(ActionEvent evt) {                                               
 		newEventDialog dialog = new newEventDialog(this, rootPaneCheckingEnabled, this);
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
 	}                                              
 
-	private void buttonEditEventActionPerformed(java.awt.event.ActionEvent evt) {                                                
+	private void buttonEditEventActionPerformed(ActionEvent evt) {                                                
 		if (eventTable.getSelectedRow() != -1) {
-			editEventDialog dialog = new editEventDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(eventTable.getSelectedRow()), this);
+			
+			editEventDialog dialog = new editEventDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow())), this);
 			dialog.setLocationRelativeTo(this);
 			dialog.setVisible(true);
 		}
-	}                                               
+	}  
+	
+	private void buttonDeleteEventActionPerformed(ActionEvent evt) {
+		Event selectedEvent = eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow()));
+		if (DialogDeleteYN2.userAcceptsDelete(selectedEvent.getTitel())) {
+			try {
+				new EventDAO().deleteEvent(selectedEvent.getEventID());
+			} catch (DALException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
+			updateTable();
+		}
+	}
 
 	// Variables declaration - do not modify                     
 	private javax.swing.JPanel EventsPanel;
@@ -232,7 +257,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 
 	}
 
-	public void updateTable() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public void updateTable() {
 		eventDataModel.updateFromDatabase();
 		eventDataModel.fireTableDataChanged();
 	}
