@@ -74,14 +74,16 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Portal Manager");
-		setSize(1280, 800);
+		setMinimumSize(new Dimension(750, 350));
 
 		eventTable.setModel(eventDataModel.getTableModel());
 		eventTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
 		eventTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		eventTable.getModel().addTableModelListener(eventTable);
 		eventTable.setAutoCreateRowSorter(true);
+		eventTable.setMinimumSize(new Dimension(1200, 200));
 		eventScrollPane.setViewportView(eventTable);
+		eventScrollPane.setPreferredSize(new Dimension(600, 200));
 
 		buttonNewEvent.setText("Opret");
 		buttonNewEvent.addActionListener(new ActionListener() {
@@ -108,7 +110,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 		EventsPanel.setLayout(EventsPanelLayout);
 		EventsPanelLayout.setHorizontalGroup(
 				EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(eventScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE)
+				.addComponent(eventScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addGroup(EventsPanelLayout.createSequentialGroup()
 						.addComponent(buttonNewEvent)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
