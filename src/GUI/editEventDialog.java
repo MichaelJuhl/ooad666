@@ -32,7 +32,7 @@ public class editEventDialog extends javax.swing.JDialog {
 		eventTitelInputField.setText(event.getTitel());
 		eventArtistInputField.setText(event.getArtist());
 		eventConcerttypeInputField.setText(event.getConcerttype());
-		eventPriceInputField.setText(new Double(event.getPrice()).toString());
+		eventPriceInputField.setText(String.valueOf(event.getPrice()));
 		eventPortalisDiscountField.setText(new Double(event.getPortalisDiscount()).toString());
 		eventShowDiscountField.setText(new Double(event.getShowDiscount()).toString());
 		//
