@@ -1,5 +1,7 @@
 package dal;
 
+import java.util.Calendar;
+
 public class Customer {
 
 	protected int CustomerID;                     
@@ -23,6 +25,10 @@ public class Customer {
 	}
 	public Customer(){
 	
+	}
+	public Customer(String text, Calendar birthTime, String selectedItem,
+			Integer valueOf, String text2) {
+		// TODO Auto-generated constructor stub
 	}
 	public int getCustomerID() {
 		return CustomerID;

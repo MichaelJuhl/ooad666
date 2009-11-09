@@ -15,14 +15,15 @@ public class CustomerDAO implements ICustomer {
 
 
 	@Override
-	public void createCustomer(Customer CustomerID ,Customer Customer) throws DALException {
+	public void createCustomer(Customer Customer) throws DALException {
 		String sql=" INSERT INTO OOADCustomer (Name, Birth, Gender, Phone, Address) VALUES("
-	+ CustomerID
+	
 	+ ", " + Customer.getName()
 	+ ", " + Customer.getBirth()
 	+ ", " + Customer.getGender()
 	+ ", " + Customer.getPhone()
 	+ ", " + Customer.getAdresse() + ")";
+		
 		String sql2 = "INSERT INTO OOADMember (CustomerID, Discount) VALUES((SELECT MAX(CustomerID) FROM OOADCustomer), '"+Customer.getDiscount() + "')";
 
 		Connector.doUpdate(sql);

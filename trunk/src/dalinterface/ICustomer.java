@@ -10,7 +10,7 @@ public interface ICustomer {
 	
 	Customer getCustomer(int CustomerID) throws DALException;
 	ArrayList<Customer> getCustomerList() throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
-	void createCustomer(Customer CustomerID ,Customer Customer) throws DALException;
+	void createCustomer(Customer Customer) throws DALException;
 	void updateCustomers(int CustomerID, Customer Customers) throws DALException;
 	void sletCustomer(int Customer) throws DALException;
 
