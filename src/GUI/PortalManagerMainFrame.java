@@ -143,6 +143,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 
 		mainTabbedPane.addTab("Arrangementer", EventsPanel);
 		mainTabbedPane.addTab("Brugere", new UserList(this));
+		mainTabbedPane.addTab("Medlemmer", new MemberList(this));
 		
 		statusBar.setEditable(false);
 		statusBar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);

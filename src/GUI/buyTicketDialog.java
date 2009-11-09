@@ -13,10 +13,10 @@ package GUI;
 
 
 import dal.Event;
-import dal.Customer;
+import dal.Member;
 import java.text.ParseException;
 import dalinterface.DALException;
-import dao.CustomerDAO;
+import dao.MemberDAO;
 import dao.EventDAO;
 
 /**
@@ -29,7 +29,7 @@ public class buyTicketDialog extends javax.swing.JDialog {
 	double portalisdiscount;
 
 	Event event2;
-	Customer customer;
+	Member customer;
 
     /** Creates new form buyTicketDialog */
     public buyTicketDialog(java.awt.Frame parent, boolean modal, Event event) {
@@ -318,9 +318,9 @@ public class buyTicketDialog extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, DALException {
     	if (MedlemIDTextfield.getText().equals("")|| MedlemIDTextfield.getText().equals("guest")){
-        	customer = new CustomerDAO().getCustomer(1);
+        	customer = new MemberDAO().getCustomer(1);
     	}else{
-    		customer = new CustomerDAO().getCustomer(Integer.parseInt(MedlemIDTextfield.getText()));
+    		customer = new MemberDAO().getCustomer(Integer.parseInt(MedlemIDTextfield.getText()));
     	}
 
     	

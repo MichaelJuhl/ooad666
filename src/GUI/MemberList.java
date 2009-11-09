@@ -20,13 +20,13 @@ import dao.EventDAO;
 public class MemberList extends JPanel{
 	
 	JFrame parent;
-	UserDataModel dataModel;
+	MemberDataModel dataModel;
 	
 	MemberList(JFrame parent) {
 		this.parent = parent;
 		
 		try {
-			dataModel = new UserDataModel();
+			dataModel = new MemberDataModel();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,39 +51,39 @@ public class MemberList extends JPanel{
 	}
 	
 	private void initComponents() {
-		userScrollPane = new JScrollPane();
-		userTable = new JTable();
-		buttonNewUser = new JButton();
-		buttonEditUser = new JButton();
-		buttonDeleteUser = new JButton();
+		memberScrollPane = new JScrollPane();
+		memberTable = new JTable();
+		buttonNewMember = new JButton();
+		buttonEditMember = new JButton();
+		buttonDeleteMember = new JButton();
 		
-		userTable.setModel(dataModel.getTableModel());
-		userTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-		userTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		userTable.getModel().addTableModelListener(userTable);
-		userTable.setAutoCreateRowSorter(true);
-		userTable.setMinimumSize(new Dimension(1200, 200));
-		userScrollPane.setViewportView(userTable);
-		userScrollPane.setPreferredSize(new Dimension(600, 200));
+		memberTable.setModel(dataModel.getTableModel());
+		memberTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
+		memberTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+		memberTable.getModel().addTableModelListener(memberTable);
+		memberTable.setAutoCreateRowSorter(true);
+		memberTable.setMinimumSize(new Dimension(1200, 200));
+		memberScrollPane.setViewportView(memberTable);
+		memberScrollPane.setPreferredSize(new Dimension(600, 200));
 		
-		buttonNewUser.setText("Opret");
-		buttonNewUser.addActionListener(new ActionListener() {
+		buttonNewMember.setText("Opret");
+		buttonNewMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				buttonNewUserActionPerformed(evt);
+				buttonNewMemberActionPerformed(evt);
 			}
 		});
 
-		buttonEditUser.setText("Rediger");
-		buttonEditUser.addActionListener(new ActionListener() {
+		buttonEditMember.setText("Rediger");
+		buttonEditMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				buttonEditUserActionPerformed(evt);
+				buttonEditMemberActionPerformed(evt);
 			}
 		});
 
-		buttonDeleteUser.setText("Slet");
-		buttonDeleteUser.addActionListener(new ActionListener() {
+		buttonDeleteMember.setText("Slet");
+		buttonDeleteMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
-				buttonDeleteUserActionPerformed(evt);
+				buttonDeleteMemberActionPerformed(evt);
 			}
 		});
 		
@@ -91,50 +91,47 @@ public class MemberList extends JPanel{
 		setLayout(EventsPanelLayout);
 		EventsPanelLayout.setHorizontalGroup(
 				EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(userScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
+				.addComponent(memberScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
 				.addGroup(EventsPanelLayout.createSequentialGroup()
-						.addComponent(buttonNewUser)
+						.addComponent(buttonNewMember)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(buttonEditUser)
+						.addComponent(buttonEditMember)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(buttonDeleteUser))
+						.addComponent(buttonDeleteMember))
 		);
 		EventsPanelLayout.setVerticalGroup(
 				EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 				.addGroup(EventsPanelLayout.createSequentialGroup()
-						.addComponent(userScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(memberScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addGroup(EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(buttonNewUser)
-								.addComponent(buttonEditUser)
-								.addComponent(buttonDeleteUser))
+								.addComponent(buttonNewMember)
+								.addComponent(buttonEditMember)
+								.addComponent(buttonDeleteMember))
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
 		);
 		
 	}
 	
-	private void buttonNewUserActionPerformed(ActionEvent evt) {                                               
-		new DialogNewUser(parent, true);
+	private void buttonNewMemberActionPerformed(ActionEvent evt) {                                               
+		//new DialogNewMember(parent, true);
 	}                                              
 
-	private void buttonEditUserActionPerformed(ActionEvent evt) {                                                
-		new DialogEditUser(parent, true, dataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())));
+	private void buttonEditMemberActionPerformed(ActionEvent evt) {                                                
+		//new DialogEditMember(parent, true, dataModel.getMemberList().get(memberTable.convertRowIndexToModel(memberTable.getSelectedRow())));
 		
 	}  
 	
-	private void buttonDeleteUserActionPerformed(ActionEvent evt) {
-		if (DialogDeleteYN2.userAcceptsDelete(dataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())).getName())) {
-			
-		}
+	private void buttonDeleteMemberActionPerformed(ActionEvent evt) {
 		
 	}
 	
 	// Variables declaration - do not modify                     
-	private JScrollPane userScrollPane;
-	private JTable userTable;
-	private JButton buttonNewUser;
-	private JButton buttonEditUser;
-	private JButton buttonDeleteUser;
+	private JScrollPane memberScrollPane;
+	private JTable memberTable;
+	private JButton buttonNewMember;
+	private JButton buttonEditMember;
+	private JButton buttonDeleteMember;
 	// End of variables declaration
 
 }

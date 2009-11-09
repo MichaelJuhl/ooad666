@@ -16,7 +16,7 @@ import java.text.ParseException;
 
 
 import dal.Event;
-import dal.Customer;
+import dal.Member;
 import dalinterface.DALException;
 import dao.EventDAO;
 import GUI.PrintUtilities;
@@ -28,7 +28,7 @@ import GUI.PrintUtilities;
 public class ticketEventDialog extends javax.swing.JDialog {
 
     /** Creates new form ticketEventDialog */
-    public ticketEventDialog(buyTicketDialog buyTicketDialog, boolean modal, Event event, Customer customer, int billetter) {
+    public ticketEventDialog(buyTicketDialog buyTicketDialog, boolean modal, Event event, Member customer, int billetter) {
         super(buyTicketDialog, modal);
         initComponents();
         jPanel1.setVisible(false);
