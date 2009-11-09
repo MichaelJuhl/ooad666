@@ -87,7 +87,7 @@ public class UserDataModel extends AbstractTableModel{
 	
 	
 
-	public TableModel getTabelModel(){
+	public TableModel getTableModel(){
 		return (TableModel)this;
 	}
 	

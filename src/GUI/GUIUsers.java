@@ -142,7 +142,7 @@ public class GUIUsers extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setModel(new UserDataModel().getTabelModel());
+        jTable1.setModel(new UserDataModel().getTableModel());
         jScrollPane1.setViewportView(jTable1);
 
         jButton4.setText("Soeg");
@@ -288,7 +288,7 @@ public class GUIUsers extends javax.swing.JFrame {
 	}
     
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-    	jTable1.setModel(new UserDataModel().getTabelModel());
+    	jTable1.setModel(new UserDataModel().getTableModel());
     }
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
     	
