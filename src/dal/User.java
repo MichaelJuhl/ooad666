@@ -7,7 +7,7 @@ public class User {
 	protected double CPR;                 
 	protected String Gender;                 
 	protected int Phone;
-	protected String Adresse;
+	protected String Address;
 	protected String Password;
 	protected String Rank;
 	
@@ -18,14 +18,26 @@ public class User {
 		this.CPR = CPR;
 		this.Gender = Gender;
 		this.Phone = Phone;
-		this.Adresse = Address;
+		this.Address = Address;
 		this.Password = Password;
 		this.Rank	= Rank;
 	}
 	
-	public User(){
+	
+//gui to DB -auto userid
+	public User(String Name, double CPR, String Gender, int Phone, String Address, String Password, String Rank) {
+		this.UserID = 999;
+		this.Name = Name;
+		this.CPR = CPR;
+		this.Gender = Gender;
+		this.Phone = Phone;
+		this.Address = Address;
+		this.Password = Password;
+		this.Rank =  Rank;
 		
 	}
+
+
 
 	public int getUserID() {
 		return UserID;
@@ -68,11 +80,11 @@ public class User {
 	}
 
 	public String getAdresse() {
-		return Adresse;
+		return Address;
 	}
 
 	public void setAdresse(String adresse) {
-		Adresse = adresse;
+		Address = adresse;
 	}
 
 	public String getPassword() {
