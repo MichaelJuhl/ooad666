@@ -3,16 +3,16 @@ package dalinterface;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import dal.Customer;
+import dal.Member;
 
 
 public interface ICustomer {
 	
-	Customer getCustomer(int CustomerID) throws DALException;
-	ArrayList<Customer> getCustomerList() throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
-	void createCustomer(Customer Customer) throws DALException;
-	void updateCustomers(int CustomerID, Customer Customers) throws DALException;
-	void sletCustomer(int Customer) throws DALException;
+	Member getCustomer(int CustomerID) throws DALException;
+	ArrayList<Member> getCustomerList() throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
+	void createCustomer(Member Customer) throws DALException;
+	void updateCustomers(int CustomerID, Member Customers) throws DALException;
+	void deleteCustomer(int Customer) throws DALException;
 
 
 }

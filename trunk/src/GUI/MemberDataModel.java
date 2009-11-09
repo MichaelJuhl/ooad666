@@ -6,18 +6,18 @@ import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-import dal.Customer;
+import dal.Member;
 import dalinterface.DALException;
-import dao.CustomerDAO;
+import dao.MemberDAO;
 
 
 
 public class MemberDataModel extends AbstractTableModel{
 	
-	protected ArrayList<Customer> customerList;
+	protected ArrayList<Member> customerList;
 	
 	MemberDataModel() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		customerList = new CustomerDAO().getCustomerList();
+		customerList = new MemberDAO().getCustomerList();
 	}
 
 	public TableModel getTableModel() {
@@ -66,12 +66,12 @@ public class MemberDataModel extends AbstractTableModel{
 	
 	}
 
-	public ArrayList<Customer> getCustomerList(){
-		return (ArrayList<Customer>)customerList;
+	public ArrayList<Member> getCustomerList(){
+		return (ArrayList<Member>)customerList;
 	}
 	public void updateFromDatabase() throws ParseException{
 		try {
-			customerList = new CustomerDAO().getCustomerList() ;
+			customerList = new MemberDAO().getCustomerList() ;
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

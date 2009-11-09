@@ -1,10 +1,10 @@
 package GUI;
 
 import javax.swing.JTable;
-import dal.Customer;
+import dal.Member;
 import dal.Event;
 import dalinterface.DALException;
-import dao.CustomerDAO;
+import dao.MemberDAO;
 import dao.EventDAO;
 
 import java.sql.SQLException;
@@ -245,10 +245,10 @@ private void customerSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {
 
 
 	//Validation passed, make new customer
-	CustomerDAO customerDAO = new CustomerDAO();
+	MemberDAO customerDAO = new MemberDAO();
 
 	try {
-		customerDAO.createCustomer(new Customer(customerNavnInputField.getText(), getBirthTime(), (String)customerGenderInputCombBox.getSelectedItem()
+		customerDAO.createCustomer(new Member(customerNavnInputField.getText(), getBirthTime(), (String)customerGenderInputCombBox.getSelectedItem()
 				, Integer.valueOf(customerPhoneInputField.getText()),customerAddressInputField.getText()));
 	} catch(NumberFormatException e) {
 		e.printStackTrace();
