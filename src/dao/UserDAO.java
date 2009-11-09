@@ -15,18 +15,17 @@ public class UserDAO implements IUser{
 
 
 	@Override
-	public void createUser(User UserID, User Users) throws DALException {
-
-		Connector.doUpdate(
-				"INSERT INTO OOADUser (Name, CPR, Gender, Phone, Address, Password) VALUES ('" 
-				+ Users.getName()+ "', '" + Users.getCPR() + "', '" + 
-				Users.getGender() + "', '" + Users.getPhone() + "', '" + Users.getPassword() +"')"
-			);
-
-
-			Connector.doUpdate(
-					"INSERT INTO OOADRank (UserID, Rank) VALUES((SELECT MAX(UserID) FROM OOADUser), '"+Users.getRank() + "')"
-				);
+	public void createUser(User User) throws DALException {
+			
+		String user="INSERT INTO OOADUser (Name, CPR, Gender, Phone, Address, Password) VALUES ('" 
+				+ User.getName()+ "', '" + User.getCPR() + "', '" + 
+				User.getGender() + "', '" + User.getPhone() + "', '" + User.getAdresse() + "', '" + User.getPassword() +"')";
+			
+			String rank=" INSERT INTO OOADRank (UserID, Rank) VALUES((SELECT MAX(UserID) FROM OOADUser), '"+User.getRank() + "')";
+			System.out.println(user);
+			System.out.println(rank);
+		Connector.doUpdate(user);
+		Connector.doUpdate(rank);
 	}
 
 	@Override
