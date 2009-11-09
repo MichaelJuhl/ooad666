@@ -218,8 +218,10 @@ public class ticketEventDialog extends javax.swing.JDialog {
 
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">
+
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel5 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         PortalenTextJLabel3 = new javax.swing.JLabel();
@@ -478,13 +480,13 @@ public class ticketEventDialog extends javax.swing.JDialog {
         PortalenTextJLabel2.setFont(new java.awt.Font("Bodoni MT", 0, 18));
         PortalenTextJLabel2.setText("Portalen Præsenterer:");
 
-        TitelJLabel2.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
+        TitelJLabel2.setFont(new java.awt.Font("Bodoni MT Black", 1, 24));
         TitelJLabel2.setText("Airbourne");
 
         TextJLabel7.setFont(new java.awt.Font("Tahoma", 0, 14));
         TextJLabel7.setText("Den");
 
-        DateSTARTJLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        DateSTARTJLabel2.setFont(new java.awt.Font("Tahoma", 0, 14));
         DateSTARTJLabel2.setText("1000-01-01 00:00:00");
 
         DateFINISHJLabel2.setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -642,7 +644,7 @@ public class ticketEventDialog extends javax.swing.JDialog {
         PortalenTextJLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 18));
         PortalenTextJLabel1.setText("Portalen Præsenterer:");
 
-        TitelJLabel1.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
+        TitelJLabel1.setFont(new java.awt.Font("Bodoni MT Black", 1, 24));
         TitelJLabel1.setText("Airbourne");
 
         TextJLabel4.setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -666,7 +668,7 @@ public class ticketEventDialog extends javax.swing.JDialog {
         KundeJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
         KundeJLabel1.setText("Kunde:");
 
-        KundeInputJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        KundeInputJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
         KundeInputJLabel1.setText("Michael Juhl");
 
         RabetJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -806,7 +808,7 @@ public class ticketEventDialog extends javax.swing.JDialog {
         PortalenTextJLabel.setFont(new java.awt.Font("Bodoni MT", 0, 18));
         PortalenTextJLabel.setText("Portalen Præsenterer:");
 
-        TitelJLabel.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
+        TitelJLabel.setFont(new java.awt.Font("Bodoni MT Black", 1, 24));
         TitelJLabel.setText("Airbourne");
 
         TextJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -827,22 +829,22 @@ public class ticketEventDialog extends javax.swing.JDialog {
         StageJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         StageJLabel.setText("Store Scene");
 
-        KundeJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        KundeJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         KundeJLabel.setText("Kunde:");
 
-        KundeInputJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        KundeInputJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         KundeInputJLabel.setText("Michael Juhl");
 
-        RabetJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        RabetJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         RabetJLabel.setText("Rabat:");
 
-        PrisJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        PrisJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         PrisJLabel.setText("Din Pris:");
 
-        RabatInputJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        RabatInputJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         RabatInputJLabel.setText("25%");
 
-        PrisInputJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        PrisInputJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         PrisInputJLabel.setText("200kr");
 
         BilletInputJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -854,10 +856,10 @@ public class ticketEventDialog extends javax.swing.JDialog {
         ArtistJLabel.setFont(new java.awt.Font("Bodoni MT", 1, 12));
         ArtistJLabel.setText("Airbourne");
 
-        PrisOriJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        PrisOriJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         PrisOriJLabel.setText("Pris:");
 
-        PrisOriInputJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        PrisOriInputJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
         PrisOriInputJLabel1.setText("200kr");
 
         TextJLabel3.setFont(new java.awt.Font("Bodoni MT", 1, 12));
@@ -992,6 +994,8 @@ public class ticketEventDialog extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jScrollPane1.setViewportView(jPanel5);
+
         Print.setText("Print");
         Print.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1006,26 +1010,26 @@ public class ticketEventDialog extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Print)
-                .addContainerGap())
+                .addContainerGap(472, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(1060, Short.MAX_VALUE)
+                .addContainerGap(302, Short.MAX_VALUE)
                 .addComponent(Print))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap(28, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(34, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>
 
     private void PrintActionPerformed(java.awt.event.ActionEvent evt) {                                      
-    	PrintUtilities.printComponent(jPanel5);
+    	//PrintUtilities.printComponent(jPanel5);
     }                                     
 
     /**
@@ -1133,6 +1137,7 @@ public class ticketEventDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration
 
 
