@@ -5,7 +5,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class DialogDeleteYN2 {
-
+	
+	/*
+	 * Klasse til at vise en sletnings dialog.
+	 * 
+	 * Brug: new DialogDelete().userAcceptsDelete("hvad-der-skal-slettet");
+	 * 		 Dette returnerer 'true' hvis brugeren trykker "ja" og 'false' hvis brugeren trykker "nej".
+	 */
+	
 	public static boolean userAcceptsDelete(String deleteItem) {
 		JOptionPane pane = new JOptionPane("Er du sikker på at du vil slette\n\"" + deleteItem + "\"?");
 		Object[] options = new String[] { "Ja", "Nej" };
