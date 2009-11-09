@@ -29,12 +29,12 @@ public class CustomerDataModel extends AbstractTableModel{
 	}
 	
 	public int getColumnCount(){
-		return 5; // returnere 
+		return 6; // returnere 
 	}
 
 	public String getColumnName(int columnIndex){
 		String[] columnNames = new String[]{
-			"Navn", "Født", "Køn", "Telefon", "Addresse"	
+			"Navn", "Født", "Køn", "Telefon", "Addresse", "Medlem"	
 		};
 		return columnNames[columnIndex];
 	}
@@ -45,6 +45,7 @@ public class CustomerDataModel extends AbstractTableModel{
         final int GENDER = 2;
         final int PHONE = 3;
         final int ADDRESS = 4;
+        final int DISCOUNT = 5;
 	
         switch(columnIndex){
         case NAME:
@@ -57,6 +58,8 @@ public class CustomerDataModel extends AbstractTableModel{
         	return customerList.get(rowIndex).getPhone();
         case ADDRESS:
         	return customerList.get(rowIndex).getAdresse();
+        case DISCOUNT:
+        	return customerList.get(rowIndex).getDiscount();
         default:
             return "";
         }
