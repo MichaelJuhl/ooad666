@@ -26,7 +26,7 @@ import dao.UserDAO;
  */
 public class GUIUsers extends javax.swing.JFrame {
    
-    
+    UserDataModel userDataModel;
     /** Creates new form GUIMembers 
      * @throws SQLException 
      * @throws ClassNotFoundException 
@@ -79,14 +79,11 @@ public class GUIUsers extends javax.swing.JFrame {
         });
 
         jButton2.setText("Edit");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
+        
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+               System.out.println("edit evt");
+            	jButton2ActionPerformed(evt);
             }
         });
 
@@ -97,7 +94,7 @@ public class GUIUsers extends javax.swing.JFrame {
             }
         });
         
-        jButton5.setText("Hvis medlemmer.");
+        jButton5.setText("Vis medlemmer.");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
@@ -272,10 +269,14 @@ public class GUIUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        DialogEditUser dialogEditMember = new DialogEditUser(new javax.swing.JFrame(), true);
+    	System.out.println("edit trykket, if.");
+    	if (jTable1.getSelectedRow() != -1) {
+    		System.out.println(userDataModel.getUserList().get(jTable1.getSelectedRow()));
+    	DialogEditUser dialogEditMember = new DialogEditUser(this, rootPaneCheckingEnabled, userDataModel.getUserList().get(jTable1.getSelectedRow()));        		
+    	System.out.println(userDataModel.getUserList().get(jTable1.getSelectedRow()));
         dialogEditMember.setLocationRelativeTo(this);
         dialogEditMember.setVisible(true);
-        
+    	}
     }//GEN-LAST:event_jButton2ActionPerformed
     
    
@@ -290,7 +291,9 @@ public class GUIUsers extends javax.swing.JFrame {
     	jTable1.setModel(new UserDataModel().getTabelModel());
     }
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-       
+    	
+    	
+    	
        // guiEditMember.setVisible(true);
     }//GEN-LAST:event_jButton2MouseClicked
 

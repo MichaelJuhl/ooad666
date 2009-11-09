@@ -2,9 +2,11 @@ package GUI;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
+
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
+
+
 
 
 import dal.User;
@@ -21,17 +23,14 @@ public class UserDataModel extends AbstractTableModel{
 	UserDataModel() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	        
 	    	userList = new UserDAO().getUserList();
-	    	
-	    		 //Test
-		//userList = new ArrayList<User>();
-		//userList.add(new User(1,"Peter",999999, "Male", 43434343, "Vej 2", "1234", "4"));
-		//userList.add(new User(2,"Peter",999999, "Male", 43434343, "Vej 2", "1234", "4"));
-		//userList.add(new User(3,"Peter",999999, "Male", 43434343, "Vej 2", "1234", "4"));
-		//System.out.println(userList);
-		//Test
+	    		    		
 	}
 	
 	
+	
+	public ArrayList<User> getUserList() {
+        return userList;
+    }
 	
 	public int getColumnCount() {
 		
