@@ -239,6 +239,12 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	}
 	
 	private void buttonBuyTicketActionPerformed(ActionEvent evt) {
+		if (eventTable.getSelectedRow() != -1) {
+			buyTicketDialog dialog1 = new buyTicketDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow())));
+			
+			dialog1.setLocationRelativeTo(this);
+			dialog1.setVisible(true);
+		}
 		
 	}
 
