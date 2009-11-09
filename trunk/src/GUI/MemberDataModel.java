@@ -12,11 +12,11 @@ import dao.CustomerDAO;
 
 
 
-public class CustomerDataModel extends AbstractTableModel{
+public class MemberDataModel extends AbstractTableModel{
 	
 	protected ArrayList<Customer> customerList;
 	
-	CustomerDataModel() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	MemberDataModel() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		customerList = new CustomerDAO().getCustomerList();
 	}
 
