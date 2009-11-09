@@ -63,6 +63,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 		buttonNewEvent = new javax.swing.JButton();
 		buttonEditEvent = new javax.swing.JButton();
 		buttonDeleteEvent = new javax.swing.JButton();
+		buttonBuyTicket = new javax.swing.JButton();
 		statusBar = new javax.swing.JTextField();
 		mainMenuBar = new javax.swing.JMenuBar();
 		menuFiler = new javax.swing.JMenu();
@@ -105,6 +106,13 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 				buttonDeleteEventActionPerformed(evt);
 			}
 		});
+		
+		buttonBuyTicket.setText("Koeb Billet");
+		buttonBuyTicket.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				buttonBuyTicketActionPerformed(evt);
+			}
+		});
 
 		javax.swing.GroupLayout EventsPanelLayout = new javax.swing.GroupLayout(EventsPanel);
 		EventsPanel.setLayout(EventsPanelLayout);
@@ -117,7 +125,8 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 						.addComponent(buttonEditEvent)
 						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 						.addComponent(buttonDeleteEvent)
-						.addGap(500, 500, 500))
+						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+						.addComponent(buttonBuyTicket))
 		);
 		EventsPanelLayout.setVerticalGroup(
 				EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +136,8 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 						.addGroup(EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
 								.addComponent(buttonNewEvent)
 								.addComponent(buttonEditEvent)
-								.addComponent(buttonDeleteEvent))
+								.addComponent(buttonDeleteEvent)
+								.addComponent(buttonBuyTicket))
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
 		);
 
@@ -227,6 +237,10 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 			updateTable();
 		}
 	}
+	
+	private void buttonBuyTicketActionPerformed(ActionEvent evt) {
+		
+	}
 
 	// Variables declaration - do not modify                     
 	private javax.swing.JPanel EventsPanel;
@@ -234,6 +248,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	private javax.swing.JButton buttonDeleteEvent;
 	private javax.swing.JButton buttonEditEvent;
 	private javax.swing.JButton buttonNewEvent;
+	private javax.swing.JButton buttonBuyTicket;
 	private javax.swing.JMenuItem connectDBMenuItem;
 	private javax.swing.JMenuItem exitMenuItem;
 	private javax.swing.JScrollPane eventScrollPane;
