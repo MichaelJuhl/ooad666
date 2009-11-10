@@ -59,16 +59,18 @@ public class EventDAO implements IEvent {
 	ClassNotFoundException, SQLException, ParseException {
 		
 		ArrayList<Event> list = new ArrayList<Event>();
-		ResultSet rs = Connector.getConnector().doQuery("SELECT DISTINCT * from OOADEvent NATURAL LEFT JOIN OOADDiscount");
+		ResultSet rs = Connector.getConnector().doQuery("SELECT * , (SELECT COUNT( TicketID ) " +
+														"FROM OOADTicket " +
+														"WHERE OOADEvent.EventID = OOADTicket.EventID) AS TicketsSold " +
+														"FROM `OOADEvent` NATURAL LEFT JOIN OOADDiscount");
+		
+		// giver: EventID, Concerttype, Stage, DateSTART, DateFINISH, Artist, Titel, Price, Visitors, SHOWDiscount, NORMAL, TicketsSold
+		
 		try {
 			while (rs.next()) {
 				list.add(new Event(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)
-		    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9), 0, rs.getDouble(10), rs.getDouble(11)));
+		    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9), rs.getInt(12), rs.getDouble(10), rs.getDouble(11)));
 			}
-			for (int i = 0; i < list.size(); i++) {
-				list.get(i).setTicketsSold(getTicketSold(list.get(i).getEventID()));		
-			}
-
 		} catch (SQLException e) {
 			throw new DALException(e);
 		}
