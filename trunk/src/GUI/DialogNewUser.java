@@ -250,7 +250,7 @@ public class DialogNewUser extends javax.swing.JDialog {
 			//create user
 			userDAO.createUser(new User(
 					nameInputField.getText()
-					, Double.valueOf(cprInputField.getText())
+					, Integer.valueOf(cprInputField.getText())
 					, (String)sexComboBox.getSelectedItem()
 					, Integer.valueOf(phoneInputField.getText())
 					, addressInputField.getText()

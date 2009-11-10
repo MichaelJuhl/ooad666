@@ -34,7 +34,7 @@ public class UserDAO implements IUser{
 		ResultSet rs = Connector.doQuery("SELECT * FROM OOADUser NATURAL JOIN OOADRank WHERE UserID = " + UserID );
 	    try {
 	    	if (!rs.first()) throw new DALException("Brugeren " + UserID + " findes ikke"); 
-	    	return new User (rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getInt(5), rs.getString(6),
+	    	return new User (rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6),
 	    			rs.getString(7), rs.getString(8));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
@@ -49,7 +49,7 @@ public class UserDAO implements IUser{
 		{
 			while (rs.next()) 
 			{
-				list.add(new User(rs.getInt(1), rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getInt(5), rs.getString(6),
+				list.add(new User(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6),
 		    			rs.getString(7), rs.getString(8)));
 			}
 		}

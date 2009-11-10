@@ -267,7 +267,7 @@ public class DialogEditUser extends javax.swing.JDialog {
 			
 			userDAO.createUser(new User(
 					nameInputField.getText()
-					, Double.valueOf(cprInputField.getText())
+					, Integer.valueOf(cprInputField.getText())
 					, (String)sexComboBox.getSelectedItem()
 					, Integer.valueOf(phoneInputField.getText())
 					, addressInputField.getText()

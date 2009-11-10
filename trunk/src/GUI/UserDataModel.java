@@ -80,7 +80,7 @@ public class UserDataModel extends AbstractTableModel{
 	
 	public String getColumnName(int columnIndex) {
     	String[] columnNames = new String [] {
-                "ID", "Medlems navn", "CPR" ,"Tlf.", "Kon", "Adresse", "Password", "Rank"
+                "ID", "Medlems navn", "CPR" ,"Køn", "Tlf.Nr.", "Adresse", "Password", "Rang"
         };
     	return columnNames[columnIndex];
     }
