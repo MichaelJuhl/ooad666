@@ -29,25 +29,28 @@ public class MemberDataModel extends AbstractTableModel{
 	}
 	
 	public int getColumnCount(){
-		return 6; // returnere 
+		return 7; // returnere 
 	}
 
 	public String getColumnName(int columnIndex){
 		String[] columnNames = new String[]{
-			"Navn", "Født", "Køn", "Telefon", "Addresse", "Medlem"	
+			"ID", "Navn", "Født", "Køn", "Telefon", "Addresse", "Medlem"	
 		};
 		return columnNames[columnIndex];
 	}
 
 	public Object getValueAt (int rowIndex, int columnIndex){
-        final int NAME = 0;
-        final int BIRTH = 1;
-        final int GENDER = 2;
-        final int PHONE = 3;
-        final int ADDRESS = 4;
-        final int DISCOUNT = 5;
+        final int ID = 0;
+		final int NAME = 1;
+        final int BIRTH = 2;
+        final int GENDER = 3;
+        final int PHONE = 4;
+        final int ADDRESS = 5;
+        final int DISCOUNT = 6;
 	
         switch(columnIndex){
+        case ID:
+        	return customerList.get(rowIndex).getMemberID();
         case NAME:
         	return customerList.get(rowIndex).getName();
         case BIRTH:
