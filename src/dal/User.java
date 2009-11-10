@@ -4,7 +4,7 @@ public class User {
 	
 	protected int UserID;                     
 	protected String Name;                
-	protected double CPR;                 
+	protected int CPR;                 
 	protected String Gender;                 
 	protected int Phone;
 	protected String Address;
@@ -12,7 +12,7 @@ public class User {
 	protected String Rank;
 	
 	
-	public User(int UserID, String Name, double CPR, String Gender, int Phone, String Address, String Password, String Rank){
+	public User(int UserID, String Name, int CPR, String Gender, int Phone, String Address, String Password, String Rank){
 		this.UserID = UserID;
 		this.Name = Name;
 		this.CPR = CPR;
@@ -25,7 +25,7 @@ public class User {
 	
 	
 //gui to DB -auto userid
-	public User(String Name, double CPR, String Gender, int Phone, String Address, String Password, String Rank) {
+	public User(String Name, int CPR, String Gender, int Phone, String Address, String Password, String Rank) {
 		this.UserID = 999;
 		this.Name = Name;
 		this.CPR = CPR;
@@ -55,11 +55,11 @@ public class User {
 		Name = name;
 	}
 
-	public double getCPR() {
+	public int getCPR() {
 		return CPR;
 	}
 
-	public void setCPR(double cpr) {
+	public void setCPR(int cpr) {
 		CPR = cpr;
 	}
 
