@@ -116,7 +116,7 @@ public class buyTicketDialog extends javax.swing.JDialog {
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 try {
-					jButton1ActionPerformed(evt);
+					jButtonkoebActionPerformed(evt);
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -316,7 +316,7 @@ public class buyTicketDialog extends javax.swing.JDialog {
         		+((jComboBox1.getSelectedIndex()+1)*pris)+"kr");
     }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, DALException {
+    private void jButtonkoebActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, DALException {
     	if (MedlemIDTextfield.getText().equals("")|| MedlemIDTextfield.getText().equals("guest")){
         	customer = new MemberDAO().getCustomer(1);
     	}else{
