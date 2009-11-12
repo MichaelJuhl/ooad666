@@ -50,13 +50,14 @@ public class ticketEventDialog extends javax.swing.JDialog {
         		BilletInputJLabel.setText(
         				event.getArtist().substring(0, 2)+
         				event.getEventID()+
-        				new EventDAO().getTicketSold(event.getEventID())+1
+        				(event.getTicketsSold()+1)+
+        				(event.getDateStartString().substring(2,4))+
+                		(event.getDateStartString().substring(5,7))+
+                		(event.getDateStartString().substring(8,10))
+
         		);
             	new EventDAO().createTicket(event.getEventID(), BilletInputJLabel.getText());
         	} catch (DALException e) {
-        		// TODO Auto-generated catch block
-        		e.printStackTrace();
-        	} catch (ParseException e) {
         		// TODO Auto-generated catch block
         		e.printStackTrace();
         	}
@@ -92,13 +93,13 @@ public class ticketEventDialog extends javax.swing.JDialog {
         		BilletInputJLabel1.setText(
         				event.getArtist().substring(0, 2)+
         				event.getEventID()+
-        				new EventDAO().getTicketSold(event.getEventID())+1
+        				(event.getTicketsSold()+2)+
+        				(event.getDateStartString().substring(2,4))+
+                		(event.getDateStartString().substring(5,7))+
+                		(event.getDateStartString().substring(8,10))
         		);
             	new EventDAO().createTicket(event.getEventID(), BilletInputJLabel1.getText());
         	} catch (DALException e) {
-        		// TODO Auto-generated catch block
-        		e.printStackTrace();
-        	} catch (ParseException e) {
         		// TODO Auto-generated catch block
         		e.printStackTrace();
         	}
@@ -133,13 +134,13 @@ public class ticketEventDialog extends javax.swing.JDialog {
         		BilletInputJLabel2.setText(
         				event.getArtist().substring(0, 2)+
         				event.getEventID()+
-        				new EventDAO().getTicketSold(event.getEventID())+1
+        				(event.getTicketsSold()+3)+
+        				(event.getDateStartString().substring(2,4))+
+                		(event.getDateStartString().substring(5,7))+
+                		(event.getDateStartString().substring(8,10))
         		);
             	new EventDAO().createTicket(event.getEventID(), BilletInputJLabel2.getText());
         	} catch (DALException e) {
-        		// TODO Auto-generated catch block
-        		e.printStackTrace();
-        	} catch (ParseException e) {
         		// TODO Auto-generated catch block
         		e.printStackTrace();
         	}
@@ -174,13 +175,13 @@ public class ticketEventDialog extends javax.swing.JDialog {
         		BilletInputJLabel3.setText(
         				event.getArtist().substring(0, 2)+
         				event.getEventID()+
-        				new EventDAO().getTicketSold(event.getEventID())+1
+        				(event.getTicketsSold()+4)+
+        				(event.getDateStartString().substring(2,4))+
+                		(event.getDateStartString().substring(5,7))+
+                		(event.getDateStartString().substring(8,10))
         		);
             	new EventDAO().createTicket(event.getEventID(), BilletInputJLabel3.getText());
         	} catch (DALException e) {
-        		// TODO Auto-generated catch block
-        		e.printStackTrace();
-        	} catch (ParseException e) {
         		// TODO Auto-generated catch block
         		e.printStackTrace();
         	}
