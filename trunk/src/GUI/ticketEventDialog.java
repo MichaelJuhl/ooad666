@@ -26,10 +26,11 @@ import GUI.PrintUtilities;
  * @author Michael
  */
 public class ticketEventDialog extends javax.swing.JDialog {
-
+	private PortalManagerMainFrame mainFrame;
     /** Creates new form ticketEventDialog */
-    public ticketEventDialog(buyTicketDialog buyTicketDialog, boolean modal, Event event, Member customer, int billetter) {
+    public ticketEventDialog(buyTicketDialog buyTicketDialog, boolean modal, Event event, Member customer, int billetter,PortalManagerMainFrame mainFrame) {
         super(buyTicketDialog, modal);
+        this.mainFrame =mainFrame;
         initComponents();
         jPanel1.setVisible(false);
         jPanel2.setVisible(false);
@@ -1030,7 +1031,9 @@ public class ticketEventDialog extends javax.swing.JDialog {
     }// </editor-fold>
 
     private void PrintActionPerformed(java.awt.event.ActionEvent evt) {                                      
-    	//PrintUtilities.printComponent(jPanel5);
+    	PrintUtilities.printComponent(jPanel5);
+    	mainFrame.updateTable();
+    	this.dispose();
     }                                     
 
     /**

@@ -14,10 +14,9 @@ package GUI;
 
 import dal.Event;
 import dal.Member;
-import java.text.ParseException;
 import dalinterface.DALException;
 import dao.MemberDAO;
-import dao.EventDAO;
+
 
 /**
  *
@@ -27,13 +26,14 @@ public class buyTicketDialog extends javax.swing.JDialog {
 	double pris;
 	double showdiscount;
 	double portalisdiscount;
-
+	private PortalManagerMainFrame mainFrame;
 	Event event2;
 	Member customer;
 
     /** Creates new form buyTicketDialog */
-    public buyTicketDialog(java.awt.Frame parent, boolean modal, Event event) {
+    public buyTicketDialog(java.awt.Frame parent, boolean modal, Event event,PortalManagerMainFrame mainFrame) {
         super(parent, modal);
+        this.mainFrame = mainFrame;
         initComponents();
         pris = event.getPrice();
         showdiscount = event.getShowDiscount();
@@ -317,14 +317,15 @@ public class buyTicketDialog extends javax.swing.JDialog {
     }
 
     private void jButtonkoebActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, DALException {
+    	
     	if (MedlemIDTextfield.getText().equals("")|| MedlemIDTextfield.getText().equals("guest")){
         	customer = new MemberDAO().getCustomer(1);
     	}else{
     		customer = new MemberDAO().getCustomer(Integer.parseInt(MedlemIDTextfield.getText()));
     	}
 
-    	
-		ticketEventDialog dialog = new ticketEventDialog(this, rootPaneCheckingEnabled, event2,customer,jComboBox1.getSelectedIndex()+1);
+    	//this.dispose();
+		ticketEventDialog dialog = new ticketEventDialog(this, rootPaneCheckingEnabled, event2,customer,jComboBox1.getSelectedIndex()+1, mainFrame);
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
     }
