@@ -64,7 +64,7 @@ public class MemberDAO implements IMember {
 	@Override
 	public void deleteMember(int memberID) throws DALException {
 		Connector.doUpdate(
-				"UPDATE OOADMemberClub SET Discount =  'Guest' WHERE MemberID = " + memberID
+				"UPDATE OOADMemberClub SET Discount =  'Gæst' WHERE MemberID = " + memberID
 			);
 		
 	}

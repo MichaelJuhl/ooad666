@@ -133,7 +133,7 @@ public class UserList extends JPanel{
 				try {
 					userDAO.deleteUser(userDataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())).getUserID());
 				} catch (DALException e) {
-					// TODO Auto-generated catch block
+					JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette bruger", "Error", JOptionPane.ERROR_MESSAGE);
 					e.printStackTrace();
 				}
 				this.updateTable();

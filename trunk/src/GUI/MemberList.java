@@ -15,8 +15,10 @@ import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 
 import dal.Event;
+import dal.Member;
 import dalinterface.DALException;
 import dao.EventDAO;
+import dao.MemberDAO;
 
 public class MemberList extends JPanel{
 	
@@ -119,12 +121,23 @@ public class MemberList extends JPanel{
 	}                                              
 
 	private void buttonEditMemberActionPerformed(ActionEvent evt) {                                                
-		//new DialogEditMember(parent, true, dataModel.getMemberList().get(memberTable.convertRowIndexToModel(memberTable.getSelectedRow())));
+		new MemberEditDialog(parent, this, true, dataModel.getMemberList().get(memberTable.convertRowIndexToModel(memberTable.getSelectedRow())));
 		
 	}  
 	
 	private void buttonDeleteMemberActionPerformed(ActionEvent evt) {
-		
+		if (memberTable.getSelectedRow() != -1) {
+			Member selectedMember = dataModel.getMemberList().get(memberTable.convertRowIndexToModel(memberTable.getSelectedRow()));
+			if (DeleteDialogYN2.userAcceptsDelete(selectedMember.getName())) {
+				try {
+					new MemberDAO().deleteMember(selectedMember.getMemberID());
+				} catch (DALException e) {
+					JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette medlem", "Error", JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				}
+				updateTable();
+			}
+		}
 	}
 	
 	public void tableChanged(TableModelEvent e) {

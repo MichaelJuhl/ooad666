@@ -28,7 +28,7 @@ public class MemberNewDialog extends javax.swing.JDialog {
 	}
 
 	public void initComponents(){
-		navnLabel = new javax.swing.JLabel();
+		nameLabel = new javax.swing.JLabel();
 		birthTimeInputField = new javax.swing.JTextField();
 		phoneInputField = new javax.swing.JTextField();
 		addressInputField = new javax.swing.JTextField();
@@ -49,7 +49,7 @@ public class MemberNewDialog extends javax.swing.JDialog {
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-		navnLabel.setText("Navn");
+		nameLabel.setText("Navn");
 
 		nameInputField.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,6 +67,7 @@ public class MemberNewDialog extends javax.swing.JDialog {
 		addressLabel.setText("Addresse");
 
 		birthYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeYearArray()));
+		birthYearComboBox.setSelectedItem(new Integer(Calendar.getInstance().get(Calendar.YEAR)-30).toString());
 
 		birthMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeMonthArray()));
 		birthMonthComboBox.setSelectedItem(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1));
@@ -109,7 +110,7 @@ public class MemberNewDialog extends javax.swing.JDialog {
 											.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 													.addGroup(layout.createSequentialGroup()
 															.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-																	.addComponent(navnLabel))
+																	.addComponent(nameLabel))
 																	.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																	.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 																			.addComponent(nameInputField, javax.swing.GroupLayout.DEFAULT_SIZE, 333, Short.MAX_VALUE)
@@ -154,7 +155,7 @@ public class MemberNewDialog extends javax.swing.JDialog {
 			.addGroup(layout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-							.addComponent(navnLabel)
+							.addComponent(nameLabel)
 							.addComponent(nameInputField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 							.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -192,10 +193,10 @@ public class MemberNewDialog extends javax.swing.JDialog {
 
 private String[] makeYearArray() {
 	int currentYear = Calendar.getInstance().get(Calendar.YEAR);
-
-	String[] years = new String[51];
+	
+	String[] years = new String[151];
 	int y = 0;
-	for(int i=currentYear; i<=currentYear+50; i++) {
+	for(int i=currentYear-150; i<=currentYear; i++) {
 		years[y] = String.valueOf(i);
 		y++;
 	}
@@ -331,7 +332,7 @@ private javax.swing.JTextField customerBirthInputField;
 private javax.swing.JTextField customerGenderInputField;
 private javax.swing.JTextField phoneInputField;
 private javax.swing.JTextField addressInputField;
-private javax.swing.JLabel navnLabel;
+private javax.swing.JLabel nameLabel;
 private javax.swing.JLabel genderLabel;
 private javax.swing.JLabel birthLabel;
 private javax.swing.JComboBox genderInputCombBox;
