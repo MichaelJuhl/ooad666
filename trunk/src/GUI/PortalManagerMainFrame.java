@@ -42,7 +42,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame {
 	 * @throws InstantiationException 
 	 * @throws DALException 
 	 * @throws ParseException */
-	public PortalManagerMainFrame() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public PortalManagerMainFrame() {
 		initComponents();
 		centreWindow(this);
 	}
@@ -127,6 +127,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame {
 		);
 
 		pack();
+		setVisible(true);
 	}
 
 	private void exitMenuItemActionPerformed(ActionEvent evt) {
