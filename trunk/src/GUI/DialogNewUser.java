@@ -68,7 +68,7 @@ public class DialogNewUser extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        rankComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
+        rankComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Billetsælger", "Kontormedarbejder", "Admin", "Deaktiveret" }));
         
         errorLabel.setText("");
         
@@ -254,11 +254,6 @@ public class DialogNewUser extends javax.swing.JDialog {
         
 		UserDAO userDAO = new UserDAO();
 		try {
-			//print to check for right inputs
-			System.out.println(nameInputField.getText()+" | " + Double.parseDouble(cprInputField.getText()) +" | " + (String)sexComboBox.getSelectedItem() + " | " +Integer.parseInt(phoneInputField.getText()) + " | " +addressInputField.getText()
-					+ " | " +passwordInputField.getText()
-					+ " | " +(String)rankComboBox.getSelectedItem());
-			
 			User user = new User();
 			user.setName(nameInputField.getText());
 			user.setCPR(Integer.valueOf(cprInputField.getText()));

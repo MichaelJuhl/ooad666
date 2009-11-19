@@ -81,7 +81,7 @@ public class MemberList extends JPanel{
 			}
 		});
 
-		buttonDeleteMember.setText("Slet");
+		buttonDeleteMember.setText("Degrader til Gæst");
 		buttonDeleteMember.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				buttonDeleteMemberActionPerformed(evt);
