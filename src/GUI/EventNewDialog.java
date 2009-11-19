@@ -17,11 +17,11 @@ import java.lang.NumberFormatException;
  *
  * @author User
  */
-public class newEventDialog extends javax.swing.JDialog {
+public class EventNewDialog extends javax.swing.JDialog {
 
     PortalManagerMainFrame mainFrame;
     /** Creates new form editEventDialog */
-    public newEventDialog(java.awt.Frame parent, boolean modal, PortalManagerMainFrame mainFrame) {
+    public EventNewDialog(java.awt.Frame parent, boolean modal, PortalManagerMainFrame mainFrame) {
         super(parent, modal);
         this.mainFrame = mainFrame;
         initComponents();

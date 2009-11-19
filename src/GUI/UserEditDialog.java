@@ -20,17 +20,31 @@ import dao.UserDAO;
  *
  * @author Casper
  */
-public class DialogNewUser extends javax.swing.JDialog {
+public class UserEditDialog extends javax.swing.JDialog {
 
-	UserList userList;
-	
-    public DialogNewUser(java.awt.Frame parent, boolean modal, UserList userList) {
+	private User user;
+	private UserList userTable;
+    public UserEditDialog(java.awt.Frame parent, UserList userTable, boolean modal, User user) {
         super(parent, modal);
-        this.userList = userList;
+        this.userTable = userTable;
+        this.user = user;
         initComponents();
-        setTitle("Opret Bruger");
+        setTitle("Rediger bruger: " + user.getUserID());
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        
+       
+        
+      //input for edit
+		nameInputField.setText(user.getName());
+		cprInputField.setText(new Integer(user.getCPR()).toString());
+		phoneInputField.setText(new Integer(user.getPhone()).toString());
+		
+		addressInputField.setText(user.getAdresse());
+		passwordInputField.setText(user.getPassword());
+		
+		//
     }
 
     /** This method is called from within the constructor to
@@ -113,7 +127,16 @@ public class DialogNewUser extends javax.swing.JDialog {
             	cancelButtonActionPerformed(evt);
             }
         });
-
+        //Load information into fields
+        nameInputField.setText(user.getName());
+        cprInputField.setText(new Integer(user.getCPR()).toString());
+        phoneInputField.setText(new Integer(user.getPhone()).toString());
+        addressInputField.setText(user.getAdresse());
+        passwordInputField.setText(user.getPassword());
+        sexComboBox.setSelectedItem(user.getGender());
+        rankComboBox.setSelectedItem(user.getRank());
+        
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -254,7 +277,6 @@ public class DialogNewUser extends javax.swing.JDialog {
         
 		UserDAO userDAO = new UserDAO();
 		try {
-			User user = new User();
 			user.setName(nameInputField.getText());
 			user.setCPR(Integer.valueOf(cprInputField.getText()));
 			user.setPhone(Integer.valueOf(phoneInputField.getText()));
@@ -263,7 +285,7 @@ public class DialogNewUser extends javax.swing.JDialog {
 			user.setPassword(passwordInputField.getText());
 			user.setRank((String)rankComboBox.getSelectedItem());
 			
-			userDAO.createUser(user);
+			userDAO.updateUser(user.getUserID(), user);
 			
 			/*
 			userDAO.createUser(new User(
@@ -284,7 +306,7 @@ public class DialogNewUser extends javax.swing.JDialog {
 			errorLabel.setText("<html><FONT COLOR=RED>Fejl: Kan ikke forbinde til database, proev igen</FONT></html>");
 			e.printStackTrace();
 		}
-		userList.updateTable();
+		userTable.updateTable();
 		this.dispose();
     }
 

@@ -24,7 +24,7 @@ import dao.UserDAO;
  *
  * @author Kinna
  */
-public class GUIUsers extends javax.swing.JFrame {
+public class UsersGUI extends javax.swing.JFrame {
    
     UserDataModel userDataModel;
     /** Creates new form GUIMembers 
@@ -34,7 +34,7 @@ public class GUIUsers extends javax.swing.JFrame {
      * @throws InstantiationException 
      * @throws DALException 
      * @throws ParseException */
-    public GUIUsers() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+    public UsersGUI() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
         initComponents();
     }
 
@@ -227,7 +227,7 @@ public class GUIUsers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DialogNewUser dialogNewMember = new DialogNewUser(new javax.swing.JFrame(), true, null);
+        UserNewDialog dialogNewMember = new UserNewDialog(new javax.swing.JFrame(), true, null);
         dialogNewMember.setLocationRelativeTo(this);
         dialogNewMember.setVisible(true);
 
@@ -272,7 +272,7 @@ public class GUIUsers extends javax.swing.JFrame {
     	System.out.println("edit trykket, if.");
     	if (jTable1.getSelectedRow() != -1) {
     		System.out.println(userDataModel.getUserList().get(jTable1.getSelectedRow()));
-    	DialogEditUser dialogEditMember = new DialogEditUser(this, null, rootPaneCheckingEnabled, userDataModel.getUserList().get(jTable1.getSelectedRow()));        		
+    	UserEditDialog dialogEditMember = new UserEditDialog(this, null, rootPaneCheckingEnabled, userDataModel.getUserList().get(jTable1.getSelectedRow()));        		
     	System.out.println(userDataModel.getUserList().get(jTable1.getSelectedRow()));
         dialogEditMember.setLocationRelativeTo(this);
         dialogEditMember.setVisible(true);
@@ -283,7 +283,7 @@ public class GUIUsers extends javax.swing.JFrame {
     
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
     	
-		jTable1.setModel(new TableSearcher().getTabelModel());
+		jTable1.setModel(new UserTableSearcher().getTabelModel());
 				
 	}
     
@@ -298,7 +298,7 @@ public class GUIUsers extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        DialogDeleteYN dialogDeleteYN = new DialogDeleteYN(new javax.swing.JFrame(), true);
+        DeleteDialogYN dialogDeleteYN = new DeleteDialogYN(new javax.swing.JFrame(), true);
         dialogDeleteYN.setLocationRelativeTo(this);
         dialogDeleteYN.setVisible(true);
     } 
@@ -311,7 +311,7 @@ public class GUIUsers extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-					new GUIUsers().setVisible(true);
+					new UsersGUI().setVisible(true);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

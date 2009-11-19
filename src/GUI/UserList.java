@@ -117,18 +117,18 @@ public class UserList extends JPanel{
 	}
 	
 	private void buttonNewUserActionPerformed(ActionEvent evt) {                                               
-		new DialogNewUser(parent, true, this);
+		new UserNewDialog(parent, true, this);
 	}                                              
 
 	private void buttonEditUserActionPerformed(ActionEvent evt) {                                                
 		if (userTable.getSelectedRow() != -1) {
-			new DialogEditUser(parent, this, true, userDataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())));
+			new UserEditDialog(parent, this, true, userDataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())));
 		}
 	}
 	
 	private void buttonDeleteUserActionPerformed(ActionEvent evt) {
 		if (userTable.getSelectedRow() != -1) {
-			if (DialogDeleteYN2.userAcceptsDelete(userDataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())).getName())) {
+			if (DeleteDialogYN2.userAcceptsDelete(userDataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())).getName())) {
 				UserDAO userDAO = new UserDAO();
 				try {
 					userDAO.deleteUser(userDataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())).getUserID());

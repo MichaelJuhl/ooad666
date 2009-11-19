@@ -115,7 +115,7 @@ public class MemberList extends JPanel{
 	}
 	
 	private void buttonNewMemberActionPerformed(ActionEvent evt) {                                               
-		new NewMemberDialog(parent, true, this);
+		new MemberNewDialog(parent, true, this);
 	}                                              
 
 	private void buttonEditMemberActionPerformed(ActionEvent evt) {                                                

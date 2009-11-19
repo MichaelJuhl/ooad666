@@ -16,13 +16,13 @@ import dao.EventDAO;
  *
  * @author User
  */
-public class editEventDialog extends javax.swing.JDialog {
+public class EventEditDialog extends javax.swing.JDialog {
 
 	private Event event;
 	private PortalManagerMainFrame mainFrame;
 
 	/** Creates new form editEventDialog */
-	public editEventDialog(java.awt.Frame parent, boolean modal, Event event, PortalManagerMainFrame mainFrame) {
+	public EventEditDialog(java.awt.Frame parent, boolean modal, Event event, PortalManagerMainFrame mainFrame) {
 		super(parent, modal);
 		this.mainFrame = mainFrame;
 		this.event = event;
