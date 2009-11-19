@@ -2,105 +2,97 @@ package dal;
 
 public class User {
 	
-	protected int UserID;                     
-	protected String Name;                
-	protected int CPR;                 
-	protected String Gender;                 
-	protected int Phone;
-	protected String Address;
-	protected String Password;
-	protected String Rank;
+	protected int userID;                     
+	protected String name;                
+	protected int cpr;                 
+	protected String gender;                 
+	protected int phone;
+	protected String address;
+	protected String password;
+	protected String rank;
 	
 	
-	public User(int UserID, String Name, int CPR, String Gender, int Phone, String Address, String Password, String Rank){
-		this.UserID = UserID;
-		this.Name = Name;
-		this.CPR = CPR;
-		this.Gender = Gender;
-		this.Phone = Phone;
-		this.Address = Address;
-		this.Password = Password;
-		this.Rank	= Rank;
+	public User(int userID, String name, int cpr, String gender, int phone, String address, String password, String rank){
+		this.userID = userID;
+		this.name = name;
+		this.cpr = cpr;
+		this.gender = gender;
+		this.phone = phone;
+		this.address = address;
+		this.password = password;
+		this.rank = rank;
 	}
 	
 	
 //gui to DB -auto userid
-	public User(String Name, int CPR, String Gender, int Phone, String Address, String Password, String Rank) {
-		this.UserID = 999;
-		this.Name = Name;
-		this.CPR = CPR;
-		this.Gender = Gender;
-		this.Phone = Phone;
-		this.Address = Address;
-		this.Password = Password;
-		this.Rank =  Rank;
-		
+	public User() {
+		this.userID = 999;
 	}
 
 
 
 	public int getUserID() {
-		return UserID;
+		return userID;
 	}
 
 	public void setUserID(int userID) {
-		UserID = userID;
+		this.userID = userID;
 	}
 
 	public String getName() {
-		return Name;
+		return name;
 	}
 
 	public void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
 	public int getCPR() {
-		return CPR;
+		return cpr;
 	}
 
 	public void setCPR(int cpr) {
-		CPR = cpr;
+		this.cpr = cpr;
 	}
 
 	public String getGender() {
-		return Gender;
+		return gender;
 	}
 
 	public void setGender(String gender) {
-		Gender = gender;
+		this.gender = gender;
 	}
 
 	public int getPhone() {
-		return Phone;
+		return phone;
 	}
 
 	public void setPhone(int phone) {
-		Phone = phone;
+		this.phone = phone;
 	}
 
 	public String getAdresse() {
-		return Address;
+		return address;
 	}
 
 	public void setAdresse(String adresse) {
-		Address = adresse;
+		this.address = adresse;
 	}
 
 	public String getPassword() {
-		return Password;
+		return password;
 	}
 
 	public void setPassword(String password) {
-		Password = password;
+		this.password = password;
 	}
 
 	public String getRank() {
-		return Rank;
+		return rank;
 	}
 
 	public void setRank(String rank) {
-		Rank = rank;
+		this.rank = rank;
 	}
 
 }

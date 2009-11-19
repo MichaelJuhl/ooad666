@@ -17,7 +17,7 @@ public class MemberDataModel extends AbstractTableModel{
 	protected ArrayList<Member> customerList;
 	
 	MemberDataModel() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		customerList = new MemberDAO().getCustomerList();
+		customerList = new MemberDAO().getMemberList();
 	}
 
 	public TableModel getTableModel() {
@@ -46,7 +46,7 @@ public class MemberDataModel extends AbstractTableModel{
         final int GENDER = 3;
         final int PHONE = 4;
         final int ADDRESS = 5;
-        final int DISCOUNT = 6;
+        final int CLUB = 6;
 	
         switch(columnIndex){
         case ID:
@@ -61,8 +61,8 @@ public class MemberDataModel extends AbstractTableModel{
         	return customerList.get(rowIndex).getPhone();
         case ADDRESS:
         	return customerList.get(rowIndex).getAdresse();
-        case DISCOUNT:
-        	return customerList.get(rowIndex).getDiscount();
+        case CLUB:
+        	return customerList.get(rowIndex).getClub();
         default:
             return "";
         }
@@ -74,7 +74,7 @@ public class MemberDataModel extends AbstractTableModel{
 	}
 	public void updateFromDatabase() throws ParseException{
 		try {
-			customerList = new MemberDAO().getCustomerList() ;
+			customerList = new MemberDAO().getMemberList() ;
 		} catch (DALException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

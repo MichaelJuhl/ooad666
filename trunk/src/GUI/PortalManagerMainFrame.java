@@ -142,7 +142,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 		);
 
 		mainTabbedPane.addTab("Arrangementer", EventsPanel);
-		mainTabbedPane.addTab("Brugere", new UserList(this));
+		mainTabbedPane.addTab("Brugere", new UserList(this, this));
 		mainTabbedPane.addTab("Medlemmer", new MemberList(this));
 		
 		statusBar.setEditable(false);
@@ -270,15 +270,6 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	// End of variables declaration
 
 	public void tableChanged(TableModelEvent e) {
-		/*
-        int row = e.getFirstRow();
-        int column = e.getColumn();
-        TableModel model = (TableModel)e.getSource();
-        String columnName = model.getColumnName(column);
-        Object data = model.getValueAt(row, column);
-
-        // Do something with the data...
-		 */
 
 	}
 

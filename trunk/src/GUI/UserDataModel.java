@@ -12,6 +12,7 @@ import javax.swing.table.TableModel;
 import dal.User;
 import dalinterface.DALException;
 
+import dao.EventDAO;
 import dao.UserDAO;;
 
 
@@ -21,19 +22,14 @@ public class UserDataModel extends AbstractTableModel{
 	
     
 	UserDataModel() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-	        
-	    	userList = new UserDAO().getUserList();
-	    		    		
+		userList = new UserDAO().getUserList();    		    		
 	}
-	
-	
-	
+		
 	public ArrayList<User> getUserList() {
         return userList;
     }
 	
 	public int getColumnCount() {
-		
 		return 8;
 	}
 
@@ -89,6 +85,27 @@ public class UserDataModel extends AbstractTableModel{
 
 	public TableModel getTableModel(){
 		return (TableModel)this;
+	}
+	
+	public void updateFromDatabase() {
+		try {
+			userList = new UserDAO().getUserList();
+		} catch (DALException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

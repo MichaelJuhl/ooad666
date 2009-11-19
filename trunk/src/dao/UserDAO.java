@@ -21,9 +21,8 @@ public class UserDAO implements IUser{
 				+ User.getName()+ "', '" + User.getCPR() + "', '" + 
 				User.getGender() + "', '" + User.getPhone() + "', '" + User.getAdresse() + "', '" + User.getPassword() +"')";
 			
-			String rank=" INSERT INTO OOADRank (UserID, Rank) VALUES((SELECT MAX(UserID) FROM OOADUser), '"+User.getRank() + "')";
-			System.out.println(user);
-			System.out.println(rank);
+		String rank=" INSERT INTO OOADRank (UserID, Rank) VALUES((SELECT MAX(UserID) FROM OOADUser), '"+User.getRank() + "')";
+		
 		Connector.doUpdate(user);
 		Connector.doUpdate(rank);
 	}
@@ -59,9 +58,9 @@ public class UserDAO implements IUser{
 	}
 
 	@Override
-	public void sletUser(int UserID) throws DALException {
+	public void deleteUser(int UserID) throws DALException {
 		Connector.doUpdate(
-				"UPDATE OOADRank SET Rank = 'deaktiv' WHERE UserID = " +UserID
+				"UPDATE OOADRank SET Rank = '-1' WHERE UserID = " +UserID
 			);
 		
 	}

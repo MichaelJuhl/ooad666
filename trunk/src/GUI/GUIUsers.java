@@ -227,7 +227,7 @@ public class GUIUsers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DialogNewUser dialogNewMember = new DialogNewUser(new javax.swing.JFrame(), true);
+        DialogNewUser dialogNewMember = new DialogNewUser(new javax.swing.JFrame(), true, null);
         dialogNewMember.setLocationRelativeTo(this);
         dialogNewMember.setVisible(true);
 
@@ -272,7 +272,7 @@ public class GUIUsers extends javax.swing.JFrame {
     	System.out.println("edit trykket, if.");
     	if (jTable1.getSelectedRow() != -1) {
     		System.out.println(userDataModel.getUserList().get(jTable1.getSelectedRow()));
-    	DialogEditUser dialogEditMember = new DialogEditUser(this, rootPaneCheckingEnabled, userDataModel.getUserList().get(jTable1.getSelectedRow()));        		
+    	DialogEditUser dialogEditMember = new DialogEditUser(this, null, rootPaneCheckingEnabled, userDataModel.getUserList().get(jTable1.getSelectedRow()));        		
     	System.out.println(userDataModel.getUserList().get(jTable1.getSelectedRow()));
         dialogEditMember.setLocationRelativeTo(this);
         dialogEditMember.setVisible(true);
