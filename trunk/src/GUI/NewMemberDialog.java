@@ -17,16 +17,21 @@ import java.lang.NumberFormatException;
 
 public class NewMemberDialog extends javax.swing.JDialog {
 
-	PortalManagerMainFrame mainFrame;
+	MemberList memberTable;
 
-	public NewMemberDialog(java.awt.Frame parent, boolean modal, PortalManagerMainFrame mainFrame){
+	public NewMemberDialog(java.awt.Frame parent, boolean modal, MemberList memberList){
 		super(parent, modal);
-		this.mainFrame = mainFrame;
+		this.memberTable = memberList;
 		initComponents();
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 
 	public void initComponents(){
 		customerNavnLabel = new javax.swing.JLabel();
+		customerBirthTimeInputField = new javax.swing.JTextField();
+		customerPhoneInputField = new javax.swing.JTextField();
+		customerAddressInputField = new javax.swing.JTextField();
 		customerNavnInputField = new javax.swing.JTextField();
 		customerBirthLabel = new javax.swing.JLabel();
 		customerGenderLabel = new javax.swing.JLabel();
@@ -39,6 +44,8 @@ public class NewMemberDialog extends javax.swing.JDialog {
 		customerBirthYearComboBox = new javax.swing.JComboBox();
 		customerBirthMonthComboBox = new javax.swing.JComboBox();
 		customerBirthDateComboBox = new javax.swing.JComboBox();
+		clubLabel = new javax.swing.JLabel();
+		clubComboBox = new javax.swing.JComboBox();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -67,8 +74,9 @@ public class NewMemberDialog extends javax.swing.JDialog {
 		customerBirthDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
 		customerBirthDateComboBox.setSelectedItem(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
 
-		customerBirthTimeField.setText(getCurrentTime());
-
+		clubLabel.setText("Klub:");
+		
+		clubComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Portalis", "Show-Portalis" }));
 
 		customerErrorLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); 
 		customerErrorLabel.setForeground(new java.awt.Color(255, 0, 0));
@@ -125,6 +133,10 @@ public class NewMemberDialog extends javax.swing.JDialog {
 																											.addComponent(customerBirthMonthComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 																											.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																											.addComponent(customerBirthDateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+																											.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																											.addComponent(clubLabel)
+																											.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																											.addComponent(clubComboBox)
 																											.addContainerGap())
 
 																											.addGroup(layout.createSequentialGroup()
@@ -163,12 +175,16 @@ public class NewMemberDialog extends javax.swing.JDialog {
 															.addComponent(customerBirthDateComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
 															.addComponent(customerBirthYearComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 															.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-															.addComponent(customerErrorLabel)
-															.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 															.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-																	.addComponent(customerDiscardButton)
-																	.addComponent(customerSaveButton))
-																	.addContainerGap(16, Short.MAX_VALUE))
+																	.addComponent(clubLabel)
+																	.addComponent(clubComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+																	.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																	.addComponent(customerErrorLabel)
+																	.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																	.addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+																			.addComponent(customerDiscardButton)
+																			.addComponent(customerSaveButton))
+																			.addContainerGap(16, Short.MAX_VALUE))
 	); 
 
 	pack();
@@ -217,46 +233,32 @@ private void customerSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {
 		customerErrorLabel.setText("Fejl: Navn kan ikke vaere tom");
 		return;
 	}
-	//check Birth
-	if (!timeValidate(customerBirthInputField.getText())) {
-		customerErrorLabel.setText("Fejl: Ugyldigt starttidspunkt");
-		return;
-	} else if(customerBirthInputField.getText().length()==4) {
-		customerBirthInputField.setText("0" + customerBirthInputField.getText());
-	}
-
-	//check Gender
-	if (customerGenderInputField.getText().equals("")) {
-		customerErrorLabel.setText("Fejl: Køn kan ikke vaere tom");
-		return;
-	}
+	
 	//check Phone
 	if (customerPhoneInputField.getText().equals("")) {
 		customerErrorLabel.setText("Fejl: Telefon-nr kan ikke være tom");
 		return;
 	}
-
-
+	
 	//check Address
 	if (customerAddressInputField.getText().equals("")) {
 		customerErrorLabel.setText("Fejl: Adresse kan ikke være tom");
 		return;
 	}
 
-
 	//Validation passed, make new customer
 	MemberDAO customerDAO = new MemberDAO();
 
 	try {
-		customerDAO.createMember(new Member(customerNavnInputField.getText(), getBirthTime(), (String)customerGenderInputCombBox.getSelectedItem()
-				, Integer.valueOf(customerPhoneInputField.getText()),customerAddressInputField.getText()));
+		customerDAO.createMember(new Member(customerNavnInputField.getText(), getBirthDate(), (String)customerGenderInputCombBox.getSelectedItem()
+				, Integer.valueOf(customerPhoneInputField.getText()),customerAddressInputField.getText(), (String)clubComboBox.getSelectedItem()));
 	} catch(NumberFormatException e) {
 		e.printStackTrace();
 	} catch (DALException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	mainFrame.updateTable();
+	memberTable.updateTable();
 	this.dispose();
 }                 
 
@@ -283,12 +285,11 @@ private Calendar getBirthTime() {
 	int startTimeYear = Integer.valueOf((String)customerBirthYearComboBox.getSelectedItem());
 	int startTimeMonth = Integer.valueOf((String)customerBirthMonthComboBox.getSelectedItem());
 	int startTimeDate = Integer.valueOf((String)customerBirthDateComboBox.getSelectedItem());
-
-
+	
 	Calendar startTime = GregorianCalendar.getInstance();
 	startTime.clear();
 	startTime.set(startTimeYear, startTimeMonth, startTimeDate);
-
+	
 	return startTime;
 }
 
@@ -296,15 +297,29 @@ private String getCurrentTime() {
 	// returns the current time in the format HH:mm - fx 13:25 or 02:07
 	String currentHour;
 	String currentMinute;
-
+	
 	currentHour = String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
 	if (currentHour.length()<2)
 		currentHour = "0" + currentHour;
 	currentMinute = String.valueOf(Calendar.getInstance().get(Calendar.MINUTE));
 	if (currentMinute.length()<2) 
 		currentMinute = "0" + currentMinute;
-
+	
 	return currentHour + ":" + currentMinute;
+}
+
+private Calendar getBirthDate() {
+	int startTimeYear = Integer.valueOf((String)customerBirthYearComboBox.getSelectedItem());
+	int startTimeMonth = Integer.valueOf((String)customerBirthMonthComboBox.getSelectedItem());
+	int startTimeDate = Integer.valueOf((String)customerBirthDateComboBox.getSelectedItem());
+	int startTimeHour = 0;
+	int startTimeMinute = 0;
+	
+	Calendar startTime = GregorianCalendar.getInstance();
+	startTime.clear();
+	startTime.set(startTimeYear, startTimeMonth, startTimeDate, startTimeHour, startTimeMinute, 0);
+	
+	return startTime;
 }
 
 
@@ -320,11 +335,12 @@ private javax.swing.JLabel customerNavnLabel;
 private javax.swing.JLabel customerGenderLabel;
 private javax.swing.JLabel customerBirthLabel;
 private javax.swing.JComboBox customerGenderInputCombBox;
-
+private javax.swing.JLabel clubLabel;
+private javax.swing.JComboBox clubComboBox;
 private javax.swing.JComboBox customerBirthYearComboBox;
 private javax.swing.JComboBox customerBirthMonthComboBox;
 private javax.swing.JComboBox customerBirthDateComboBox;
-private javax.swing.JTextField customerBirthTimeField;
+private javax.swing.JTextField customerBirthTimeInputField;
 private javax.swing.JLabel customerAddressLabel;
 private javax.swing.JLabel customerPhoneLabel;
 private javax.swing.JButton customerSaveButton;

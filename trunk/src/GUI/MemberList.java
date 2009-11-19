@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
 
 import dal.Event;
 import dalinterface.DALException;
@@ -114,7 +115,7 @@ public class MemberList extends JPanel{
 	}
 	
 	private void buttonNewMemberActionPerformed(ActionEvent evt) {                                               
-		//new DialogNewMember(parent, true);
+		new NewMemberDialog(parent, true, this);
 	}                                              
 
 	private void buttonEditMemberActionPerformed(ActionEvent evt) {                                                
@@ -124,6 +125,20 @@ public class MemberList extends JPanel{
 	
 	private void buttonDeleteMemberActionPerformed(ActionEvent evt) {
 		
+	}
+	
+	public void tableChanged(TableModelEvent e) {
+
+	}
+	
+	public void updateTable() {
+		try {
+			dataModel.updateFromDatabase();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		dataModel.fireTableDataChanged();
 	}
 	
 	// Variables declaration - do not modify                     
