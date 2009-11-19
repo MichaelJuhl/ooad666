@@ -12,17 +12,17 @@ public class Event  {
 
 	protected int eventID;                     
 	protected String concertType;                
-	protected String Stage;  
+	protected String Stage;
 	protected Calendar dateStart = new GregorianCalendar(new Locale("da","DK"));
 	protected Calendar dateEnd = new GregorianCalendar(new Locale("da","DK"));
 	protected String artist;                 
 	protected String titel;
-	protected double price;		
+	protected double price;
 	protected int maxVisitors;
 	protected int ticketsSold;
 	protected double showDiscount;
 	protected double portalisDiscount;
-	protected DateFormat dateFormat;	
+	protected DateFormat dateFormat;
 
 	//Constructor for building Event objects from information from the database and editing 
 	public Event(int eventID, String concertType, String Stage, String dateStart, String dateFinish, String artist, String titel, 

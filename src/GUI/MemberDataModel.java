@@ -54,11 +54,11 @@ public class MemberDataModel extends AbstractTableModel{
         case NAME:
         	return customerList.get(rowIndex).getName();
         case BIRTH:
-        	return customerList.get(rowIndex).getBirth();
+        	return customerList.get(rowIndex).getBirthString();
         case GENDER:
         	return customerList.get(rowIndex).getGender();
         case PHONE:
-        	return customerList.get(rowIndex).getPhone();
+        	return customerList.get(rowIndex).getPhoneString();
         case ADDRESS:
         	return customerList.get(rowIndex).getAdresse();
         case CLUB:
