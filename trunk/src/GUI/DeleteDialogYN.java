@@ -12,10 +12,10 @@ package GUI;
  *
  * @author Casper
  */
-public class DialogDeleteYN extends javax.swing.JDialog {
+public class DeleteDialogYN extends javax.swing.JDialog {
 
     /** Creates new form DialogDeleteYN */
-    public DialogDeleteYN(java.awt.Frame parent, boolean modal) {
+    public DeleteDialogYN(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -105,7 +105,7 @@ public class DialogDeleteYN extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DialogDeleteYN dialog = new DialogDeleteYN(new javax.swing.JFrame(), true);
+                DeleteDialogYN dialog = new DeleteDialogYN(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);

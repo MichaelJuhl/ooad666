@@ -12,9 +12,6 @@
 package GUI;
 import java.awt.Component;
 import java.text.ParseException;
-
-
-
 import dal.Event;
 import dal.Member;
 import dalinterface.DALException;
@@ -25,10 +22,10 @@ import GUI.PrintUtilities;
  *
  * @author Michael
  */
-public class ticketEventDialog extends javax.swing.JDialog {
+public class TicketEventDialog extends javax.swing.JDialog {
 	private PortalManagerMainFrame mainFrame;
     /** Creates new form ticketEventDialog */
-    public ticketEventDialog(buyTicketDialog buyTicketDialog, boolean modal, Event event, Member customer, int billetter,PortalManagerMainFrame mainFrame) {
+    public TicketEventDialog(TicketBuyDialog buyTicketDialog, boolean modal, Event event, Member customer, int billetter,PortalManagerMainFrame mainFrame) {
         super(buyTicketDialog, modal);
         this.mainFrame =mainFrame;
         initComponents();

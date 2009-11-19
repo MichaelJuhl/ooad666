@@ -22,7 +22,7 @@ import dao.MemberDAO;
  *
  * @author Michael
  */
-public class buyTicketDialog extends javax.swing.JDialog {
+public class TicketBuyDialog extends javax.swing.JDialog {
 	double pris;
 	double showdiscount;
 	double portalisdiscount;
@@ -31,7 +31,7 @@ public class buyTicketDialog extends javax.swing.JDialog {
 	Member customer;
 
     /** Creates new form buyTicketDialog */
-    public buyTicketDialog(java.awt.Frame parent, boolean modal, Event event,PortalManagerMainFrame mainFrame) {
+    public TicketBuyDialog(java.awt.Frame parent, boolean modal, Event event,PortalManagerMainFrame mainFrame) {
         super(parent, modal);
         this.mainFrame = mainFrame;
         initComponents();
@@ -325,7 +325,7 @@ public class buyTicketDialog extends javax.swing.JDialog {
     	}
 
     	//this.dispose();
-		ticketEventDialog dialog = new ticketEventDialog(this, rootPaneCheckingEnabled, event2,customer,jComboBox1.getSelectedIndex()+1, mainFrame);
+		TicketEventDialog dialog = new TicketEventDialog(this, rootPaneCheckingEnabled, event2,customer,jComboBox1.getSelectedIndex()+1, mainFrame);
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
     }

@@ -4,7 +4,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-public class DialogDeleteYN2 {
+public class DeleteDialogYN2 {
 	
 	/*
 	 * Klasse til at vise en sletnings dialog.

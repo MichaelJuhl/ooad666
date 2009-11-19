@@ -213,7 +213,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	}                                             
 
 	private void buttonNewEventActionPerformed(ActionEvent evt) {                                               
-		newEventDialog dialog = new newEventDialog(this, rootPaneCheckingEnabled, this);
+		EventNewDialog dialog = new EventNewDialog(this, rootPaneCheckingEnabled, this);
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
 	}                                              
@@ -221,28 +221,30 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	private void buttonEditEventActionPerformed(ActionEvent evt) {                                                
 		if (eventTable.getSelectedRow() != -1) {
 			
-			editEventDialog dialog = new editEventDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow())), this);
+			EventEditDialog dialog = new EventEditDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow())), this);
 			dialog.setLocationRelativeTo(this);
 			dialog.setVisible(true);
 		}
 	}  
 	
 	private void buttonDeleteEventActionPerformed(ActionEvent evt) {
-		Event selectedEvent = eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow()));
-		if (DialogDeleteYN2.userAcceptsDelete(selectedEvent.getTitel())) {
-			try {
-				new EventDAO().deleteEvent(selectedEvent.getEventID());
-			} catch (DALException e) {
-				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
-				e.printStackTrace();
+		if (eventTable.getSelectedRow() != -1) {
+			Event selectedEvent = eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow()));
+			if (DeleteDialogYN2.userAcceptsDelete(selectedEvent.getTitel())) {
+				try {
+					new EventDAO().deleteEvent(selectedEvent.getEventID());
+				} catch (DALException e) {
+					JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				}
+				updateTable();
 			}
-			updateTable();
 		}
 	}
 	
 	private void buttonBuyTicketActionPerformed(ActionEvent evt) {
 		if (eventTable.getSelectedRow() != -1) {
-			buyTicketDialog dialog1 = new buyTicketDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow())),this);
+			TicketBuyDialog dialog1 = new TicketBuyDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow())),this);
 			
 			dialog1.setLocationRelativeTo(this);
 			dialog1.setVisible(true);

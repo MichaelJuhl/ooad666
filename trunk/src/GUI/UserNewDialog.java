@@ -20,31 +20,17 @@ import dao.UserDAO;
  *
  * @author Casper
  */
-public class DialogEditUser extends javax.swing.JDialog {
+public class UserNewDialog extends javax.swing.JDialog {
 
-	private User user;
-	private UserList userTable;
-    public DialogEditUser(java.awt.Frame parent, UserList userTable, boolean modal, User user) {
+	UserList userList;
+	
+    public UserNewDialog(java.awt.Frame parent, boolean modal, UserList userList) {
         super(parent, modal);
-        this.userTable = userTable;
-        this.user = user;
+        this.userList = userList;
         initComponents();
-        setTitle("Rediger bruger: " + user.getUserID());
+        setTitle("Opret Bruger");
         setLocationRelativeTo(null);
         setVisible(true);
-        
-        
-       
-        
-      //input for edit
-		nameInputField.setText(user.getName());
-		cprInputField.setText(new Integer(user.getCPR()).toString());
-		phoneInputField.setText(new Integer(user.getPhone()).toString());
-		
-		addressInputField.setText(user.getAdresse());
-		passwordInputField.setText(user.getPassword());
-		
-		//
     }
 
     /** This method is called from within the constructor to
@@ -127,16 +113,7 @@ public class DialogEditUser extends javax.swing.JDialog {
             	cancelButtonActionPerformed(evt);
             }
         });
-        //Load information into fields
-        nameInputField.setText(user.getName());
-        cprInputField.setText(new Integer(user.getCPR()).toString());
-        phoneInputField.setText(new Integer(user.getPhone()).toString());
-        addressInputField.setText(user.getAdresse());
-        passwordInputField.setText(user.getPassword());
-        sexComboBox.setSelectedItem(user.getGender());
-        rankComboBox.setSelectedItem(user.getRank());
-        
-        
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -277,6 +254,7 @@ public class DialogEditUser extends javax.swing.JDialog {
         
 		UserDAO userDAO = new UserDAO();
 		try {
+			User user = new User();
 			user.setName(nameInputField.getText());
 			user.setCPR(Integer.valueOf(cprInputField.getText()));
 			user.setPhone(Integer.valueOf(phoneInputField.getText()));
@@ -285,7 +263,7 @@ public class DialogEditUser extends javax.swing.JDialog {
 			user.setPassword(passwordInputField.getText());
 			user.setRank((String)rankComboBox.getSelectedItem());
 			
-			userDAO.updateUser(user.getUserID(), user);
+			userDAO.createUser(user);
 			
 			/*
 			userDAO.createUser(new User(
@@ -306,7 +284,7 @@ public class DialogEditUser extends javax.swing.JDialog {
 			errorLabel.setText("<html><FONT COLOR=RED>Fejl: Kan ikke forbinde til database, proev igen</FONT></html>");
 			e.printStackTrace();
 		}
-		userTable.updateTable();
+		userList.updateTable();
 		this.dispose();
     }
 

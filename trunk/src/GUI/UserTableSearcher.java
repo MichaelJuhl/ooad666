@@ -13,14 +13,14 @@ import dalinterface.DALException;
 import dao.UserDAO;;
 
 
-public class TableSearcher extends AbstractTableModel{
+public class UserTableSearcher extends AbstractTableModel{
 	
 	protected User getUser;
 	int userID;
     
-	TableSearcher() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	UserTableSearcher() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 	        
-	    	getUser = new UserDAO().getUser(Integer.parseInt(GUIUsers.jTextField1.getText()));
+	    	getUser = new UserDAO().getUser(Integer.parseInt(UsersGUI.jTextField1.getText()));
 	    	
 	    		 
 	}
