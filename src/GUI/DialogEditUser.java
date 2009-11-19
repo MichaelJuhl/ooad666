@@ -277,11 +277,6 @@ public class DialogEditUser extends javax.swing.JDialog {
         
 		UserDAO userDAO = new UserDAO();
 		try {
-			//print to check for right inputs
-			System.out.println(nameInputField.getText()+" | " + Double.parseDouble(cprInputField.getText()) +" | " + (String)sexComboBox.getSelectedItem() + " | " +Integer.parseInt(phoneInputField.getText()) + " | " +addressInputField.getText()
-					+ " | " +passwordInputField.getText()
-					+ " | " +(String)rankComboBox.getSelectedItem());
-			
 			user.setName(nameInputField.getText());
 			user.setCPR(Integer.valueOf(cprInputField.getText()));
 			user.setPhone(Integer.valueOf(phoneInputField.getText()));

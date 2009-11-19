@@ -46,7 +46,7 @@ public class EventDAO implements IEvent {
 			+ ", " + Event.getVisitors() + ")";
 		
 		
-		String discount=" INSERT INTO OOADDiscount (EventID, SHOWDiscount, NORMAL) VALUES((SELECT MAX(EventID) FROM OOADEvent)"
+		String discount=" INSERT INTO OOADDiscount (EventID, ShowDiscount, PortalisDiscount) VALUES((SELECT MAX(EventID) FROM OOADEvent)"
 			+ ", " + Event.getShowDiscount()
 			+ ", " + Event.getPortalisDiscount()+ ")";
 		
@@ -64,7 +64,7 @@ public class EventDAO implements IEvent {
 														"WHERE OOADEvent.EventID = OOADTicket.EventID) AS TicketsSold " +
 														"FROM `OOADEvent` NATURAL LEFT JOIN OOADDiscount");
 		
-		// giver: EventID, Concerttype, Stage, DateSTART, DateFINISH, Artist, Titel, Price, Visitors, SHOWDiscount, NORMAL, TicketsSold
+		// giver: EventID, Concerttype, Stage, DateSTART, DateFINISH, Artist, Titel, Price, Visitors, ShowDiscount, PortalisDiscount, TicketsSold
 		
 		try {
 			while (rs.next()) {
@@ -99,7 +99,7 @@ public class EventDAO implements IEvent {
 				" WHERE EventID = " + event.getEventID();
 		
 		
-		String discount=" Update OOADDiscount SET SHOWDiscount = "+event.getShowDiscount()+ ", NORMAL = " + event.getPortalisDiscount()+" WHERE EventID = "
+		String discount=" Update OOADDiscount SET ShowDiscount = "+event.getShowDiscount()+ ", PortalisDiscount = " + event.getPortalisDiscount()+" WHERE EventID = "
 		+ event.getEventID();
 		
 		Connector.doUpdate(eventUpdate);

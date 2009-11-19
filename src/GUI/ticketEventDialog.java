@@ -62,12 +62,12 @@ public class ticketEventDialog extends javax.swing.JDialog {
         		// TODO Auto-generated catch block
         		e.printStackTrace();
         	}
-        	if (customer.getClub().equalsIgnoreCase("SHOW") ) {
+        	if (customer.getClub().equalsIgnoreCase("Show-Portalis") ) {
         		RabatInputJLabel.setText(event.getShowDiscount()+"%");
         		double pris = event.getPrice()-((event.getPrice()/100)*event.getShowDiscount());
         		PrisInputJLabel.setText(pris+"kr");
         	}else{
-        		if (customer.getClub().equalsIgnoreCase("NORMAL") ) {
+        		if (customer.getClub().equalsIgnoreCase("Portalis") ) {
         			RabatInputJLabel.setText(+event.getPortalisDiscount()+"%");
         			double pris = event.getPrice()-((event.getPrice()/100)*event.getPortalisDiscount());
         			PrisInputJLabel.setText(pris+"kr");
@@ -104,12 +104,12 @@ public class ticketEventDialog extends javax.swing.JDialog {
         		// TODO Auto-generated catch block
         		e.printStackTrace();
         	}
-        	if (customer.getClub().equalsIgnoreCase("SHOW") ) {
+        	if (customer.getClub().equalsIgnoreCase("Show-Portalis") ) {
         		RabatInputJLabel1.setText(event.getShowDiscount()+"%");
         		double pris = event.getPrice()-((event.getPrice()/100)*event.getShowDiscount());
         		PrisInputJLabel1.setText(pris+"kr");
         	}else{
-        		if (customer.getClub().equalsIgnoreCase("NORMAL") ) {
+        		if (customer.getClub().equalsIgnoreCase("Portalis") ) {
         			RabatInputJLabel1.setText(+event.getPortalisDiscount()+"%");
         			double pris = event.getPrice()-((event.getPrice()/100)*event.getPortalisDiscount());
         			PrisInputJLabel1.setText(pris+"kr");
@@ -145,12 +145,12 @@ public class ticketEventDialog extends javax.swing.JDialog {
         		// TODO Auto-generated catch block
         		e.printStackTrace();
         	}
-        	if (customer.getClub().equalsIgnoreCase("SHOW") ) {
+        	if (customer.getClub().equalsIgnoreCase("Show-Portalis") ) {
         		RabatInputJLabel2.setText(event.getShowDiscount()+"%");
         		double pris = event.getPrice()-((event.getPrice()/100)*event.getShowDiscount());
         		PrisInputJLabel2.setText(pris+"kr");
         	}else{
-        		if (customer.getClub().equalsIgnoreCase("NORMAL") ) {
+        		if (customer.getClub().equalsIgnoreCase("Portalis") ) {
         			RabatInputJLabel2.setText(+event.getPortalisDiscount()+"%");
         			double pris = event.getPrice()-((event.getPrice()/100)*event.getPortalisDiscount());
         			PrisInputJLabel2.setText(pris+"kr");
@@ -186,12 +186,12 @@ public class ticketEventDialog extends javax.swing.JDialog {
         		// TODO Auto-generated catch block
         		e.printStackTrace();
         	}
-        	if (customer.getClub().equalsIgnoreCase("SHOW") ) {
+        	if (customer.getClub().equalsIgnoreCase("Show-Portalis") ) {
         		RabatInputJLabel3.setText(event.getShowDiscount()+"%");
         		double pris = event.getPrice()-((event.getPrice()/100)*event.getShowDiscount());
         		PrisInputJLabel3.setText(pris+"kr");
         	}else{
-        		if (customer.getClub().equalsIgnoreCase("NORMAL") ) {
+        		if (customer.getClub().equalsIgnoreCase("Portalis") ) {
         			RabatInputJLabel3.setText(+event.getPortalisDiscount()+"%");
         			double pris = event.getPrice()-((event.getPrice()/100)*event.getPortalisDiscount());
         			PrisInputJLabel3.setText(pris+"kr");
