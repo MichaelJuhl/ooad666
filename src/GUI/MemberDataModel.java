@@ -69,7 +69,7 @@ public class MemberDataModel extends AbstractTableModel{
 	
 	}
 
-	public ArrayList<Member> getCustomerList(){
+	public ArrayList<Member> getMemberList(){
 		return (ArrayList<Member>)customerList;
 	}
 	public void updateFromDatabase() throws ParseException{
