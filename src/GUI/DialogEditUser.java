@@ -12,11 +12,7 @@
 
 package GUI;
 
-import java.sql.SQLException;
-import java.text.ParseException;
-
-
-
+import java.awt.event.ActionEvent;
 import dal.User;
 import dalinterface.DALException;
 import dao.UserDAO;
@@ -27,22 +23,26 @@ import dao.UserDAO;
 public class DialogEditUser extends javax.swing.JDialog {
 
 	private User user;
-    public DialogEditUser(java.awt.Frame parent, boolean modal, User user) {
+	private UserList userTable;
+    public DialogEditUser(java.awt.Frame parent, UserList userTable, boolean modal, User user) {
         super(parent, modal);
-        
+        this.userTable = userTable;
+        this.user = user;
         initComponents();
         setTitle("Rediger bruger: " + user.getUserID());
+        setLocationRelativeTo(null);
+        setVisible(true);
         
         
        
         
       //input for edit
 		nameInputField.setText(user.getName());
-		cprInputField.setText(new Double(user.getCPR()).toString());
+		cprInputField.setText(new Integer(user.getCPR()).toString());
 		phoneInputField.setText(new Integer(user.getPhone()).toString());
 		
-		addressInputField.setText(new Double(user.getAdresse()).toString());
-		passwordInputField.setText(new Double(user.getPassword()).toString());
+		addressInputField.setText(user.getAdresse());
+		passwordInputField.setText(user.getPassword());
 		
 		//
     }
@@ -69,45 +69,40 @@ public class DialogEditUser extends javax.swing.JDialog {
         rankComboBox = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         addressInputField = new javax.swing.JTextField();
+        errorLabel = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        saveNewUserButton = new javax.swing.JButton();
+        saveUserButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         passwordInputField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        rankComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Billetsælger", "Kontormedarbejder", "Admin", "Deaktiveret" }));
+        
+        errorLabel.setText("");
+        
         jLabel1.setText("Navn:");
 
         jLabel2.setText("CPR:");
 
         jLabel3.setText("TLF:");
 
-        phoneInputField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneInputFieldActionPerformed(evt);
-            }
-        });
-
         sexComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Mand", "Kvinde" }));
-        //set sexComboBox inputfield to selected item.
-        sexComboBox.setSelectedItem(user.getGender());
         
         jLabel4.setText("Køn:");
 
         jLabel5.setText("Password:");
 
         jLabel6.setText("Rank");
-
-        rankComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4" }));
-      //set rankComboBox inputfield to selected item.
-        rankComboBox.setSelectedItem(user.getRank());
         
         jLabel7.setText("Adresse");
+        
+        jLabel8.setText("");
 
         jLabel9.setText(" ");
 
@@ -119,21 +114,29 @@ public class DialogEditUser extends javax.swing.JDialog {
 
         jLabel13.setText(" ");
 
-        saveNewUserButton.setText("Opret");
-        saveNewUserButton.addActionListener(new java.awt.event.ActionListener() {
+        saveUserButton.setText("Gem");
+        saveUserButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveNewUserButtonActionPerformed(evt);
+                saveUserButtonActionPerformed(evt);
             }
         });
 
-        cancelButton.setText("Tilbage");
-
-        passwordInputField.addActionListener(new java.awt.event.ActionListener() {
+        cancelButton.setText("Luk");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordInputFieldActionPerformed(evt);
+            	cancelButtonActionPerformed(evt);
             }
         });
-
+        //Load information into fields
+        nameInputField.setText(user.getName());
+        cprInputField.setText(new Integer(user.getCPR()).toString());
+        phoneInputField.setText(new Integer(user.getPhone()).toString());
+        addressInputField.setText(user.getAdresse());
+        passwordInputField.setText(user.getPassword());
+        sexComboBox.setSelectedItem(user.getGender());
+        rankComboBox.setSelectedItem(user.getRank());
+        
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,7 +145,7 @@ public class DialogEditUser extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(saveNewUserButton)
+                        .addComponent(saveUserButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton))
                     .addGroup(layout.createSequentialGroup()
@@ -160,6 +163,7 @@ public class DialogEditUser extends javax.swing.JDialog {
                             .addComponent(jLabel5)
                             .addComponent(jLabel6)
                             .addComponent(rankComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(errorLabel)
                             .addComponent(addressInputField, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
                         .addGap(6, 6, 6)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,8 +218,10 @@ public class DialogEditUser extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rankComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(errorLabel)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveNewUserButton)
+                    .addComponent(saveUserButton)
                     .addComponent(cancelButton))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
@@ -223,41 +229,52 @@ public class DialogEditUser extends javax.swing.JDialog {
         pack();
     }// </editor-fold>
 
-    private void phoneInputFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    }
+    protected void cancelButtonActionPerformed(ActionEvent evt) {
+    	this.dispose();
+	}
 
-    private void saveNewUserButtonActionPerformed(java.awt.event.ActionEvent evt) {
-       //check inputs
+	private void saveUserButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		//check inputs
         //navn
         if (nameInputField.getText().equals("")) {
-			nameInputField.setText("Fejl: Navn kan ikke vaere tom");
+			errorLabel.setText("<html><FONT COLOR=RED>Fejl: Navn kan ikke vaere tom</FONT></html>");
 			return;
 		}
         //cpr
-                if (cprInputField.getText().equals("")) {
-			cprInputField.setText("Fejl: CPR # kan ikke vaere tom");
+        if (cprInputField.getText().equals("")) {
+        	errorLabel.setText("<html><FONT COLOR=RED>Fejl: CPR # kan ikke vaere tom</FONT></html>");
 			return;
 		}
 
        //tlf
         if (phoneInputField.getText().equals("")) {
-			phoneInputField.setText("Fejl: telefon # kan ikke vaere tom");
+        	errorLabel.setText("<html><FONT COLOR=RED>Fejl: telefon # kan ikke vaere tom</FONT></html>");
+			return;
+		}
+        if (phoneInputField.getText().length() > 8) {
+        	errorLabel.setText("<html><FONT COLOR=RED>Fejl: telefon nr. er for stort</FONT></html>");
+			return;
+		}
+        try {
+			new Integer(phoneInputField.getText());
+		} catch (NumberFormatException e1) {
+			errorLabel.setText("<html><FONT COLOR=RED>Fejl: telefon nr. ugyldigt, brug kun tal</FONT></html>");
 			return;
 		}
 
         //adresse
         if (addressInputField.getText().equals("")) {
-			addressInputField.setText("Fejl: Adresse kan ikke vaere tom");
+        	errorLabel.setText("<html><FONT COLOR=RED>Fejl: Adresse kan ikke vaere tom</FONT></html>");
 			return;
 		}
         //password
         if (passwordInputField.getText().equals("")) {
-			passwordInputField.setText("Fejl: password kan ikke vaere tom");
+        	errorLabel.setText("<html><FONT COLOR=RED>Fejl: password kan ikke vaere tom</FONT></html>");
 			return;
 		}
        
-
+        saveUserButton.setEnabled(false);
+        
 		UserDAO userDAO = new UserDAO();
 		try {
 			//print to check for right inputs
@@ -265,6 +282,17 @@ public class DialogEditUser extends javax.swing.JDialog {
 					+ " | " +passwordInputField.getText()
 					+ " | " +(String)rankComboBox.getSelectedItem());
 			
+			user.setName(nameInputField.getText());
+			user.setCPR(Integer.valueOf(cprInputField.getText()));
+			user.setPhone(Integer.valueOf(phoneInputField.getText()));
+			user.setGender((String)sexComboBox.getSelectedItem());
+			user.setAdresse(addressInputField.getText());
+			user.setPassword(passwordInputField.getText());
+			user.setRank((String)rankComboBox.getSelectedItem());
+			
+			userDAO.updateUser(user.getUserID(), user);
+			
+			/*
 			userDAO.createUser(new User(
 					nameInputField.getText()
 					, Integer.valueOf(cprInputField.getText())
@@ -274,15 +302,17 @@ public class DialogEditUser extends javax.swing.JDialog {
 					, passwordInputField.getText()
 					, (String)rankComboBox.getSelectedItem()
 					));
+			*/
+			
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
+			errorLabel.setText("<html><FONT COLOR=RED>Fejl i input!</FONT></html>");
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
+			errorLabel.setText("<html><FONT COLOR=RED>Fejl: Kan ikke forbinde til database, proev igen</FONT></html>");
 			e.printStackTrace();
 		}
-		
+		userTable.updateTable();
 		this.dispose();
-
     }
 
     private void passwordInputFieldActionPerformed(java.awt.event.ActionEvent evt) {
@@ -309,7 +339,7 @@ public class DialogEditUser extends javax.swing.JDialog {
     */
 
     // Variables declaration - do not modify
-    private javax.swing.JButton saveNewUserButton;
+    private javax.swing.JButton saveUserButton;
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox sexComboBox;
     private javax.swing.JComboBox rankComboBox;
@@ -331,6 +361,7 @@ public class DialogEditUser extends javax.swing.JDialog {
     private javax.swing.JTextField phoneInputField;
     private javax.swing.JTextField addressInputField;
     private javax.swing.JTextField passwordInputField;
+    private javax.swing.JLabel errorLabel;
     // End of variables declaration
 
 }

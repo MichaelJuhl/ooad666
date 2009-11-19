@@ -12,21 +12,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
 
 import dal.Event;
 import dalinterface.DALException;
 import dao.EventDAO;
+import dao.UserDAO;
 
 public class UserList extends JPanel{
 	
 	JFrame parent;
-	UserDataModel dataModel;
+	PortalManagerMainFrame mainFrame;
+	UserDataModel userDataModel;
 	
-	UserList(JFrame parent) {
+	UserList(JFrame parent, PortalManagerMainFrame mainFrame) {
 		this.parent = parent;
 		
 		try {
-			dataModel = new UserDataModel();
+			userDataModel = new UserDataModel();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,7 +60,7 @@ public class UserList extends JPanel{
 		buttonEditUser = new JButton();
 		buttonDeleteUser = new JButton();
 		
-		userTable.setModel(dataModel.getTableModel());
+		userTable.setModel(userDataModel.getTableModel());
 		userTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
 		userTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 		userTable.getModel().addTableModelListener(userTable);
@@ -80,7 +83,7 @@ public class UserList extends JPanel{
 			}
 		});
 
-		buttonDeleteUser.setText("Slet");
+		buttonDeleteUser.setText("Deaktiver");
 		buttonDeleteUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				buttonDeleteUserActionPerformed(evt);
@@ -114,19 +117,38 @@ public class UserList extends JPanel{
 	}
 	
 	private void buttonNewUserActionPerformed(ActionEvent evt) {                                               
-		new DialogNewUser(parent, true);
+		new DialogNewUser(parent, true, this);
 	}                                              
 
 	private void buttonEditUserActionPerformed(ActionEvent evt) {                                                
-		new DialogEditUser(parent, true, dataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())));
-		
-	}  
+		if (userTable.getSelectedRow() != -1) {
+			new DialogEditUser(parent, this, true, userDataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())));
+		}
+	}
 	
 	private void buttonDeleteUserActionPerformed(ActionEvent evt) {
-		if (DialogDeleteYN2.userAcceptsDelete(dataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())).getName())) {
-			
+		if (userTable.getSelectedRow() != -1) {
+			if (DialogDeleteYN2.userAcceptsDelete(userDataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())).getName())) {
+				UserDAO userDAO = new UserDAO();
+				try {
+					userDAO.deleteUser(userDataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())).getUserID());
+				} catch (DALException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				this.updateTable();
+			}
 		}
 		
+	}
+	
+	public void tableChanged(TableModelEvent e) {
+
+	}
+	
+	public void updateTable() {
+		userDataModel.updateFromDatabase();
+		userDataModel.fireTableDataChanged();
 	}
 	
 	// Variables declaration - do not modify                     

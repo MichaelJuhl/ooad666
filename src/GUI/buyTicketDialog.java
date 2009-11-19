@@ -319,9 +319,9 @@ public class buyTicketDialog extends javax.swing.JDialog {
     private void jButtonkoebActionPerformed(java.awt.event.ActionEvent evt) throws NumberFormatException, DALException {
     	
     	if (MedlemIDTextfield.getText().equals("")|| MedlemIDTextfield.getText().equals("guest")){
-        	customer = new MemberDAO().getCustomer(1);
+        	customer = new MemberDAO().getMember(1);
     	}else{
-    		customer = new MemberDAO().getCustomer(Integer.parseInt(MedlemIDTextfield.getText()));
+    		customer = new MemberDAO().getMember(Integer.parseInt(MedlemIDTextfield.getText()));
     	}
 
     	//this.dispose();

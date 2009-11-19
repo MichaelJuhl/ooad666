@@ -7,14 +7,14 @@ import java.util.List;
 
 import dal.Member;
 import dalinterface.DALException;
-import dalinterface.ICustomer;
+import dalinterface.IMember;
 import dbConnect.Connector;
 
-public class MemberDAO implements ICustomer {
+public class MemberDAO implements IMember {
 
 
 	@Override
-	public void createCustomer(Member Customer) throws DALException {
+	public void createMember(Member Customer) throws DALException {
 		String sql=" INSERT INTO OOADCustomer (Name, Birth, Gender, Phone, Address) VALUES("
 	
 	+ ", " + Customer.getName()
@@ -23,7 +23,7 @@ public class MemberDAO implements ICustomer {
 	+ ", " + Customer.getPhone()
 	+ ", " + Customer.getAdresse() + ")";
 		
-		String sql2 = "INSERT INTO OOADMember (CustomerID, Discount) VALUES((SELECT MAX(CustomerID) FROM OOADCustomer), '"+Customer.getDiscount() + "')";
+		String sql2 = "INSERT INTO OOADMember (CustomerID, Discount) VALUES((SELECT MAX(CustomerID) FROM OOADCustomer), '"+Customer.getClub() + "')";
 
 		Connector.doUpdate(sql);
 		Connector.doUpdate(sql2);
@@ -32,7 +32,7 @@ public class MemberDAO implements ICustomer {
 	}
 
 	@Override
-	public Member getCustomer(int CustomerID) throws DALException {
+	public Member getMember(int CustomerID) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM OOADCustomer NATURAL JOIN OOADMember WHERE CustomerID = " + CustomerID);
 	    try {
 	    	if (!rs.first()) throw new DALException("Kunden " + CustomerID + " findes ikke"); 
@@ -44,7 +44,7 @@ public class MemberDAO implements ICustomer {
 	
 
 	@Override
-	public ArrayList<Member> getCustomerList() throws DALException, InstantiationException, IllegalAccessException,
+	public ArrayList<Member> getMemberList() throws DALException, InstantiationException, IllegalAccessException,
 			ClassNotFoundException, SQLException {
 		
 		ArrayList<Member> list = new ArrayList<Member>();
@@ -62,7 +62,7 @@ public class MemberDAO implements ICustomer {
 
 
 	@Override
-	public void deleteCustomer(int CustomerID) throws DALException {
+	public void deleteMember(int CustomerID) throws DALException {
 		Connector.doUpdate(
 				"DELETE FROM OOADCustomer WHERE CustomerID = "+ CustomerID
 			);
@@ -70,7 +70,7 @@ public class MemberDAO implements ICustomer {
 	}
 
 	@Override
-	public void updateCustomers(int CustomerID, Member Customers)
+	public void updateMember(int CustomerID, Member Customers)
 			throws DALException {
 		Connector.doUpdate(
 				"UPDATE OOADCustomer SET Name = '" + Customers.getName() + "', Birth =  '" + Customers.getBirth() + 
@@ -78,7 +78,7 @@ public class MemberDAO implements ICustomer {
 				+ Customers.getAdresse() + "' WHERE CustomerID = " + CustomerID
 				);
 		Connector.doUpdate(
-				"UPDATE OOADMember SET Discount =  '" + Customers.getDiscount() + "' WHERE CustomerID = " + CustomerID
+				"UPDATE OOADMember SET Discount =  '" + Customers.getClub() + "' WHERE CustomerID = " + CustomerID
 		);
 		
 	}

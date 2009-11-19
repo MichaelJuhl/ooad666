@@ -15,11 +15,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.NumberFormatException;
 
-public class newCustomerDialog extends javax.swing.JDialog {
+public class NewMemberDialog extends javax.swing.JDialog {
 
 	PortalManagerMainFrame mainFrame;
 
-	public newCustomerDialog(java.awt.Frame parent, boolean modal, PortalManagerMainFrame mainFrame){
+	public NewMemberDialog(java.awt.Frame parent, boolean modal, PortalManagerMainFrame mainFrame){
 		super(parent, modal);
 		this.mainFrame = mainFrame;
 		initComponents();
@@ -248,7 +248,7 @@ private void customerSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {
 	MemberDAO customerDAO = new MemberDAO();
 
 	try {
-		customerDAO.createCustomer(new Member(customerNavnInputField.getText(), getBirthTime(), (String)customerGenderInputCombBox.getSelectedItem()
+		customerDAO.createMember(new Member(customerNavnInputField.getText(), getBirthTime(), (String)customerGenderInputCombBox.getSelectedItem()
 				, Integer.valueOf(customerPhoneInputField.getText()),customerAddressInputField.getText()));
 	} catch(NumberFormatException e) {
 		e.printStackTrace();
