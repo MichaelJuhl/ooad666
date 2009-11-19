@@ -12,5 +12,5 @@ public abstract class Constant
 	password				= "hej312"; // password
 	
 	public static final int
-		port					= 3306;
+	port					= 3306;
 }
