@@ -30,10 +30,10 @@ import dao.EventDAO;
  *
  * @author User
  */
-public class PortalManagerMainFrame extends javax.swing.JFrame implements TableModelListener {
+public class PortalManagerMainFrame extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
 	
-	EventDataModel eventDataModel;
+	
 
 	/** Creates new form PortalManagerMainFrame 
 	 * @throws SQLException 
@@ -43,7 +43,6 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	 * @throws DALException 
 	 * @throws ParseException */
 	public PortalManagerMainFrame() throws ParseException, DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
-		eventDataModel = new EventDataModel();
 		initComponents();
 		centreWindow(this);
 	}
@@ -57,13 +56,6 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	private void initComponents() {
 
 		mainTabbedPane = new javax.swing.JTabbedPane();
-		EventsPanel = new javax.swing.JPanel();
-		eventScrollPane = new javax.swing.JScrollPane();
-		eventTable = new javax.swing.JTable();
-		buttonNewEvent = new javax.swing.JButton();
-		buttonEditEvent = new javax.swing.JButton();
-		buttonDeleteEvent = new javax.swing.JButton();
-		buttonBuyTicket = new javax.swing.JButton();
 		statusBar = new javax.swing.JTextField();
 		mainMenuBar = new javax.swing.JMenuBar();
 		menuFiler = new javax.swing.JMenu();
@@ -77,71 +69,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 		setTitle("Portal Manager");
 		setMinimumSize(new Dimension(750, 350));
 
-		eventTable.setModel(eventDataModel.getTableModel());
-		eventTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
-		eventTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-		eventTable.getModel().addTableModelListener(eventTable);
-		eventTable.setAutoCreateRowSorter(true);
-		eventTable.setMinimumSize(new Dimension(1200, 200));
-		eventScrollPane.setViewportView(eventTable);
-		eventScrollPane.setPreferredSize(new Dimension(600, 200));
-
-		buttonNewEvent.setText("Opret");
-		buttonNewEvent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				buttonNewEventActionPerformed(evt);
-			}
-		});
-
-		buttonEditEvent.setText("Rediger");
-		buttonEditEvent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				buttonEditEventActionPerformed(evt);
-			}
-		});
-
-		buttonDeleteEvent.setText("Slet");
-		buttonDeleteEvent.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				buttonDeleteEventActionPerformed(evt);
-			}
-		});
-		
-		buttonBuyTicket.setText("Koeb Billet");
-		buttonBuyTicket.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				buttonBuyTicketActionPerformed(evt);
-			}
-		});
-
-		javax.swing.GroupLayout EventsPanelLayout = new javax.swing.GroupLayout(EventsPanel);
-		EventsPanel.setLayout(EventsPanelLayout);
-		EventsPanelLayout.setHorizontalGroup(
-				EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addComponent(eventScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)
-				.addGroup(EventsPanelLayout.createSequentialGroup()
-						.addComponent(buttonNewEvent)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(buttonEditEvent)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(buttonDeleteEvent)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addComponent(buttonBuyTicket))
-		);
-		EventsPanelLayout.setVerticalGroup(
-				EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-				.addGroup(EventsPanelLayout.createSequentialGroup()
-						.addComponent(eventScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-						.addGroup(EventsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-								.addComponent(buttonNewEvent)
-								.addComponent(buttonEditEvent)
-								.addComponent(buttonDeleteEvent)
-								.addComponent(buttonBuyTicket))
-								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-		);
-
-		mainTabbedPane.addTab("Arrangementer", EventsPanel);
+		mainTabbedPane.addTab("Arrangementer", new EventList(this));
 		mainTabbedPane.addTab("Brugere", new UserList(this, this));
 		mainTabbedPane.addTab("Medlemmer", new MemberList(this));
 		
@@ -212,57 +140,10 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 		dialog.setVisible(true);
 	}                                             
 
-	private void buttonNewEventActionPerformed(ActionEvent evt) {                                               
-		EventNewDialog dialog = new EventNewDialog(this, rootPaneCheckingEnabled, this);
-		dialog.setLocationRelativeTo(this);
-		dialog.setVisible(true);
-	}                                              
-
-	private void buttonEditEventActionPerformed(ActionEvent evt) {                                                
-		if (eventTable.getSelectedRow() != -1) {
-			
-			EventEditDialog dialog = new EventEditDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow())), this);
-			dialog.setLocationRelativeTo(this);
-			dialog.setVisible(true);
-		}
-	}  
-	
-	private void buttonDeleteEventActionPerformed(ActionEvent evt) {
-		if (eventTable.getSelectedRow() != -1) {
-			Event selectedEvent = eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow()));
-			if (DeleteDialogYN2.userAcceptsDelete(selectedEvent.getTitel())) {
-				try {
-					new EventDAO().deleteEvent(selectedEvent.getEventID());
-				} catch (DALException e) {
-					JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
-					e.printStackTrace();
-				}
-				updateTable();
-			}
-		}
-	}
-	
-	private void buttonBuyTicketActionPerformed(ActionEvent evt) {
-		if (eventTable.getSelectedRow() != -1) {
-			TicketBuyDialog dialog1 = new TicketBuyDialog(this, rootPaneCheckingEnabled, eventDataModel.getEventList().get(eventTable.convertRowIndexToModel(eventTable.getSelectedRow())),this);
-			
-			dialog1.setLocationRelativeTo(this);
-			dialog1.setVisible(true);
-		}
-		
-	}
-
-	// Variables declaration - do not modify                     
-	private javax.swing.JPanel EventsPanel;
+	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
-	private javax.swing.JButton buttonDeleteEvent;
-	private javax.swing.JButton buttonEditEvent;
-	private javax.swing.JButton buttonNewEvent;
-	private javax.swing.JButton buttonBuyTicket;
 	private javax.swing.JMenuItem connectDBMenuItem;
 	private javax.swing.JMenuItem exitMenuItem;
-	private javax.swing.JScrollPane eventScrollPane;
-	private javax.swing.JTable eventTable;
 	private javax.swing.JMenuBar mainMenuBar;
 	private javax.swing.JTabbedPane mainTabbedPane;
 	private javax.swing.JMenu menuFiler;
@@ -271,13 +152,6 @@ public class PortalManagerMainFrame extends javax.swing.JFrame implements TableM
 	private javax.swing.JTextField statusBar;
 	// End of variables declaration
 
-	public void tableChanged(TableModelEvent e) {
 
-	}
-
-	public void updateTable() {
-		eventDataModel.updateFromDatabase();
-		eventDataModel.fireTableDataChanged();
-	}
 
 }
