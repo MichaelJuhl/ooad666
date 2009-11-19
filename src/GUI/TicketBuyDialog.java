@@ -26,14 +26,14 @@ public class TicketBuyDialog extends javax.swing.JDialog {
 	double pris;
 	double showdiscount;
 	double portalisdiscount;
-	private PortalManagerMainFrame mainFrame;
+	private EventList eventList;
 	Event event2;
 	Member customer;
 
     /** Creates new form buyTicketDialog */
-    public TicketBuyDialog(java.awt.Frame parent, boolean modal, Event event,PortalManagerMainFrame mainFrame) {
+    public TicketBuyDialog(java.awt.Frame parent, boolean modal, Event event, EventList eventList) {
         super(parent, modal);
-        this.mainFrame = mainFrame;
+        this.eventList = eventList;
         initComponents();
         pris = event.getPrice();
         showdiscount = event.getShowDiscount();
@@ -325,7 +325,7 @@ public class TicketBuyDialog extends javax.swing.JDialog {
     	}
 
     	//this.dispose();
-		TicketEventDialog dialog = new TicketEventDialog(this, rootPaneCheckingEnabled, event2,customer,jComboBox1.getSelectedIndex()+1, mainFrame);
+		TicketPrintingDialog dialog = new TicketPrintingDialog(this, rootPaneCheckingEnabled, event2,customer,jComboBox1.getSelectedIndex()+1, eventList);
 		dialog.setLocationRelativeTo(this);
 		dialog.setVisible(true);
     }

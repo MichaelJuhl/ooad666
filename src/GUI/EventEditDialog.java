@@ -19,12 +19,12 @@ import dao.EventDAO;
 public class EventEditDialog extends javax.swing.JDialog {
 
 	private Event event;
-	private PortalManagerMainFrame mainFrame;
+	private EventList eventList;
 
 	/** Creates new form editEventDialog */
-	public EventEditDialog(java.awt.Frame parent, boolean modal, Event event, PortalManagerMainFrame mainFrame) {
+	public EventEditDialog(java.awt.Frame parent, boolean modal, Event event, EventList eventList) {
 		super(parent, modal);
-		this.mainFrame = mainFrame;
+		this.eventList = eventList;
 		this.event = event;
 		initComponents();
 
@@ -352,7 +352,7 @@ public class EventEditDialog extends javax.swing.JDialog {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		mainFrame.updateTable();
+		eventList.updateTable();
 		this.dispose();
 	}                                               
 

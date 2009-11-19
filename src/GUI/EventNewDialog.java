@@ -19,11 +19,11 @@ import java.lang.NumberFormatException;
  */
 public class EventNewDialog extends javax.swing.JDialog {
 
-    PortalManagerMainFrame mainFrame;
-    /** Creates new form editEventDialog */
-    public EventNewDialog(java.awt.Frame parent, boolean modal, PortalManagerMainFrame mainFrame) {
+	EventList eventList;
+    
+    public EventNewDialog(java.awt.Frame parent, boolean modal, EventList eventList) {
         super(parent, modal);
-        this.mainFrame = mainFrame;
+        this.eventList = eventList;
         initComponents();
     }
 
@@ -386,7 +386,7 @@ public class EventNewDialog extends javax.swing.JDialog {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		mainFrame.updateTable();
+		eventList.updateTable();
         this.dispose();
     }                                               
 

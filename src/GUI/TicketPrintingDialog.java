@@ -22,12 +22,12 @@ import GUI.PrintUtilities;
  *
  * @author Michael
  */
-public class TicketEventDialog extends javax.swing.JDialog {
-	private PortalManagerMainFrame mainFrame;
+public class TicketPrintingDialog extends javax.swing.JDialog {
+	private EventList eventList;
     /** Creates new form ticketEventDialog */
-    public TicketEventDialog(TicketBuyDialog buyTicketDialog, boolean modal, Event event, Member customer, int billetter,PortalManagerMainFrame mainFrame) {
+    public TicketPrintingDialog(TicketBuyDialog buyTicketDialog, boolean modal, Event event, Member customer, int billetter, EventList eventList) {
         super(buyTicketDialog, modal);
-        this.mainFrame =mainFrame;
+        this.eventList = eventList;
         initComponents();
         jPanel1.setVisible(false);
         jPanel2.setVisible(false);
@@ -1029,7 +1029,7 @@ public class TicketEventDialog extends javax.swing.JDialog {
 
     private void PrintActionPerformed(java.awt.event.ActionEvent evt) {                                      
     	PrintUtilities.printComponent(jPanel5);
-    	mainFrame.updateTable();
+    	eventList.updateTable();
     	this.dispose();
     }                                     
 
