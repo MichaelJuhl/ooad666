@@ -22,6 +22,8 @@ import java.text.ParseException;
 import javax.swing.JOptionPane;
 import javax.swing.event.*;
 
+import MainController.MainController;
+
 import dal.Event;
 import dalinterface.DALException;
 import dao.EventDAO;
@@ -32,6 +34,7 @@ import dao.EventDAO;
  */
 public class PortalManagerMainFrame extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;
+	private MainController mainController;
 	
 	
 
@@ -42,7 +45,8 @@ public class PortalManagerMainFrame extends javax.swing.JFrame {
 	 * @throws InstantiationException 
 	 * @throws DALException 
 	 * @throws ParseException */
-	public PortalManagerMainFrame() {
+	public PortalManagerMainFrame(MainController mainController) {
+		this.mainController = mainController;
 		initComponents();
 		centreWindow(this);
 	}
@@ -59,7 +63,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame {
 		statusBar = new javax.swing.JTextField();
 		mainMenuBar = new javax.swing.JMenuBar();
 		menuFiler = new javax.swing.JMenu();
-		connectDBMenuItem = new javax.swing.JMenuItem();
+		logoutMenuItem = new javax.swing.JMenuItem();
 		exitMenuItem = new javax.swing.JMenuItem();
 		menuHelp = new javax.swing.JMenu();
 		showLogMenuItem = new javax.swing.JMenuItem();
@@ -68,18 +72,28 @@ public class PortalManagerMainFrame extends javax.swing.JFrame {
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 		setTitle("Portal Manager");
 		setMinimumSize(new Dimension(750, 350));
-
-		mainTabbedPane.addTab("Arrangementer", new EventList(this));
-		mainTabbedPane.addTab("Brugere", new UserList(this, this));
-		mainTabbedPane.addTab("Medlemmer", new MemberList(this));
+		
+		int rank = mainController.currentUser.getRankAsInt(); 
+		if (rank > 0)
+			mainTabbedPane.addTab("Arrangementer", new EventList(this, rank));
+		if (rank > 1)
+			mainTabbedPane.addTab("Medlemmer", new MemberList(this, rank));
+		if (rank > 2)
+			mainTabbedPane.addTab("Brugere", new UserList(this, this, rank));
 		
 		statusBar.setEditable(false);
 		statusBar.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
 
 		menuFiler.setText("Filer");
 
-		connectDBMenuItem.setText("Forbind til DB");
-		menuFiler.add(connectDBMenuItem);
+		logoutMenuItem.setText("Log ud");
+		logoutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				logoutMenuItemActionPerformed(evt);
+			}
+		});
+		
+		menuFiler.add(logoutMenuItem);
 
 		exitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.ALT_MASK));
 		exitMenuItem.setText("Luk");
@@ -130,6 +144,10 @@ public class PortalManagerMainFrame extends javax.swing.JFrame {
 		setVisible(true);
 	}
 
+	private void logoutMenuItemActionPerformed(ActionEvent evt) {
+		mainController.userLoggedOut();
+		this.dispose();
+	}
 	private void exitMenuItemActionPerformed(ActionEvent evt) {
 		setVisible(false);
 		System.exit(0);
@@ -143,7 +161,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame {
 
 	// Variables declaration - do not modify
 	private javax.swing.JMenuItem aboutMenuItem;
-	private javax.swing.JMenuItem connectDBMenuItem;
+	private javax.swing.JMenuItem logoutMenuItem;
 	private javax.swing.JMenuItem exitMenuItem;
 	private javax.swing.JMenuBar mainMenuBar;
 	private javax.swing.JTabbedPane mainTabbedPane;

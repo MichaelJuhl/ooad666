@@ -24,9 +24,11 @@ public class MemberList extends JPanel{
 	
 	JFrame parent;
 	MemberDataModel dataModel;
+	int rankOfUser;
 	
-	MemberList(JFrame parent) {
+	MemberList(JFrame parent, int rankOfUser) {
 		this.parent = parent;
+		this.rankOfUser = rankOfUser;
 		
 		try {
 			dataModel = new MemberDataModel();
@@ -114,6 +116,11 @@ public class MemberList extends JPanel{
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
 		);
 		
+		if (rankOfUser < 2) {
+			buttonNewMember.setEnabled(false);
+			buttonEditMember.setEnabled(false);
+			buttonDeleteMember.setEnabled(false);
+		}
 	}
 	
 	private void buttonNewMemberActionPerformed(ActionEvent evt) {                                               
