@@ -23,10 +23,9 @@ public class User {
 		this.rank = rank;
 	}
 	
-	
-//gui to DB -auto userid
+	//for GUI to DB -auto userid, and for wrong login
 	public User() {
-		this.userID = 999;
+		// all fields == null
 	}
 
 
@@ -89,6 +88,17 @@ public class User {
 
 	public String getRank() {
 		return rank;
+	}
+	
+	public int getRankAsInt() {
+		if (rank.equals("Billetsælger"))
+			return 1;
+		else if (rank.equals("Kontormedarbejder"))
+				return 2;
+		else if (rank.equals("Admin"))
+				return 3;
+		else
+			return -1;
 	}
 
 	public void setRank(String rank) {

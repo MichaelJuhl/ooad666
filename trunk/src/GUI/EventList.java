@@ -15,9 +15,11 @@ import dao.EventDAO;
 public class EventList extends JPanel{
 	
 	PortalManagerMainFrame mainFrame;
+	int rankOfUser;
 	
-	EventList(PortalManagerMainFrame mainFrame) {
+	EventList(PortalManagerMainFrame mainFrame, int rankOfUser) {
 		this.mainFrame = mainFrame;
+		this.rankOfUser = rankOfUser;
 		
 		try {
 			eventDataModel = new EventDataModel();
@@ -114,7 +116,14 @@ public class EventList extends JPanel{
 								.addComponent(buttonDeleteEvent)
 								.addComponent(buttonBuyTicket))
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-		);		
+		);
+		
+		if (rankOfUser < 2) {
+			buttonNewEvent.setEnabled(false);
+			buttonEditEvent.setEnabled(false);
+			buttonDeleteEvent.setEnabled(false);
+		}
+			
 	}
 	
 	private void buttonNewEventActionPerformed(ActionEvent evt) {                                               

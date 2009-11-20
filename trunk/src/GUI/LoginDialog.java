@@ -11,15 +11,29 @@
 
 package GUI;
 
+import java.sql.SQLException;
+import java.text.ParseException;
+
+import javax.swing.JOptionPane;
+
+import MainController.MainController;
+
+import dal.User;
+import dalinterface.DALException;
+import dao.LoginDAO;
+
 /**
  *
  * @author user
  */
 public class LoginDialog extends java.awt.Dialog {
-
+	
+	MainController mainController;
+	
     /** Creates new form LoginDialog */
-    public LoginDialog(java.awt.Frame parent, boolean modal) {
+    public LoginDialog(java.awt.Frame parent, boolean modal, MainController mainController) {
         super(parent, modal);
+        this.mainController = mainController;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -128,7 +142,11 @@ public class LoginDialog extends java.awt.Dialog {
         );
 
         add(jPanel1, java.awt.BorderLayout.CENTER);
-
+        
+        //For test only! fill in test username and password
+        usernameInputField.setText("admin");
+        passwordInputField.setText("admin");
+        
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -143,7 +161,37 @@ public class LoginDialog extends java.awt.Dialog {
     }//GEN-LAST:event_usernameInputFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
+        LoginDAO loginDAO = new LoginDAO();
+        User loginUser = null;
+    	try {
+			loginUser = loginDAO.getUser(usernameInputField.getText(), new String(passwordInputField.getPassword()));
+		} catch (DALException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke forbinde til databasen", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (loginUser.getName() == null) {
+			JOptionPane.showMessageDialog(this, "Forkert username eller password", "Error", JOptionPane.ERROR_MESSAGE);
+		} else if (loginUser.getRank().equals("Deaktiveret")) {
+			JOptionPane.showMessageDialog(this, "Din bruger er deaktiveret/nKontakt en Admin", "Error", JOptionPane.ERROR_MESSAGE);
+		} else {
+		mainController.userLoggedIn(loginUser);
+		this.dispose();
+		}
     }//GEN-LAST:event_loginButtonActionPerformed
     
     public void setDBOnline(long connectTime) {
@@ -159,19 +207,19 @@ public class LoginDialog extends java.awt.Dialog {
     /**
     * @param args the command line arguments
     */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                LoginDialog dialog = new LoginDialog(new java.awt.Frame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                LoginDialog dialog = new LoginDialog(new java.awt.Frame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

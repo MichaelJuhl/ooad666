@@ -24,9 +24,11 @@ public class UserList extends JPanel{
 	JFrame parent;
 	PortalManagerMainFrame mainFrame;
 	UserDataModel userDataModel;
+	int rankOfUser;
 	
-	UserList(JFrame parent, PortalManagerMainFrame mainFrame) {
+	UserList(JFrame parent, PortalManagerMainFrame mainFrame, int rankOfUser) {
 		this.parent = parent;
+		this.rankOfUser = rankOfUser;
 		
 		try {
 			userDataModel = new UserDataModel();
@@ -114,6 +116,11 @@ public class UserList extends JPanel{
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
 		);
 		
+		if (rankOfUser < 3) {
+			buttonNewUser.setEnabled(false);
+			buttonEditUser.setEnabled(false);
+			buttonDeleteUser.setEnabled(false);
+		}
 	}
 	
 	private void buttonNewUserActionPerformed(ActionEvent evt) {                                               
