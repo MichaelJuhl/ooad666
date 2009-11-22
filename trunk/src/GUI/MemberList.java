@@ -116,7 +116,7 @@ public class MemberList extends JPanel{
 								.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
 		);
 		
-		if (rankOfUser < 2) {
+		if (rankOfUser < 1) {
 			buttonNewMember.setEnabled(false);
 			buttonEditMember.setEnabled(false);
 			buttonDeleteMember.setEnabled(false);
