@@ -74,10 +74,10 @@ public class PortalManagerMainFrame extends javax.swing.JFrame {
 		setMinimumSize(new Dimension(750, 350));
 		
 		int rank = mainController.currentUser.getRankAsInt(); 
-		if (rank > 0)
+		if (rank > 0) {
 			mainTabbedPane.addTab("Arrangementer", new EventList(this, rank));
-		if (rank > 1)
 			mainTabbedPane.addTab("Medlemmer", new MemberList(this, rank));
+		}
 		if (rank > 2)
 			mainTabbedPane.addTab("Brugere", new UserList(this, this, rank));
 		
