@@ -14,7 +14,7 @@ public class Event  {
 	protected String concertType;                
 	protected String Stage;
 	protected Calendar dateStart = new GregorianCalendar(new Locale("da","DK"));
-	protected Calendar dateEnd = new GregorianCalendar(new Locale("da","DK"));
+	protected Calendar dateFinish = new GregorianCalendar(new Locale("da","DK"));
 	protected String artist;                 
 	protected String titel;
 	protected double price;
@@ -33,7 +33,7 @@ public class Event  {
 		this.concertType = concertType;
 		this.Stage = Stage;
 		this.dateStart.setTime(dateFormat.parse(dateStart));
-		this.dateEnd.setTime(dateFormat.parse(dateFinish));
+		this.dateFinish.setTime(dateFormat.parse(dateFinish));
 		this.artist = artist;
 		this.titel = titel;
 		this.price = price;
@@ -45,14 +45,13 @@ public class Event  {
 
 	//Constructor for creating a new Event from the GUI to send to the database 
 	public Event(String concertType, String Stage, Calendar dateStart, Calendar dateFinish, String artist, String titel, 
-			double price, int maxVisitors, double showDiscount, double portalisDiscount) throws ParseException
-			{
+			double price, int maxVisitors, double showDiscount, double portalisDiscount) throws ParseException {
 		dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		this.eventID = 12345;
+		this.eventID = -1;
 		this.concertType = concertType;
 		this.Stage = Stage;
 		this.dateStart = dateStart;
-		this.dateEnd = dateFinish;
+		this.dateFinish = dateFinish;
 		this.artist = artist;
 		this.titel = titel;
 		this.price = price;
@@ -61,7 +60,25 @@ public class Event  {
 		this.showDiscount = showDiscount;
 		this.portalisDiscount = portalisDiscount;
 
-			}
+	}
+
+	//Constructor for the .clone() method 
+	public Event(int eventID, String concertType, String Stage, Calendar dateStart, Calendar dateFinish, String artist, String titel, 
+			double price, int maxVisitors, int ticketsSold, double showDiscount, double portalisDiscount) {
+		this.eventID = eventID;
+		this.concertType = concertType;
+		this.Stage = Stage;
+		this.dateStart = dateStart;
+		this.dateFinish = dateFinish;
+		this.artist = artist;
+		this.titel = titel;
+		this.price = price;
+		this.maxVisitors = maxVisitors;
+		this.ticketsSold = 0;
+		this.showDiscount = showDiscount;
+		this.portalisDiscount = portalisDiscount;
+
+	}
 
 	public Event(){
 
@@ -75,7 +92,7 @@ public class Event  {
 		this.eventID = eventID;
 	}
 
-	public String getConcerttype() {
+	public String getConcertType() {
 		return concertType;
 	}
 
@@ -106,15 +123,15 @@ public class Event  {
 
 	public String getDateFinishString() {
 		DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		return format.format(dateEnd.getTime());
+		return format.format(dateFinish.getTime());
 	}
 
 	public void setDateFinish(String dateFinish) throws ParseException {
-		this.dateEnd.setTime(dateFormat.parse(dateFinish));
+		this.dateFinish.setTime(dateFormat.parse(dateFinish));
 	}
 
 	public void setDateFinish(Calendar dateFinish) {
-		this.dateEnd = dateFinish;
+		this.dateFinish = dateFinish;
 	}
 
 	public Calendar getDateStart() {
@@ -122,7 +139,7 @@ public class Event  {
 	}
 
 	public Calendar getDateFinish() {
-		return dateEnd;
+		return dateFinish;
 	}
 
 	public String getArtist() {
@@ -194,7 +211,7 @@ public class Event  {
 	}
 
 	public String[] getEndYearArray() {
-		Calendar calendar = (Calendar) dateEnd.clone();
+		Calendar calendar = (Calendar) dateFinish.clone();
 
 		String[] years = new String[51];
 		int y = 0;
@@ -218,14 +235,53 @@ public class Event  {
 	}
 
 	public int getEndYear() {
-		return dateEnd.get(Calendar.YEAR);
+		return dateFinish.get(Calendar.YEAR);
 	}
 
 	public int getEndMonth() {
-		return dateEnd.get(Calendar.MONTH);
+		return dateFinish.get(Calendar.MONTH);
 	}
 
 	public int getEndDay() {
-		return dateEnd.get(Calendar.DAY_OF_MONTH);
+		return dateFinish.get(Calendar.DAY_OF_MONTH);
+	}
+
+	public int getMaxVisitors() {
+		return maxVisitors;
+	}
+
+	public void setMaxVisitors(int maxVisitors) {
+		this.maxVisitors = maxVisitors;
+	}
+
+	public void setConcertType(String concertType) {
+		this.concertType = concertType;
+	}
+
+	public Event clone() {
+		return new Event(this.eventID, this.concertType, this.Stage, this.dateStart, this.dateFinish, this.artist
+				, this.titel, this.price, this.maxVisitors, this.ticketsSold, this.showDiscount, this.portalisDiscount);
+	}
+
+	public boolean equals(Event event) {
+		return (this.concertType.equals(event.getConcertType()) 
+				&& this.Stage.equals(event.getStage()) 
+				&& this.dateStart.equals(event.getDateStart()) 
+				&& this.dateFinish.equals(event.getDateFinish())
+				&& this.artist.equals(event.getArtist())
+				&& this.titel.equals(event.getTitel())
+				&& this.price == event.getPrice()
+				&& this.maxVisitors == event.getMaxVisitors()
+				&& this.ticketsSold == event.getTicketsSold()
+				&& this.showDiscount == event.getShowDiscount()
+				&& this.portalisDiscount == event.getPortalisDiscount()
+		);
+
+	}
+	
+	public String toString() {
+		return "EventID: " + this.eventID + ", concertType: " + this.concertType + ", Stage: " + this.Stage + ", DateStart:" + this.getDateStartString() + ", DateFinish: " + this.getDateFinishString() + ", Artist: " + this.artist
+		 + ", Titel:" + this.titel + ", Price:" + this.price + ", MaxVisitors:" + this.maxVisitors + ", TickestSold: " + this.ticketsSold + ", ShowDiscount:" + this.showDiscount + ", PortalisDiscount: " + this.portalisDiscount;
+		
 	}
 }

@@ -9,6 +9,8 @@ import java.util.GregorianCalendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.JOptionPane;
+
 import dal.Event;
 import dalinterface.DALException;
 import dao.EventDAO;
@@ -31,7 +33,7 @@ public class EventEditDialog extends javax.swing.JDialog {
 		//set up input fields for edit
 		eventTitelInputField.setText(event.getTitel());
 		eventArtistInputField.setText(event.getArtist());
-		eventConcerttypeInputField.setText(event.getConcerttype());
+		eventConcerttypeInputField.setText(event.getConcertType());
 		eventPriceInputField.setText(String.valueOf(event.getPrice()));
 		eventPortalisDiscountField.setText(new Double(event.getPortalisDiscount()).toString());
 		eventShowDiscountField.setText(new Double(event.getShowDiscount()).toString());
@@ -347,9 +349,22 @@ public class EventEditDialog extends javax.swing.JDialog {
 		try {
 			eventDAO.updateEvent(event);
 		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 		eventList.updateTable();
