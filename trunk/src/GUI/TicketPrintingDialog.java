@@ -11,7 +11,11 @@
 
 package GUI;
 import java.awt.Component;
+import java.sql.SQLException;
 import java.text.ParseException;
+
+import javax.swing.JOptionPane;
+
 import dal.Event;
 import dal.Member;
 import dalinterface.DALException;
@@ -56,9 +60,21 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         		);
             	new EventDAO().createTicket(event.getEventID(), BilletInputJLabel.getText());
         	} catch (DALException e) {
-        		// TODO Auto-generated catch block
+        		JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
         		e.printStackTrace();
-        	}
+        	} catch (InstantiationException e) {
+        		JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
         	if (customer.getClub().equalsIgnoreCase("Show-Portalis") ) {
         		RabatInputJLabel.setText(event.getShowDiscount()+"%");
         		double pris = event.getPrice()-((event.getPrice()/100)*event.getShowDiscount());
@@ -98,9 +114,21 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         		);
             	new EventDAO().createTicket(event.getEventID(), BilletInputJLabel1.getText());
         	} catch (DALException e) {
-        		// TODO Auto-generated catch block
+        		JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
         		e.printStackTrace();
-        	}
+        	} catch (InstantiationException e) {
+        		JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
         	if (customer.getClub().equalsIgnoreCase("Show-Portalis") ) {
         		RabatInputJLabel1.setText(event.getShowDiscount()+"%");
         		double pris = event.getPrice()-((event.getPrice()/100)*event.getShowDiscount());
@@ -139,9 +167,21 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         		);
             	new EventDAO().createTicket(event.getEventID(), BilletInputJLabel2.getText());
         	} catch (DALException e) {
-        		// TODO Auto-generated catch block
+        		JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
         		e.printStackTrace();
-        	}
+        	} catch (InstantiationException e) {
+        		JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
         	if (customer.getClub().equalsIgnoreCase("Show-Portalis") ) {
         		RabatInputJLabel2.setText(event.getShowDiscount()+"%");
         		double pris = event.getPrice()-((event.getPrice()/100)*event.getShowDiscount());
@@ -180,9 +220,21 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         		);
             	new EventDAO().createTicket(event.getEventID(), BilletInputJLabel3.getText());
         	} catch (DALException e) {
-        		// TODO Auto-generated catch block
+        		JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
         		e.printStackTrace();
-        	}
+        	} catch (InstantiationException e) {
+        		JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette billet", "Error", JOptionPane.ERROR_MESSAGE);
+				e.printStackTrace();
+			}
         	if (customer.getClub().equalsIgnoreCase("Show-Portalis") ) {
         		RabatInputJLabel3.setText(event.getShowDiscount()+"%");
         		double pris = event.getPrice()-((event.getPrice()/100)*event.getShowDiscount());

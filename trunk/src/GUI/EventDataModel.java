@@ -67,7 +67,7 @@ public class EventDataModel extends AbstractTableModel {
             case STAGE:
                 return eventList.get(rowIndex).getStage();
             case CONCERTTYPE:
-                return eventList.get(rowIndex).getConcerttype();
+                return eventList.get(rowIndex).getConcertType();
             case DATESTART:
                 return eventList.get(rowIndex).getDateStartString();
             case DATEFINISH:

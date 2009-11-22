@@ -150,6 +150,18 @@ public class EventList extends JPanel{
 				} catch (DALException e) {
 					JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 					e.printStackTrace();
+				} catch (InstantiationException e) {
+					JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
+				} catch (SQLException e) {
+					JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke slette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+					e.printStackTrace();
 				}
 				updateTable();
 			}

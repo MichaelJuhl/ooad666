@@ -12,18 +12,23 @@ import dbConnect.Connector;
 
 public class EventDAO implements IEvent {
 
-	public Event getEvent(int EventID) throws DALException, ParseException {
-		ResultSet rs = Connector.doQuery("SELECT DISTINCT * from OOADEvent natural left join OOADDiscount WHERE EventID = " + EventID);
+	public Event getEvent(int EventID) throws DALException, ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		Connector.getConnector();
+		ResultSet rs = Connector.doQuery("SELECT * , (SELECT COUNT( TicketID ) " +
+				"FROM OOADTicket " +
+				"WHERE OOADEvent.EventID = OOADTicket.EventID) AS TicketsSold " +
+				"FROM `OOADEvent` NATURAL LEFT JOIN OOADDiscount WHERE EventID = " + EventID);
 	    try {
 	    	if (!rs.first()) throw new DALException("Event'et " + EventID + " findes ikke"); 
-	    	return new Event (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)
-	    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9), rs.getInt(10), rs.getDouble(11), rs.getDouble(12) );
+	    	return new Event(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)
+	    			,rs.getString(6), rs.getString(7), rs.getDouble(8), rs.getInt(9), rs.getInt(12), rs.getDouble(10), rs.getDouble(11));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }
 		
 	}
 
-	public int getTicketSold(int EventID) throws DALException, ParseException {
+	public int getTicketSold(int EventID) throws DALException, ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		Connector.getConnector();
 		ResultSet rs = Connector.doQuery("SELECT COUNT(TicketID) from OOADTicket WHERE EventID = " + EventID);
 	    try {
 	    	if (!rs.first()) throw new DALException("Event'et " + EventID + " findes ikke"); 
@@ -34,9 +39,9 @@ public class EventDAO implements IEvent {
 	}
 
 	@Override
-	public void createEvent(Event Event) throws DALException {
+	public void createEvent(Event Event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		String event=" INSERT INTO OOADEvent (Concerttype, Stage, DateSTART, DateFINISH, Artist, Titel, Price, Visitors) VALUES("
-			+ "'" + Event.getConcerttype()
+			+ "'" + Event.getConcertType()
 			+ "', '" + Event.getStage()
 			+ "', '" + Event.getDateStartString()
 			+ "', '" + Event.getDateFinishString()
@@ -50,6 +55,7 @@ public class EventDAO implements IEvent {
 			+ ", " + Event.getShowDiscount()
 			+ ", " + Event.getPortalisDiscount()+ ")";
 		
+		Connector.getConnector();
 		Connector.doUpdate(event);
 		Connector.doUpdate(discount);
 	}
@@ -59,7 +65,8 @@ public class EventDAO implements IEvent {
 	ClassNotFoundException, SQLException, ParseException {
 		
 		ArrayList<Event> list = new ArrayList<Event>();
-		ResultSet rs = Connector.getConnector().doQuery("SELECT * , (SELECT COUNT( TicketID ) " +
+		Connector.getConnector();
+		ResultSet rs = Connector.doQuery("SELECT * , (SELECT COUNT( TicketID ) " +
 														"FROM OOADTicket " +
 														"WHERE OOADEvent.EventID = OOADTicket.EventID) AS TicketsSold " +
 														"FROM `OOADEvent` NATURAL LEFT JOIN OOADDiscount");
@@ -78,7 +85,8 @@ public class EventDAO implements IEvent {
 	}
 
 	@Override
-	public void deleteEvent(int EventID) throws DALException {
+	public void deleteEvent(int EventID) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		Connector.getConnector();
 		Connector.doUpdate(
 				"DELETE FROM OOADEvent WHERE EventID = "+ EventID
 			);
@@ -86,9 +94,9 @@ public class EventDAO implements IEvent {
 		
 
 	@Override
-	public void updateEvent(Event event) throws DALException {
+	public void updateEvent(Event event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		String eventUpdate ="UPDATE OOADEvent SET Concerttype = " +
-				"'" + event.getConcerttype() + 
+				"'" + event.getConcertType() + 
 				"', Stage =  '" + event.getStage() + 
 				"', DateSTART = '" + event.getDateStartString() + 
 				"', DateFINISH = '" + event.getDateFinishString() + 
@@ -102,12 +110,14 @@ public class EventDAO implements IEvent {
 		String discount=" Update OOADDiscount SET ShowDiscount = "+event.getShowDiscount()+ ", PortalisDiscount = " + event.getPortalisDiscount()+" WHERE EventID = "
 		+ event.getEventID();
 		
+		Connector.getConnector();
 		Connector.doUpdate(eventUpdate);
 		Connector.doUpdate(discount);
 			
 	}
 
-	public boolean checkEvent(Event Event) throws DALException {
+	public boolean checkEvent(Event Event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		Connector.getConnector();
 		ResultSet rs = Connector.doQuery("SELECT * from OOADEvent WHERE Stage = '"+Event.getStage()+"' and DateSTART <= " +"'"
 				+ Event.getDateStart()+"' AND DateFINISH >= '"+Event.getDateStart()+"' OR (Stage = '"+ Event.getStage()+"' AND DateSTART >= '"+Event.getDateStart()+
 				"' AND DateSTART <= '"+Event.getDateFinish()+"' ");
@@ -122,7 +132,8 @@ public class EventDAO implements IEvent {
 	}
 
 	@Override
-	public boolean checkTickets(Event Event) throws DALException {
+	public boolean checkTickets(Event Event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+		Connector.getConnector();
 		ResultSet rs = Connector.doQuery("SELECT COUNT(TicketID) from OOADTicket WHERE COUNT(TicketID) > "+Event.getVisitors()
 				);
 		
@@ -135,11 +146,12 @@ public class EventDAO implements IEvent {
 	    }catch (SQLException e) {throw new DALException(e); }
 	}
 	
-	public void createTicket(int EventID,String TicketID) throws DALException {
+	public void createTicket(int EventID,String TicketID) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		String sql=" INSERT INTO OOADTicket (EventID, TicketID) VALUES("
 			+ EventID
 			+ ", '" + TicketID + "')";
 		
+		Connector.getConnector();
 		Connector.doUpdate(sql);
 	}
 
