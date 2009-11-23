@@ -70,7 +70,7 @@ public class PortalManagerMainFrame extends javax.swing.JFrame {
 		aboutMenuItem = new javax.swing.JMenuItem();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-		setTitle("Portal Manager");
+		setTitle("PortalManager");
 		setMinimumSize(new Dimension(750, 350));
 		
 		int rank = mainController.currentUser.getRankAsInt(); 
@@ -106,10 +106,10 @@ public class PortalManagerMainFrame extends javax.swing.JFrame {
 
 		mainMenuBar.add(menuFiler);
 
-		menuHelp.setText("Hjaelp");
+		menuHelp.setText("Hjælp");
 
 		showLogMenuItem.setText("Vis Log");
-		menuHelp.add(showLogMenuItem);
+		//menuHelp.add(showLogMenuItem);
 
 		aboutMenuItem.setText("Om Portal Manager");
 		aboutMenuItem.addActionListener(new java.awt.event.ActionListener() {

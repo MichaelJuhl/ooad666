@@ -19,16 +19,6 @@ public class EventDAOTest extends TestCase{
 		
 		testEventDAO = new EventDAO();
 		
-		//Delete event if it already exists
-		try {
-			testEventDAO.deleteEvent(9999);
-		} catch (DALException e) {
-		} catch (InstantiationException e) {
-		} catch (IllegalAccessException e) {
-		} catch (ClassNotFoundException e) {
-		} catch (SQLException e) {
-		}
-		
 		// Create test
 		try {
 			testEventSent = new Event(9999, "TestType", "Store scene", "2009-11-22 18:58:00", "2009-11-22 23:13:42", "TestArtist", "TestTitel", 120, 500, 391, 8.69, 75.13);
@@ -49,6 +39,24 @@ public class EventDAOTest extends TestCase{
 		} catch (SQLException e) {
 			assertFalse(true); //test fails because of exception
 		}
+		
+		try {
+			testEventRecieved = testEventDAO.getEvent(testEventDAO.getEventList().get(testEventDAO.getEventList().size()-1).getEventID());
+		} catch (DALException e2) {
+			assertFalse(true); //test fails because of exception
+		} catch (ParseException e2) {
+			assertFalse(true); //test fails because of exception
+		} catch (InstantiationException e2) {
+			assertFalse(true); //test fails because of exception
+		} catch (IllegalAccessException e2) {
+			assertFalse(true); //test fails because of exception
+		} catch (ClassNotFoundException e2) {
+			assertFalse(true); //test fails because of exception
+		} catch (SQLException e2) {
+			assertFalse(true); //test fails because of exception
+		}
+		
+		assertTrue(testEventSent.equals(testEventRecieved));
 		
 		// Update Test
 		try {
