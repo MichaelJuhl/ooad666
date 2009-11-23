@@ -46,7 +46,7 @@ public class PortalManagerAboutDialog extends javax.swing.JDialog {
         Heading.setText("Portal Manager");
 
         textPane.setEditable(false);
-        textPane.setText("Vi har lavet dette program, forever!");
+        textPane.setText("Dette er en prototype af PortalManager. Et CMS-system til kulturhuset Portalen der holder styr paa deres arrangementer, medarbejdere og medlemmer af deres klubber.\n\nLavet af:\nAbdigani Diriye\nSvante Jørgensen\nCasper Skoubo\nMichael Juhl");
         textScrollPane.setViewportView(textPane);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

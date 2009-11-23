@@ -84,7 +84,7 @@ public class EventList extends JPanel{
 			}
 		});
 		
-		buttonBuyTicket.setText("Koeb Billet");
+		buttonBuyTicket.setText("Køb Billet");
 		buttonBuyTicket.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				buttonBuyTicketActionPerformed(evt);
