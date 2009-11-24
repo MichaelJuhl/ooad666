@@ -35,7 +35,9 @@ public class MemberDAO implements IMember {
 	public Member getMember(int memberID) throws DALException {
 		ResultSet rs = Connector.doQuery("SELECT * FROM OOADMember NATURAL JOIN OOADMemberClub WHERE MemberID = " + memberID);
 	    try {
-	    	if (!rs.first()) throw new DALException("Kunden " + memberID + " findes ikke"); 
+	    	if (!rs.first())
+	    		return new Member(0,"","0001-01-01","",0,"","");
+	    	else
 	    	return new Member (rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7));
 	    }
 	    catch (SQLException e) {throw new DALException(e); }

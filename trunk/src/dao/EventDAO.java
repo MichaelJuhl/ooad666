@@ -132,9 +132,10 @@ public class EventDAO implements IEvent {
 	}
 
 	@Override
-	public boolean checkTickets(Event Event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public boolean checkTickets(int eventID,int tickets) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException  {
 		Connector.getConnector();
-		ResultSet rs = Connector.doQuery("SELECT COUNT(TicketID) from OOADTicket WHERE COUNT(TicketID) > "+Event.getVisitors()
+		ResultSet rs = Connector.doQuery("SELECT * , (SELECT COUNT( TicketID ) FROM OOADTicket WHERE OOADEvent.EventID = OOADTicket.EventID) AS TicketsSold " +
+				"FROM `OOADEvent` NATURAL LEFT JOIN OOADDiscount WHERE OOADEvent.EventID = "+eventID+" AND (OOADEvent.Visitors - (SELECT COUNT( TicketID ) FROM OOADTicket WHERE OOADEvent.EventID = OOADTicket.EventID) >= "+tickets+")"
 				);
 		
 	    try {

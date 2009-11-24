@@ -367,7 +367,7 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         PortalenTextJLabel3.setFont(new java.awt.Font("Bodoni MT", 0, 18));
         PortalenTextJLabel3.setText("Portalen Præsenterer:");
 
-        TitelJLabel3.setFont(new java.awt.Font("Bodoni MT Black", 1, 24));
+        TitelJLabel3.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         TitelJLabel3.setText("Airbourne");
 
         TextJLabel10.setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -406,10 +406,10 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         PrisInputJLabel3.setFont(new java.awt.Font("Tahoma", 0, 14));
         PrisInputJLabel3.setText("200kr");
 
-        BilletInputJLabel3.setFont(new java.awt.Font("Tahoma", 0, 14));
-        BilletInputJLabel3.setText("D291F8IR");
+        BilletInputJLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BilletInputJLabel3.setText("D291F8IRT2LK54");
 
-        BilletJLabel3.setFont(new java.awt.Font("Tahoma", 1, 14));
+        BilletJLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BilletJLabel3.setText("BilletID:");
 
         ArtistJLabel3.setFont(new java.awt.Font("Bodoni MT", 1, 12));
@@ -468,11 +468,11 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
                                 .addGap(262, 262, 262))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(PortalenTextJLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                                 .addComponent(BilletJLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BilletInputJLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(185, 185, 185))))
+                                .addComponent(BilletInputJLabel3)
+                                .addGap(207, 207, 207))))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,7 +531,7 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         PortalenTextJLabel2.setFont(new java.awt.Font("Bodoni MT", 0, 18));
         PortalenTextJLabel2.setText("Portalen Præsenterer:");
 
-        TitelJLabel2.setFont(new java.awt.Font("Bodoni MT Black", 1, 24));
+        TitelJLabel2.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         TitelJLabel2.setText("Airbourne");
 
         TextJLabel7.setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -570,10 +570,10 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         PrisInputJLabel2.setFont(new java.awt.Font("Tahoma", 0, 14));
         PrisInputJLabel2.setText("200kr");
 
-        BilletInputJLabel2.setFont(new java.awt.Font("Tahoma", 0, 14));
-        BilletInputJLabel2.setText("D291F8IR");
+        BilletInputJLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BilletInputJLabel2.setText("D291F8IRT2LK54");
 
-        BilletJLabel2.setFont(new java.awt.Font("Tahoma", 1, 14));
+        BilletJLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BilletJLabel2.setText("BilletID:");
 
         ArtistJLabel2.setFont(new java.awt.Font("Bodoni MT", 1, 12));
@@ -632,19 +632,19 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
                                 .addGap(262, 262, 262))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(PortalenTextJLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                                 .addComponent(BilletJLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BilletInputJLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(185, 185, 185))))
+                                .addComponent(BilletInputJLabel2)
+                                .addGap(207, 207, 207))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TitelJLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(TextJLabel9)
                                 .addGap(18, 18, 18)
-                                .addComponent(ArtistJLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(TitelJLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(ArtistJLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -687,7 +687,7 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PrisJLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PrisInputJLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -695,7 +695,7 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         PortalenTextJLabel1.setFont(new java.awt.Font("Bodoni MT", 0, 18));
         PortalenTextJLabel1.setText("Portalen Præsenterer:");
 
-        TitelJLabel1.setFont(new java.awt.Font("Bodoni MT Black", 1, 24));
+        TitelJLabel1.setFont(new java.awt.Font("Bodoni MT Black", 1, 24)); // NOI18N
         TitelJLabel1.setText("Airbourne");
 
         TextJLabel4.setFont(new java.awt.Font("Tahoma", 0, 14));
@@ -728,16 +728,16 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         PrisJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
         PrisJLabel1.setText("Din Pris:");
 
-        RabatInputJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
+        RabatInputJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         RabatInputJLabel1.setText("25%");
 
         PrisInputJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
         PrisInputJLabel1.setText("200kr");
 
-        BilletInputJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14));
-        BilletInputJLabel1.setText("D291F8IR");
+        BilletInputJLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BilletInputJLabel1.setText("D291F8IRT2LK54");
 
-        BilletJLabel1.setFont(new java.awt.Font("Tahoma", 1, 14));
+        BilletJLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BilletJLabel1.setText("BilletID:");
 
         ArtistJLabel1.setFont(new java.awt.Font("Bodoni MT", 1, 12));
@@ -796,19 +796,19 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
                                 .addGap(262, 262, 262))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(PortalenTextJLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                                 .addComponent(BilletJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BilletInputJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(185, 185, 185))))
+                                .addComponent(BilletInputJLabel1)
+                                .addGap(207, 207, 207))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TitelJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(TextJLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(ArtistJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(TitelJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(ArtistJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -851,7 +851,7 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PrisJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PrisInputJLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -898,10 +898,10 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
         PrisInputJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
         PrisInputJLabel.setText("200kr");
 
-        BilletInputJLabel.setFont(new java.awt.Font("Tahoma", 0, 14));
-        BilletInputJLabel.setText("D291F8IR");
+        BilletInputJLabel.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        BilletInputJLabel.setText("D291F8IRT2LK54");
 
-        BilletJLabel.setFont(new java.awt.Font("Tahoma", 1, 14));
+        BilletJLabel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         BilletJLabel.setText("BilletID:");
 
         ArtistJLabel.setFont(new java.awt.Font("Bodoni MT", 1, 12));
@@ -960,11 +960,11 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
                                 .addGap(262, 262, 262))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(PortalenTextJLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
                                 .addComponent(BilletJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(BilletInputJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(185, 185, 185))))
+                                .addComponent(BilletInputJLabel)
+                                .addGap(207, 207, 207))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -981,8 +981,8 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PortalenTextJLabel)
-                    .addComponent(BilletInputJLabel)
-                    .addComponent(BilletJLabel))
+                    .addComponent(BilletJLabel)
+                    .addComponent(BilletInputJLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TitelJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
@@ -1015,7 +1015,7 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(PrisJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(PrisInputJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -1029,7 +1029,7 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1042,7 +1042,7 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel5);
@@ -1081,7 +1081,6 @@ public class TicketPrintingDialog extends javax.swing.JDialog {
 
     private void PrintActionPerformed(java.awt.event.ActionEvent evt) {                                      
     	PrintUtilities.printComponent(jPanel5);
-    	eventList.updateTable();
     	this.dispose();
     }                                     
 
