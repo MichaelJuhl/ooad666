@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 
 import dal.User;
-import dalinterface.DALException;
+import daoInterface.DALException;
 import dbConnect.Connector;
 
 public class LoginDAO {

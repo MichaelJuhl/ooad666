@@ -14,8 +14,8 @@ package GUI;
 
 import dal.Event;
 import dal.Member;
-import dalinterface.DALException;
 import dao.MemberDAO;
+import daoInterface.DALException;
 
 
 /**

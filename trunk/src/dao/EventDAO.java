@@ -6,11 +6,11 @@ import java.text.ParseException;
 import java.util.ArrayList;
 
 import dal.Event;
-import dalinterface.DALException;
-import dalinterface.IEvent;
+import daoInterface.DALException;
+import daoInterface.IEventDAO;
 import dbConnect.Connector;
 
-public class EventDAO implements IEvent {
+public class EventDAO implements IEventDAO {
 
 	public Event getEvent(int EventID) throws DALException, ParseException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Connector.getConnector();

@@ -10,16 +10,13 @@
  */
 
 package GUI;
-import java.awt.Component;
+
 import java.sql.SQLException;
-import java.text.ParseException;
-
 import javax.swing.JOptionPane;
-
 import dal.Event;
 import dal.Member;
-import dalinterface.DALException;
 import dao.EventDAO;
+import daoInterface.DALException;
 import GUI.PrintUtilities;
 
 /**

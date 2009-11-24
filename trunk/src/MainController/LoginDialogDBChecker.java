@@ -1,7 +1,5 @@
 package MainController;
 
-import java.sql.SQLException;
-import dbConnect.Connector;
 import dbConnect.Constant;
 
 import java.io.*;
