@@ -2,7 +2,6 @@ package MainController;
 
 import dal.User;
 import GUI.LoginDialog;
-import GUI.LoginDialogDBChecker;
 import GUI.PortalManagerMainFrame;
 
 public class MainController {
