@@ -3,15 +3,12 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-
-
 import dal.User;
-import dalinterface.DALException;
-import dalinterface.IUser;
+import daoInterface.DALException;
+import daoInterface.IUserDAO;
 import dbConnect.Connector;
 
-public class UserDAO implements IUser{
+public class UserDAO implements IUserDAO{
 
 
 	@Override

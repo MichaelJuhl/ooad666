@@ -1,14 +1,8 @@
 package GUI;
 
-import javax.swing.JTable;
 import dal.Member;
-import dal.Event;
-import dalinterface.DALException;
 import dao.MemberDAO;
-import dao.EventDAO;
-
-import java.sql.SQLException;
-import java.text.ParseException;
+import daoInterface.DALException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.regex.Matcher;

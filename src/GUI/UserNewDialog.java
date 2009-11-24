@@ -9,17 +9,18 @@
  * Created on 05-11-2009, 09:00:03
  */
 
-
 package GUI;
 
 import java.awt.event.ActionEvent;
 import dal.User;
-import dalinterface.DALException;
 import dao.UserDAO;
+import daoInterface.DALException;
+
 /**
  *
  * @author Casper
  */
+
 public class UserNewDialog extends javax.swing.JDialog {
 
 	UserList userList;

@@ -14,8 +14,9 @@ package GUI;
 
 import java.awt.event.ActionEvent;
 import dal.User;
-import dalinterface.DALException;
 import dao.UserDAO;
+import daoInterface.DALException;
+
 /**
  *
  * @author Casper

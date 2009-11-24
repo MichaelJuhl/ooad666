@@ -15,22 +15,14 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
-
-import javax.swing.JOptionPane;
-import javax.swing.event.*;
-
 import MainController.MainController;
-
-import dal.Event;
-import dalinterface.DALException;
-import dao.EventDAO;
+import daoInterface.DALException;
 
 /**
  *
- * @author User
+ * @author Svante
  */
 public class PortalManagerMainFrame extends javax.swing.JFrame {
 	private static final long serialVersionUID = 1L;

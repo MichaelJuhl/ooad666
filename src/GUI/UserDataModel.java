@@ -1,20 +1,13 @@
 package GUI;
+
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
-
-
-
-
 import dal.User;
-import dalinterface.DALException;
-
-import dao.EventDAO;
-import dao.UserDAO;;
-
+import dao.UserDAO;
+import daoInterface.DALException;
 
 public class UserDataModel extends AbstractTableModel{
 	

@@ -4,13 +4,11 @@ package GUI;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
-
 import dal.Event;
-import dalinterface.DALException;
 import dao.EventDAO;
+import daoInterface.DALException;
 
 public class EventDataModel extends AbstractTableModel {
 

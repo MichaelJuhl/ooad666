@@ -1,10 +1,8 @@
 package GUI;
 
-import javax.swing.JTable;
 import dal.Event;
-import dalinterface.DALException;
 import dao.EventDAO;
-
+import daoInterface.DALException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.Calendar;

@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
 import MainController.MainController;
 
 import dal.User;
-import dalinterface.DALException;
 import dao.LoginDAO;
+import daoInterface.DALException;
 
 /**
  *

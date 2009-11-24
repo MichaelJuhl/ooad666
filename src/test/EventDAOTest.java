@@ -5,8 +5,8 @@ import java.text.ParseException;
 import junit.framework.TestCase;
 import org.junit.Test;
 import dal.Event;
-import dalinterface.DALException;
 import dao.EventDAO;
+import daoInterface.DALException;
 
 public class EventDAOTest extends TestCase{
 	

@@ -1,7 +1,5 @@
 package GUI;
 
-
-
 /*
  * DialogDeleteYN.java
  *

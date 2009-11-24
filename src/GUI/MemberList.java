@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.text.ParseException;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -13,12 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
-
-import dal.Event;
 import dal.Member;
-import dalinterface.DALException;
-import dao.EventDAO;
 import dao.MemberDAO;
+import daoInterface.DALException;
 
 public class MemberList extends JPanel{
 	

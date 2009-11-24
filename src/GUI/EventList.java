@@ -9,8 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.event.TableModelEvent;
 import dal.Event;
-import dalinterface.DALException;
 import dao.EventDAO;
+import daoInterface.DALException;
 
 public class EventList extends JPanel{
 	
