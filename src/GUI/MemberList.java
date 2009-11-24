@@ -124,8 +124,9 @@ public class MemberList extends JPanel{
 	}                                              
 
 	private void buttonEditMemberActionPerformed(ActionEvent evt) {                                                
-		new MemberEditDialog(parent, this, true, dataModel.getMemberList().get(memberTable.convertRowIndexToModel(memberTable.getSelectedRow())));
-		
+		if (memberTable.convertRowIndexToModel(memberTable.getSelectedRow()) != 0) {
+			new MemberEditDialog(parent, this, true, dataModel.getMemberList().get(memberTable.convertRowIndexToModel(memberTable.getSelectedRow())));
+		}		
 	}  
 	
 	private void buttonDeleteMemberActionPerformed(ActionEvent evt) {
