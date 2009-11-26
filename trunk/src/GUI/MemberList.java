@@ -125,6 +125,10 @@ public class MemberList extends JPanel{
 
 	private void buttonEditMemberActionPerformed(ActionEvent evt) {                                                
 		if (memberTable.getSelectedRow() != -1) {
+			if (memberTable.convertRowIndexToModel(memberTable.getSelectedRow()) == 0) {
+				JOptionPane.showMessageDialog(this, "Af sikkerhedsgrunde kan man ikke redigere den foerste Guest.\nDenne bliver brugt til at registrere koeb af billet fra kunder der ikke er medlemmer.", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			if (memberTable.convertRowIndexToModel(memberTable.getSelectedRow()) != 0) {
 				new MemberEditDialog(parent, this, true, dataModel.getMemberList().get(memberTable.convertRowIndexToModel(memberTable.getSelectedRow())));
 			}
