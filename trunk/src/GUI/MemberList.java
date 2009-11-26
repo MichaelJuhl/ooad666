@@ -124,8 +124,10 @@ public class MemberList extends JPanel{
 	}                                              
 
 	private void buttonEditMemberActionPerformed(ActionEvent evt) {                                                
-		if (memberTable.convertRowIndexToModel(memberTable.getSelectedRow()) != 0) {
-			new MemberEditDialog(parent, this, true, dataModel.getMemberList().get(memberTable.convertRowIndexToModel(memberTable.getSelectedRow())));
+		if (memberTable.getSelectedRow() != -1) {
+			if (memberTable.convertRowIndexToModel(memberTable.getSelectedRow()) != 0) {
+				new MemberEditDialog(parent, this, true, dataModel.getMemberList().get(memberTable.convertRowIndexToModel(memberTable.getSelectedRow())));
+			}
 		}		
 	}  
 	

@@ -11,6 +11,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.NumberFormatException;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
@@ -68,7 +70,9 @@ public class EventNewDialog extends javax.swing.JDialog {
         eventSaveButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
+        
+        setResizable(false);
+        
         eventTitelLabel.setText("Titel");
 
         eventTitelInputField.addActionListener(new java.awt.event.ActionListener() {
@@ -321,6 +325,7 @@ public class EventNewDialog extends javax.swing.JDialog {
 
     private void eventSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
         //Validate input
+    	eventErrorLabel.setText("");
             //check titel
         if (eventTitelInputField.getText().equals("")) {
             eventErrorLabel.setText("Fejl: Titel kan ikke vaere tom");
@@ -371,30 +376,75 @@ public class EventNewDialog extends javax.swing.JDialog {
             eventErrorLabel.setText("Fejl: Ugyldigt Portalis tilbud");
             return;
         }
-
-        //Validation passed, make new event
+        
+        // Basic validation passed, make new event
         EventDAO eventDAO = new EventDAO();
-        try {
-            eventDAO.createEvent(new Event(eventConcerttypeInputField.getText(), (String)eventSceneInputComboBox.getSelectedItem(), getStartTime(), getEndTime(), eventArtistInputField.getText(), eventTitelInputField.getText(), Double.valueOf(eventPriceInputField.getText()), Integer.valueOf(eventMaxVisitorsField.getText()), Double.valueOf(eventShowDiscountField.getText()), Double.valueOf(eventPortalisDiscountField.getText())));
-        } catch(NumberFormatException e) {
-        	e.printStackTrace();
-        } catch (ParseException e) {
-			e.printStackTrace();
+        
+        Event newEvent = null;
+		try {
+			newEvent = new Event(eventConcerttypeInputField.getText(), (String)eventSceneInputComboBox.getSelectedItem(), getStartTime(), getEndTime(), eventArtistInputField.getText(), eventTitelInputField.getText(), Double.valueOf(eventPriceInputField.getText()), Integer.valueOf(eventMaxVisitorsField.getText()), Double.valueOf(eventShowDiscountField.getText()), Double.valueOf(eventPortalisDiscountField.getText()));
+			if (eventDAO.otherEventInTimeslot(newEvent)) {
+				JOptionPane.showMessageDialog(this, "Tidsperioden for dette arrangement overlapper et andet arrangement på denne Scene", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			
+		} catch (NumberFormatException e1) {
+			JOptionPane.showMessageDialog(this, "Fejl i input", "Error", JOptionPane.ERROR_MESSAGE);
+			e1.printStackTrace();
+			return;
+		} catch (ParseException e1) {
+			JOptionPane.showMessageDialog(this, "Fejl i input", "Error", JOptionPane.ERROR_MESSAGE);
+			e1.printStackTrace();
+			return;
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
+		}
+        
+        // All Validation passed, send Event to database
+        try {
+            eventDAO.createEvent(newEvent);
+        } catch(NumberFormatException e) {
+        	JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			return;        	
+		} catch (DALException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			return;
+		} catch (InstantiationException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			return;
+		} catch (IllegalAccessException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke oprette arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			return;
+		} catch (ClassNotFoundException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			return;
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			return;
 		}
 		eventList.updateTable();
         this.dispose();
@@ -421,7 +471,7 @@ public class EventNewDialog extends javax.swing.JDialog {
     
     private Calendar getStartTime() {
     	int startTimeYear = Integer.valueOf((String)eventStartYearComboBox.getSelectedItem());
-    	int startTimeMonth = Integer.valueOf((String)eventStartMonthComboBox.getSelectedItem());
+    	int startTimeMonth = Integer.valueOf((String)eventStartMonthComboBox.getSelectedItem())-1;
     	int startTimeDate = Integer.valueOf((String)eventStartDateComboBox.getSelectedItem());
     	int startTimeHour = Integer.valueOf(eventStartTimeField.getText().substring(0, 2));
     	int startTimeMinute = Integer.valueOf(eventStartTimeField.getText().substring(3, 5));
@@ -435,7 +485,7 @@ public class EventNewDialog extends javax.swing.JDialog {
     
     private Calendar getEndTime() {
     	int endTimeYear = Integer.valueOf((String)eventEndYearComboBox.getSelectedItem());
-    	int endTimeMonth = Integer.valueOf((String)eventEndMonthComboBox.getSelectedItem());
+    	int endTimeMonth = Integer.valueOf((String)eventEndMonthComboBox.getSelectedItem())-1;
     	int endTimeDate = Integer.valueOf((String)eventEndDateComboBox.getSelectedItem());
     	int endTimeHour = Integer.valueOf(eventEndTimeField.getText().substring(0, 2));
     	int endTimeMinute = Integer.valueOf(eventEndTimeField.getText().substring(3, 5));

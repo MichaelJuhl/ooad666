@@ -38,6 +38,7 @@ public class PortalManagerAboutDialog extends javax.swing.JDialog {
         textPane = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
         setTitle("Om ");
 
         pictureLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("resources/mugShot.png"))); // NOI18N

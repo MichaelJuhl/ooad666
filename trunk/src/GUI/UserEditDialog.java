@@ -82,6 +82,7 @@ public class UserEditDialog extends javax.swing.JDialog {
         passwordInputField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         rankComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Billetsælger", "Kontormedarbejder", "Admin", "Deaktiveret" }));
         

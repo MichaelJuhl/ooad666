@@ -71,6 +71,7 @@ public class EventEditDialog extends javax.swing.JDialog {
 		eventSaveButton = new javax.swing.JButton();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+		setResizable(false);
 
 		eventTitelLabel.setText("Titel");
 
@@ -97,7 +98,7 @@ public class EventEditDialog extends javax.swing.JDialog {
 		eventStartYearComboBox.setSelectedItem(String.valueOf(event.getStartYear()));
 
 		eventStartMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeMonthArray()));
-		eventStartMonthComboBox.setSelectedItem(String.valueOf(event.getStartMonth()));
+		eventStartMonthComboBox.setSelectedItem(String.valueOf(event.getStartMonth()+1));
 
 		eventStartDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
 		eventStartDateComboBox.setSelectedItem(String.valueOf(event.getStartDay()));
@@ -109,7 +110,7 @@ public class EventEditDialog extends javax.swing.JDialog {
 		eventEndYearComboBox.setSelectedItem(String.valueOf(event.getDateFinish().get(Calendar.YEAR)));
 
 		eventEndMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeMonthArray()));
-		eventEndMonthComboBox.setSelectedItem(String.valueOf(event.getDateFinish().get(Calendar.MONTH)));
+		eventEndMonthComboBox.setSelectedItem(String.valueOf(event.getDateFinish().get(Calendar.MONTH)+1));
 
 		eventEndDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
 		eventEndDateComboBox.setSelectedItem(String.valueOf(event.getDateFinish().get(Calendar.DAY_OF_MONTH)));
@@ -280,6 +281,7 @@ public class EventEditDialog extends javax.swing.JDialog {
 
 	private void eventSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                
 		//Validate input
+		eventErrorLabel.setText("");
 		//check titel
 		if (eventTitelInputField.getText().equals("")) {
 			eventErrorLabel.setText("Fejl: Titel kan ikke vaere tom");
@@ -331,7 +333,7 @@ public class EventEditDialog extends javax.swing.JDialog {
 			return;
 		}
 
-		//Validation passed, update event
+		//Basic validation passed, create event object
 		event.setConcerttype(eventConcerttypeInputField.getText());
 		event.setStage((String)eventStageInputComboBox.getSelectedItem());
 		event.setDateStart(getStartTime());
@@ -344,25 +346,60 @@ public class EventEditDialog extends javax.swing.JDialog {
 		
 		EventDAO eventDAO = new EventDAO();
 		try {
+			if (eventDAO.otherEventInTimeslot(event)) {
+				JOptionPane.showMessageDialog(this, "Tidsperioden for dette arrangement overlapper et andet arrangement på denne Scene", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+		} catch (DALException e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		} catch (InstantiationException e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+			
+		
+		//All validation passed, commit to database
+		try {
 			eventDAO.updateEvent(event);
 		} catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
 		} catch (DALException e) {
 			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
 		} catch (InstantiationException e) {
 			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
 		} catch (IllegalAccessException e) {
 			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
 		} catch (ClassNotFoundException e) {
 			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(this, "Databasefejl: Kunne ikke redigere arrangement", "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
+			return;
 		}
 		eventList.updateTable();
 		this.dispose();
@@ -389,7 +426,7 @@ public class EventEditDialog extends javax.swing.JDialog {
 
 	private Calendar getStartTime() {
 		int startTimeYear = Integer.valueOf((String)eventStartYearComboBox.getSelectedItem());
-		int startTimeMonth = Integer.valueOf((String)eventStartMonthComboBox.getSelectedItem());
+		int startTimeMonth = Integer.valueOf((String)eventStartMonthComboBox.getSelectedItem())-1;
 		int startTimeDate = Integer.valueOf((String)eventStartDateComboBox.getSelectedItem());
 		int startTimeHour = Integer.valueOf(eventStartTimeField.getText().substring(0, 2));
 		int startTimeMinute = Integer.valueOf(eventStartTimeField.getText().substring(3, 5));
@@ -403,7 +440,7 @@ public class EventEditDialog extends javax.swing.JDialog {
 
 	private Calendar getEndTime() {
 		int endTimeYear = Integer.valueOf((String)eventEndYearComboBox.getSelectedItem());
-		int endTimeMonth = Integer.valueOf((String)eventEndMonthComboBox.getSelectedItem());
+		int endTimeMonth = Integer.valueOf((String)eventEndMonthComboBox.getSelectedItem())-1;
 		int endTimeDate = Integer.valueOf((String)eventEndDateComboBox.getSelectedItem());
 		int endTimeHour = Integer.valueOf(eventEndTimeField.getText().substring(0, 2));
 		int endTimeMinute = Integer.valueOf(eventEndTimeField.getText().substring(3, 5));
