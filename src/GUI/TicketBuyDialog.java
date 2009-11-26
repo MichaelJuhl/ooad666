@@ -99,6 +99,7 @@ public class TicketBuyDialog extends javax.swing.JDialog {
         FejlLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("MedlemID:");
 

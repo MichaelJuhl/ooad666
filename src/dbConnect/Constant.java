@@ -6,10 +6,10 @@ package dbConnect;
 public abstract class Constant
 {
 	public static final String
-	server					= "grp3.smallmeans.com",  // database-serveren
-	database				= "grp3", // navnet på databasen
-	username				= "s073197", // brugernavnet 
-	password				= "hej312"; // password
+	server					= "127.0.0.1",  // database-serveren
+	database				= "ooad", // navnet på databasen
+	username				= "root", // brugernavnet 
+	password				= "root"; // password
 	
 	public static final int
 	port					= 3306;

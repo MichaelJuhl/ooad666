@@ -9,6 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.NumberFormatException;
 
+import javax.swing.JOptionPane;
+
 public class MemberEditDialog extends javax.swing.JDialog {
 
 	Member member;
@@ -44,7 +46,9 @@ public class MemberEditDialog extends javax.swing.JDialog {
 		clubComboBox = new javax.swing.JComboBox();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
+		
+		setResizable(false);
+		
 		nameLabel.setText("Navn");
 
 		nameInputField.addActionListener(new java.awt.event.ActionListener() {
@@ -65,10 +69,8 @@ public class MemberEditDialog extends javax.swing.JDialog {
 		birthYearComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeYearArray()));
 
 		birthMonthComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeMonthArray()));
-		birthMonthComboBox.setSelectedItem(String.valueOf(Calendar.getInstance().get(Calendar.MONTH)+1));
 
 		birthDateComboBox.setModel(new javax.swing.DefaultComboBoxModel(makeDayArray()));
-		birthDateComboBox.setSelectedItem(String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH)));
 
 		clubLabel.setText("Klub:");
 
@@ -98,7 +100,7 @@ public class MemberEditDialog extends javax.swing.JDialog {
 		phoneInputField.setText(new Integer(member.getPhone()).toString());
 		addressInputField.setText(member.getAdresse());
 		birthYearComboBox.setSelectedItem(new Integer(member.getBirth().get(Calendar.YEAR)).toString());
-		birthMonthComboBox.setSelectedItem(new Integer(member.getBirth().get(Calendar.MONTH)).toString());
+		birthMonthComboBox.setSelectedItem(new Integer(member.getBirth().get(Calendar.MONTH)+1).toString());
 		birthDateComboBox.setSelectedItem(new Integer(member.getBirth().get(Calendar.DAY_OF_MONTH)).toString());
 		clubComboBox.setSelectedItem(member.getClub());
 		
@@ -261,9 +263,12 @@ public class MemberEditDialog extends javax.swing.JDialog {
 			customerDAO.updateMember(member.getMemberID(), memberToUpdate);
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Fejl i input!", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		} catch (DALException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Fejl ved forbindelse til databasef", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		memberlist.updateTable();
 		this.dispose();
@@ -317,7 +322,7 @@ public class MemberEditDialog extends javax.swing.JDialog {
 
 	private Calendar getBirthDate() {
 		int startTimeYear = Integer.valueOf((String)birthYearComboBox.getSelectedItem());
-		int startTimeMonth = Integer.valueOf((String)birthMonthComboBox.getSelectedItem());
+		int startTimeMonth = Integer.valueOf((String)birthMonthComboBox.getSelectedItem())-1;
 		int startTimeDate = Integer.valueOf((String)birthDateComboBox.getSelectedItem());
 		int startTimeHour = 0;
 		int startTimeMinute = 0;

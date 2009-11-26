@@ -9,6 +9,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.lang.NumberFormatException;
 
+import javax.swing.JOptionPane;
+
 public class MemberNewDialog extends javax.swing.JDialog {
 
 	MemberList memberTable;
@@ -42,7 +44,9 @@ public class MemberNewDialog extends javax.swing.JDialog {
 		clubComboBox = new javax.swing.JComboBox();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
+		
+		setResizable(false);
+		
 		nameLabel.setText("Navn");
 
 		nameInputField.addActionListener(new java.awt.event.ActionListener() {
@@ -249,9 +253,12 @@ private void customerSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {
 				, Integer.valueOf(phoneInputField.getText()),addressInputField.getText(), (String)clubComboBox.getSelectedItem()));
 	} catch(NumberFormatException e) {
 		e.printStackTrace();
+		JOptionPane.showMessageDialog(this, "Fejl i input!", "Error", JOptionPane.ERROR_MESSAGE);
+		return;
 	} catch (DALException e) {
-		// TODO Auto-generated catch block
 		e.printStackTrace();
+		JOptionPane.showMessageDialog(this, "Fejl ved forbindelse til database", "Error", JOptionPane.ERROR_MESSAGE);
+		return;
 	}
 	memberTable.updateTable();
 	this.dispose();
@@ -278,7 +285,7 @@ private boolean timeValidate(String text) {
 
 private Calendar getBirthTime() {
 	int startTimeYear = Integer.valueOf((String)birthYearComboBox.getSelectedItem());
-	int startTimeMonth = Integer.valueOf((String)birthMonthComboBox.getSelectedItem());
+	int startTimeMonth = Integer.valueOf((String)birthMonthComboBox.getSelectedItem())-1;
 	int startTimeDate = Integer.valueOf((String)birthDateComboBox.getSelectedItem());
 	
 	Calendar startTime = GregorianCalendar.getInstance();
@@ -305,7 +312,7 @@ private String getCurrentTime() {
 
 private Calendar getBirthDate() {
 	int startTimeYear = Integer.valueOf((String)birthYearComboBox.getSelectedItem());
-	int startTimeMonth = Integer.valueOf((String)birthMonthComboBox.getSelectedItem());
+	int startTimeMonth = Integer.valueOf((String)birthMonthComboBox.getSelectedItem())-1;
 	int startTimeDate = Integer.valueOf((String)birthDateComboBox.getSelectedItem());
 	int startTimeHour = 0;
 	int startTimeMinute = 0;

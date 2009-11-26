@@ -13,7 +13,7 @@ public interface IEventDAO {
 	void createEvent(Event Event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
 	void updateEvent(Event Event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
 	void deleteEvent(int EventID) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
-	public boolean checkEvent(Event Event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
+	public boolean otherEventInTimeslot(Event Event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
 	public boolean checkTickets(int eventID,int tickets) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException;
 }
 	

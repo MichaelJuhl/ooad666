@@ -12,6 +12,9 @@
 package GUI;
 
 import java.awt.event.ActionEvent;
+
+import javax.swing.JOptionPane;
+
 import dal.User;
 import dao.UserDAO;
 import daoInterface.DALException;
@@ -68,6 +71,7 @@ public class UserNewDialog extends javax.swing.JDialog {
         passwordInputField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         rankComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Billetsælger", "Kontormedarbejder", "Admin", "Deaktiveret" }));
         
@@ -281,9 +285,13 @@ public class UserNewDialog extends javax.swing.JDialog {
 		} catch(NumberFormatException e) {
 			e.printStackTrace();
 			errorLabel.setText("<html><FONT COLOR=RED>Fejl i input!</FONT></html>");
+			JOptionPane.showMessageDialog(this, "Fejl i input!", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		} catch (DALException e) {
 			errorLabel.setText("<html><FONT COLOR=RED>Fejl: Kan ikke forbinde til database, proev igen</FONT></html>");
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(this, "Fejl ved forbindelse til database", "Error", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 		userList.updateTable();
 		this.dispose();

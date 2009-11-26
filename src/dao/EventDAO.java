@@ -116,11 +116,11 @@ public class EventDAO implements IEventDAO {
 			
 	}
 
-	public boolean checkEvent(Event Event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public boolean otherEventInTimeslot(Event event) throws DALException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Connector.getConnector();
-		ResultSet rs = Connector.doQuery("SELECT * from OOADEvent WHERE Stage = '"+Event.getStage()+"' and DateSTART <= " +"'"
-				+ Event.getDateStart()+"' AND DateFINISH >= '"+Event.getDateStart()+"' OR (Stage = '"+ Event.getStage()+"' AND DateSTART >= '"+Event.getDateStart()+
-				"' AND DateSTART <= '"+Event.getDateFinish()+"' ");
+		ResultSet rs = Connector.doQuery("SELECT * FROM OOADEvent WHERE Stage = '" + event.getStage() + "' AND EventID <> " + event.getEventID() + " AND DateSTART <= '"
+				+ event.getDateStartString() + "' AND DateFINISH >= '" + event.getDateStartString() + "' OR (Stage = '" + event.getStage() 
+				+ "' AND EventID <> " + event.getEventID() + " AND DateSTART >= '" + event.getDateStartString()+ "' AND DateSTART <= '" + event.getDateFinishString() + "')");
 	    try {
 	    	if (!rs.first()){ 
 	    	return false;
