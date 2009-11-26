@@ -131,6 +131,10 @@ public class UserList extends JPanel{
 	
 	private void buttonDeleteUserActionPerformed(ActionEvent evt) {
 		if (userTable.getSelectedRow() != -1) {
+			if (userTable.convertRowIndexToModel(userTable.getSelectedRow()) == 0) {
+				JOptionPane.showMessageDialog(this, "Af sikkerhedsgrunde kan man ikke deaktivere den foerste Admin,\nhvis ingen aktive brugere eksisterer kan man ikke logge ind paa systemet", "Error", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			if (DeleteDialogYN2.userAcceptsDelete(userDataModel.getUserList().get(userTable.convertRowIndexToModel(userTable.getSelectedRow())).getName())) {
 				UserDAO userDAO = new UserDAO();
 				try {
